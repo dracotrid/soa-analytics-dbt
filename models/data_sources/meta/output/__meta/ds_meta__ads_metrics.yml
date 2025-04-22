@@ -1,0 +1,100 @@
+version: 2
+models:
+  - name: ds_meta__ads_metrics
+    description: "Meta provided report on ads performance metrics"
+    config:
+      alias: ads_metrics
+      meta:
+        tf_config:
+            filter: campaign_name IS NOT NULL
+    columns:
+      - name: campaign_name
+        description: ''
+        data_type: STRING
+      - name: ad_set_name
+        description: ''
+        data_type: STRING
+      - name: ad_name
+        description: ''
+        data_type: STRING
+      - name: platform
+        description: ''
+        data_type: STRING
+      - name: date
+        description: ''
+        data_type: DATE
+        meta:
+          tf_config:
+            field: Day
+      - name: amount_spent
+        description: ''
+        data_type: NUMERIC(10,6)
+        meta:
+          tf_config:
+            field: Amount_spent__USD_
+      - name: result_type
+        description: ''
+        data_type: STRING
+      - name: results
+        description: ''
+        data_type: INT
+      - name: reach
+        description: ''
+        data_type: INT
+      - name: impressions
+        description: ''
+        data_type: INT
+      - name: link_clicks
+        description: ''
+        data_type: INT
+      - name: all_clicks
+        description: ''
+        data_type: INT
+        meta:
+          tf_config:
+            field: Clicks__all_
+      - name: frequency
+        description: ''
+        data_type: FLOAT64
+      - name: cost_per_result
+        description: 'cost_per_result'
+        data_type: NUMERIC(10,6)
+      - name: cpc
+        description: 'cost per link click'
+        meta:
+          tf_config:
+            field: CPC__cost_per_link_click_
+        data_type: NUMERIC(10,6)
+      - name: cpm
+        description: 'cost per 1000 impressions'
+        data_type: NUMERIC(10,6)
+        meta:
+          tf_config:
+            field: CPM__cost_per_1_000_impressions_
+      - name: ctr
+        description: 'click through rate'
+        data_type: NUMERIC(10,6)
+        meta:
+          tf_config:
+            field: CTR__link_click_through_rate_
+      - name: ctr_all
+        description: ''
+        data_type: NUMERIC(10,6)
+        meta:
+          tf_config:
+            field: CTR__all_
+      - name: starts
+        description: ''
+        data_type: DATE
+      - name: ends
+        description: ''
+        data_type: STRING
+      - name: attribution_setting
+        description: ''
+        data_type: STRING
+      - name: delivery_status
+        description: ''
+        data_type: STRING
+      - name: delivery_level
+        description: ''
+        data_type: STRING
