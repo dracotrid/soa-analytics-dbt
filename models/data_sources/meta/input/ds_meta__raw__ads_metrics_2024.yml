@@ -1,0 +1,89 @@
+version: 2
+
+sources:
+  - name: ds_meta
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_meta"
+    tags: ["scope:data-source", "ds-name:meta", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__ads_metrics_2024
+        identifier: raw__ads_metrics_2024
+        description: "Meta provided report on ads performance metrics for 2024"
+        columns:
+          - name: Campaign_name
+            description: ''
+            data_type: STRING
+          - name: Ad_Set_Name
+            description: ''
+            data_type: STRING
+          - name: Ad_name
+            description: ''
+            data_type: STRING
+          - name: Platform
+            description: ''
+            data_type: STRING
+          - name: Day
+            description: ''
+            data_type: DATE
+          - name: Amount_spent__USD_
+            description: ''
+            data_type: FLOAT64
+          - name: Result_type
+            description: ''
+            data_type: STRING
+          - name: Results
+            description: ''
+            data_type: INT64
+          - name: Reach
+            description: ''
+            data_type: INT64
+          - name: Impressions
+            description: ''
+            data_type: INT64
+          - name: Link_clicks
+            description: ''
+            data_type: INT64
+          - name: Clicks__all_
+            description: ''
+            data_type: INT64
+          - name: Frequency
+            description: ''
+            data_type: FLOAT64
+          - name: Cost_per_result
+            description: ''
+            data_type: FLOAT64
+          - name: CPC__cost_per_link_click_
+            description: ''
+            data_type: FLOAT64
+          - name: CPM__cost_per_1_000_impressions_
+            description: ''
+            data_type: FLOAT64
+          - name: CTR__link_click_through_rate_
+            description: ''
+            data_type: FLOAT64
+          - name: CTR__all_
+            description: ''
+            data_type: FLOAT64
+          - name: Starts
+            description: ''
+            data_type: DATE
+          - name: Ends
+            description: ''
+            data_type: STRING
+          - name: Attribution_setting
+            description: ''
+            data_type: STRING
+          - name: Delivery_status
+            description: ''
+            data_type: STRING
+          - name: Delivery_level
+            description: ''
+            data_type: STRING
+          - name: Reporting_starts
+            description: ''
+            data_type: DATE
+          - name: Reporting_ends
+            description: ''
+            data_type: DATE

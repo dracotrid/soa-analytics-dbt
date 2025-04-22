@@ -100,7 +100,7 @@ seeds:
 # Full documentation: https://docs.getdbt.com/reference/model-configs
 models:
   soa:
-    +dbt-osmosis: "meta/{model}.yml"
+    +dbt-osmosis: "__meta/{model}.yml"
     +persist_docs:
       relation: true
       columns: true
@@ -116,6 +116,17 @@ models:
         +schema: "ds_cleverbox"
         +group: "ds_cleverbox"
         +tags: ["ds-name:cleverbox"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+        output:
+          +access: public
+          +tags: ["asset-type:output"]
+      meta:
+        +schema: "ds_meta"
+        +group: "ds_meta"
+        +tags: ["ds-name:meta"]
         intermediate:
           +tags: ["asset-type:intermediate"]
           _mappings:
