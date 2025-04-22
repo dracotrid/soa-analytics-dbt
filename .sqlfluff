@@ -1,0 +1,35 @@
+[sqlfluff]
+templater = dbt
+sql_file_exts = .sql
+dialect = bigquery
+max_line_length = 150
+large_file_skip_byte_limit = 0
+exclude_rules = ST06,ST07,AM07,ST03,RF02
+
+[sqlfluff:indentation]
+indented_joins = false
+indented_using_on = true
+template_blocks_indent = false
+
+[sqlfluff:templater]
+unwrap_wrapped_queries = true
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+load_macros_from_path = macros
+
+[sqlfluff:templater:jinja:context]
+target = {"schema": "dbt_default_schema"}
+
+[sqlfluff:templater:dbt]
+project_dir = ./
+profiles_dir = ./
+profile = gc
+target = dev
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.identifiers]
+capitalisation_policy = lower
+unquoted_identifiers_policy = aliases

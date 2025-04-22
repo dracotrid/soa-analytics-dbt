@@ -1,0 +1,5 @@
+groups:
+  - name: em_cleverbox
+    owner:
+      # 'name' or 'email' is required; additional properties allowed
+      name: SoloMia Team

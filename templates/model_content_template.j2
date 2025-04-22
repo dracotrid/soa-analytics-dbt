@@ -1,0 +1,18 @@
+<<! if model_group !>>
+{{ config(group='<<model_group>>') }}
+<<! endif !>>
+
+<<! if exclude_columns !>>
+    <<! set exclude_columns_str = "'" ~ exclude_columns | join("', '") ~ "'" !>>
+<<! else !>>
+    <<! set exclude_columns_str = "" !>>
+<<! endif !>>
+
+{{
+    data_diff_compare_columns(
+        dev_relation=<<dev_relation>>,
+        prod_relation='<<prod_relation>>',
+        primary_key='<<primary_key>>',
+        exclude_columns=[<<exclude_columns_str>>]
+    )
+}}

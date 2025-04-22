@@ -1,0 +1,17 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+default_install_hook_types: [pre-commit, commit-msg]
+repos:
+  - repo: local
+    hooks:
+      - id: sqlfluff-fix
+        name: sqlfluff fix
+        entry: sqlfluff fix --show-lint-violations --processes 0 --disable-progress-bar
+        require_serial: true
+        language: python
+        types: [sql]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer

@@ -1,0 +1,187 @@
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: "soa"
+version: "1.0.0"
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: "soa"
+require-dbt-version: ">=1.4.3"
+
+# These configurations specify where dbt should look for different types of files.
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds", "models"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+docs-paths: ["docs"]
+
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# Project Variables
+# Full Documentation: https://docs.getdbt.com/docs/build/project-variables
+vars:
+  default_numeric_scale: 5
+#  data_diff:
+#    prod_database: bq_name
+#    prod_schema: some_prod_schema
+
+
+# Seeds Configuration
+# Full documentation: https://docs.getdbt.com/reference/seed-configs
+seeds:
+  soa:
+    +persist_docs:
+      relation: true
+      columns: true
+    data_sources:
+      +tags: "scope:data-source"
+      +docs:
+        node_color: "#4fae1c"
+      cleverbox:
+        +schema: "ds_cleverbox"
+        +group: "ds_cleverbox"
+        +tags: ["ds-name:cleverbox"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _blacklists:
+            +tags: ["asset-type:blacklist"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+    foundational:
+      +tags: "scope:foundational"
+      corops:
+        +schema: "fm_corops"
+        +group: "fm_corops"
+        +tags: ["fm-name:corops"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _configs:
+            +tags: ["asset-type:config"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+    data_marts:
+      +tags: "scope:data-mart"
+      hr:
+        +schema: "dm_hr"
+        +group: "dm_hr"
+        +tags: ["dm-name:hr"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _configs:
+            +tags: ["asset-type:config"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+    export_marts:
+      +tags: "scope:export-mart"
+      +persist_docs:
+        relation: true
+        columns: true
+      cleverbox:
+        +schema: "em_cleverbox"
+        +group: "em_cleverbox"
+        +tags: ["em-name:cleverbox"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _configs:
+            +tags: ["asset-type:config"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+
+
+# Models Configuration
+# Full documentation: https://docs.getdbt.com/reference/model-configs
+models:
+  soa:
+    +dbt-osmosis: "meta/{model}.yml"
+    +persist_docs:
+      relation: true
+      columns: true
+    data_sources:
+      +tags: "scope:data-source"
+      +access: private
+      +contract:
+        enforced: true
+      +docs:
+        node_color: "#4fae1c"
+      +materialized: table
+      cleverbox:
+        +schema: "ds_cleverbox"
+        +group: "ds_cleverbox"
+        +tags: ["ds-name:cleverbox"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+        output:
+          +access: public
+          +tags: ["asset-type:output"]
+    foundational:
+      +tags: "scope:foundational"
+      +access: private
+      +contract:
+        enforced: true
+      +materialized: table
+      corops:
+        +schema: "fm_corops"
+        +group: "fm_corops"
+        +tags: ["fm-name:corops"]
+        input:
+          +materialized: view
+          +tags: ["asset-type:input"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+        output:
+          +access: public
+          +tags: ["asset-type:output"]
+    data_marts:
+      +tags: "scope:data-mart"
+      +access: private
+      +contract:
+        enforced: true
+      +docs:
+        node_color: "#00d5dd"
+      +materialized: table
+      hr:
+        +schema: "dm_hr"
+        +group: "dm_hr"
+        +tags: ["dm-name:hr"]
+        +docs:
+          node_color: "#1e1326"
+        input:
+          +materialized: view
+          +tags: ["asset-type:input"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+        output:
+          +tags: ["asset-type:output"]
+    export_marts:
+      +tags: "scope:export-mart"
+      +access: private
+      +contract:
+        enforced: true
+      +docs:
+        node_color: "#00d5dd"
+      +materialized: table
+      cleverbox:
+        +schema: "em_cleverbox"
+        +group: "em_cleverbox"
+        +tags: ["em-name:cleverbox"]
+        +docs:
+          node_color: "#1e1326"
+        input:
+          +materialized: view
+          +tags: ["asset-type:input"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+        output:
+          +tags: ["asset-type:output"]
+
+## Full documentation: https://docs.getdbt.com/reference/project-configs/on-run-start-on-run-end
+#on-run-start:
+#  - "{{ create_udfs() }}"

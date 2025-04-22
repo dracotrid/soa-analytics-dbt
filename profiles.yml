@@ -1,0 +1,35 @@
+soa:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      keyfile: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_KEYFILE', 'null') }}"
+      project: "{{ env_var('SOA_DBT_GOOGLE_PROJECT', 'null') }}"
+      dataset: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_DATASET_DEV', 'null') }}"
+      threads: 16
+      job_creation_timeout_seconds: 1200
+      job_execution_timeout_seconds: 1200
+      priority: interactive
+
+    stage:
+      type: bigquery
+      method: oauth
+      keyfile: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_KEYFILE', 'null') }}"
+      project: "{{ env_var('SOA_DBT_GOOGLE_PROJECT', 'null') }}"
+      dataset: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_DATASET_STAGE', 'null') }}"
+      threads: 16
+      job_creation_timeout_seconds: 1200
+      job_execution_timeout_seconds: 1200
+      priority: interactive
+
+    prod:
+      type: bigquery
+      method: oauth
+      keyfile: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_KEYFILE', 'null') }}"
+      project: "{{ env_var('SOA_DBT_GOOGLE_PROJECT', 'null') }}"
+      dataset: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_DATASET_PROD', 'null') }}"
+      threads: 16
+      job_creation_timeout_seconds: 1200
+      job_execution_timeout_seconds: 1200
+      priority: interactive

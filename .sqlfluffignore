@@ -1,0 +1,5 @@
+target/
+dbt_modules/
+macros/
+dbt_packages/
+models/dbt_audit/

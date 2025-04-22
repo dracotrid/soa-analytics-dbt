@@ -1,0 +1,4 @@
+**/montecarlo*.yml
+**/montecarlo_global.*.yml
+**/__dbt
+**/__mcd

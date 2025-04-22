@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__service_sales
+    description: "CleverBox Service Sales"
+    config:
+      alias: service_sales
+    columns:
+      - name: id
+        data_type: STRING
+        description: Service Sale record identifier
+      - name: eid_cleverbox
+        data_type: STRING
+        description: Service Sale entity identifier
+        meta:
+            tf_config:
+              field: id
+      - name: name
+        description: Service name
+        data_type: STRING
+      - name: date
+        data_type: TIMESTAMP
+        description: Service date and time

@@ -1,0 +1,5 @@
+| {{ diff.headers | join(" | ") }} |
+| {% for col in diff.headers %}---{% if not loop.last %} | {% endif %}{% endfor %} |
+{%- for row in diff.rows %}
+| {{ row | join(" | ") }} |
+{%- endfor %}
