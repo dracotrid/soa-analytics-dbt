@@ -7,6 +7,7 @@ soa:
       keyfile: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_KEYFILE', 'null') }}"
       project: "{{ env_var('SOA_DBT_GOOGLE_PROJECT', 'null') }}"
       dataset: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_DATASET_DEV', 'null') }}"
+      location: europe-central2
       threads: 16
       job_creation_timeout_seconds: 1200
       job_execution_timeout_seconds: 1200
@@ -18,6 +19,7 @@ soa:
       keyfile: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_KEYFILE', 'null') }}"
       project: "{{ env_var('SOA_DBT_GOOGLE_PROJECT', 'null') }}"
       dataset: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_DATASET_STAGE', 'null') }}"
+      location: europe-central2
       threads: 16
       job_creation_timeout_seconds: 1200
       job_execution_timeout_seconds: 1200
@@ -29,6 +31,7 @@ soa:
       keyfile: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_KEYFILE', 'null') }}"
       project: "{{ env_var('SOA_DBT_GOOGLE_PROJECT', 'null') }}"
       dataset: "{{ env_var('SOA_DBT_GOOGLE_BIGQUERY_DATASET_PROD', 'null') }}"
+      location: europe-central2
       threads: 16
       job_creation_timeout_seconds: 1200
       job_execution_timeout_seconds: 1200
