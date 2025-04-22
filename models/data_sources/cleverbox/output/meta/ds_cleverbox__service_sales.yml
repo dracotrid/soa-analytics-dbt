@@ -5,6 +5,9 @@ models:
     description: "CleverBox Service Sales"
     config:
       alias: service_sales
+      meta:
+        tf_config:
+          filter: yuid IS NOT NULL
     columns:
       - name: id
         data_type: STRING
