@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa__{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}__ds__cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__service_sales_2025
+        identifier: raw__service_sales_2025
+        description: "CleverBox raw Service Sales records"
+        columns:
+          - name: yuid
+            data_type: STRING
+            description: Unique record id withing year
+          - name: muid
+            data_type: STRING
+            description: Unique record id withing month
+          - name: name
+            data_type: STRING
+            description: Service name
+          - name: code
+            data_type: STRING
+            description: Service code
+          - name: date
+            data_type: DATE
+            description: Service date of sale
+          - name: value
+            data_type: INTEGER
+            description: ""
+          - name: paid
+            data_type: NUMERIC
+            description: ""

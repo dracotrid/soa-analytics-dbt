@@ -26,7 +26,9 @@ clean-targets: # directories to be removed by `dbt clean`
 # Project Variables
 # Full Documentation: https://docs.getdbt.com/docs/build/project-variables
 vars:
-  default_numeric_scale: 5
+  primary_bigquery_database_name: solomia-analytics-main
+  production_dataset: soa_prod
+
 #  data_diff:
 #    prod_database: bq_name
 #    prod_schema: some_prod_schema

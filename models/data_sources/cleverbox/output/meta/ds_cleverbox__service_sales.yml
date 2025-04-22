@@ -9,15 +9,33 @@ models:
       - name: id
         data_type: STRING
         description: Service Sale record identifier
+        meta:
+          tf_config:
+            field: yuid
       - name: eid_cleverbox
         data_type: STRING
         description: Service Sale entity identifier
         meta:
             tf_config:
-              field: id
-      - name: name
-        description: Service name
+              field: yuid
+      - name: yuid
         data_type: STRING
+        description: Unique record id withing year
+      - name: muid
+        data_type: STRING
+        description: Unique record id withing month
+      - name: name
+        data_type: STRING
+        description: Service name
+      - name: code
+        data_type: STRING
+        description: Service code
       - name: date
-        data_type: TIMESTAMP
-        description: Service date and time
+        data_type: DATE
+        description: Service date of sale
+      - name: value
+        data_type: NUMERIC
+        description: ""
+      - name: paid
+        data_type: NUMERIC
+        description: ""
