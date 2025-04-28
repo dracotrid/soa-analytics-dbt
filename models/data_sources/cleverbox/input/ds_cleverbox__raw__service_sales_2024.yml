@@ -8,8 +8,8 @@ sources:
     loader: google_sheet
 
     tables:
-      - name: raw__service_sales_2025
-        identifier: raw__service_sales_2025
+      - name: raw__service_sales_2024
+        identifier: raw__service_sales_2024
         description: "CleverBox raw Service Sales records"
         columns:
           - name: yuid

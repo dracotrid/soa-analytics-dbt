@@ -36,9 +36,42 @@ models:
       - name: date
         data_type: DATE
         description: Service date of sale
+      - name: branch
+        data_type: STRING
+        description: Branch of service sale
       - name: value
         data_type: NUMERIC
         description: ""
       - name: paid
         data_type: NUMERIC
         description: ""
+      - name: discount
+        data_type: NUMERIC
+        description: ""
+      - name: subscription
+        data_type: NUMERIC
+        description: ""
+      - name: client_code
+        data_type: STRING
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: specialist
+        data_type: STRING
+        description: ""
+      - name: position
+        data_type: STRING
+        description: Specialist position
+      - name: cost_price
+        data_type: NUMERIC
+        description: ""
+      - name: profit
+        data_type: NUMERIC
+        description: ""
+      - name: category
+        data_type: STRING
+        description: Service category
+      - name: direction
+        data_type: STRING
+        description: Service direction
