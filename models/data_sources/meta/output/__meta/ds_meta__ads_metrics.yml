@@ -28,7 +28,7 @@ models:
             field: Day
       - name: amount_spent
         description: ''
-        data_type: NUMERIC(10,6)
+        data_type: NUMERIC.COST
         meta:
           tf_config:
             field: Amount_spent__USD_
