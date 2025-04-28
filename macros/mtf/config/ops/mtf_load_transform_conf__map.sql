@@ -26,6 +26,7 @@
     {# "Extend predefined BigQuery types mapping" #}
     {# "TODO: Find out the way to use DBT Contract mapping" #}
     {{ api.Column.TYPE_LABELS.update({"INT": "INT64", "STR": "STRING"})}}
+    {{ api.Column.TYPE_LABELS.update({"NUMERIC.COST": "NUMERIC(12,2)"})}}
     {{ tf_config.update({"columns": []}) }}
     {{ tf_config.update({"contract_enforced": tf_model.get('contract', {}).get('enforced', true)}) }}
     {% set tf_config_columns = tf_config.columns %}
