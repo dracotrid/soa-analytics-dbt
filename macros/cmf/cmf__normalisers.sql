@@ -1,6 +1,7 @@
 {#
     "Contains Core Model Foundation value normalisation helpers:
     "   - cmf__normalise__phone_number
+    "   - cmf_pad_left_signs
 #}
 
 
@@ -40,4 +41,12 @@ CASE
     ELSE
       REGEXP_REPLACE({{ phone_number_field }}, r'\D', '')
 END
+{% endmacro %}
+
+
+{% macro cmf__normalise__pad_left_signs(column_name, result_length, sign) %}
+{#
+    "Converts a column value to a left-padded string
+#}
+LPAD(CAST({{ column_name }} AS STRING), {{ result_length }}, '{{ sign }}')
 {% endmacro %}

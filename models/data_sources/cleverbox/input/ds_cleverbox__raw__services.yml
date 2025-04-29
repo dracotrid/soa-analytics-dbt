@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__services
+        identifier: raw__services
+        description: "CleverBox raw Services records"
+        columns:
+          - name: guid
+            data_type: NUMERIC
+            description: ""
+          - name: suid
+            data_type: NUMERIC
+            description: ""
+          - name: name
+            data_type: STRING
+            description: ""
+          - name: direction
+            data_type: STRING
+            description: ""
+          - name: category
+            data_type: STRING
+            description: ""
+          - name: value
+            data_type: NUMERIC.COST
+            description: ""
+          - name: cost_value
+            data_type: NUMERIC.COST
+            description: ""

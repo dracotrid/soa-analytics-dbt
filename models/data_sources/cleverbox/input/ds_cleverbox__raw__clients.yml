@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__clients
+        identifier: raw__clients
+        description: "CleverBox raw Clients records"
+        columns:
+          - name: vip_clients
+            data_type: STRING
+            description: ""
+          - name: discount
+            data_type: NUMERIC.PRICE
+            description: ""
+          - name: note
+            data_type: STRING
+            description: ""

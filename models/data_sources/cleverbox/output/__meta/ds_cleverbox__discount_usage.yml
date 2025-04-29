@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__discount_usage
+    description: "CleverBox Discount Usage"
+    config:
+      alias: discount_usage
+      meta:
+        tf_config:
+          filter: yuid IS NOT NULL
+    columns:
+      - name: ruid
+        data_type: STRING
+        description: ""
+      - name: yuid
+        data_type: STRING
+        description: ""
+      - name: date
+        data_type: DATE
+        description: ""
+      - name: discount_name
+        data_type: STRING
+        description: ""
+      - name: value
+        data_type: NUMERIC.COST
+        description: ""
+      - name: discount_percent
+        data_type: NUMERIC.PRICE
+        description: ""
+      - name: discount_value
+        data_type: NUMERIC.COST
+        description: ""
+      - name: service
+        data_type: STRING
+        description: ""
+      - name: client_code
+        data_type: STRING
+        meta:
+          tf_config:
+            macro: cmf__normalise__pad_left_signs
+            params: [client_code, 6, '0']
+      - name: client_name
+        data_type: STRING
+        description: ""
+      - name: specialist
+        data_type: STRING
+        description: ""

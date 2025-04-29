@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__discount_usage
+        identifier: raw__discount_usage
+        description: "CleverBox raw Discount Usage records"
+        columns:
+          - name: ruid
+            data_type: STRING
+            description: ""
+          - name: yuid
+            data_type: STRING
+            description: ""
+          - name: date
+            data_type: DATE
+            description: ""
+          - name: discount_name
+            data_type: STRING
+            description: ""
+          - name: value
+            data_type: NUMERIC.COST
+            description: ""
+          - name: discount_percent
+            data_type: NUMERIC.PRICE
+            description: ""
+          - name: discount_value
+            data_type: NUMERIC.COST
+            description: ""
+          - name: service
+            data_type: STRING
+            description: ""
+          - name: client_code
+            data_type: NUMERIC
+            description: ""
+          - name: client_name
+            data_type: STRING
+            description: ""
+          - name: specialist
+            data_type: STRING
+            description: ""

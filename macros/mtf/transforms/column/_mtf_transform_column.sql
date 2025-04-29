@@ -12,7 +12,7 @@
 
     {%- set _target_type = { "value": tf_column_target_config.type.split("(")[0] } -%}
     {#- "TODO: Add flexible base type extraction " -#}
-    {%- if _target_type.value == "NUMERIC.COST" -%}
+    {%- if _target_type.value == "NUMERIC.COST" or _target_type.value == "NUMERIC.PRICE" -%}
         {%- set _ = _target_type.update({"value": "NUMERIC"}) -%}
     {%- endif -%}
 

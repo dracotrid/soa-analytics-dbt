@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__services
+    description: "CleverBox Services"
+    config:
+      alias: services
+      meta:
+        tf_config:
+          filter: guid IS NOT NULL
+    columns:
+      - name: guid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            macro: cmf__normalise__pad_left_signs
+            params: [guid, 6, '0']
+      - name: suid
+        data_type: NUMERIC
+        description: ""
+      - name: name
+        data_type: STRING
+        description: ""
+      - name: direction
+        data_type: STRING
+        description: ""
+      - name: category
+        data_type: STRING
+        description: ""
+      - name: value
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost_value
+        data_type: NUMERIC.COST
+        description: ""

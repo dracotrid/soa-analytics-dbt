@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__employees
+        identifier: raw__employees
+        description: "CleverBox raw Employees records"
+        columns:
+          - name: string_field_0
+            data_type: STRING
+            description: ""
+            meta:
+              tf_config:
+                field: name
+          - name: string_field_1
+            data_type: STRING
+            description: ""
+            meta:
+              tf_config:
+                field: job_title
+          - name: string_field_2
+            data_type: STRING
+            description: ""
+            meta:
+              tf_config:
+                field: status
+          - name: string_field_3
+            data_type: STRING
+            description: ""
+            meta:
+              tf_config:
+                field: name_for_service
+          - name: string_field_4
+            data_type: STRING
+            description: ""
+            meta:
+              tf_config:
+                field: name_for_good
