@@ -15,7 +15,7 @@
 
 {% macro mtf__extension__config__custom_data_types() %}
 {#
-    Returns mapping of custom types to database supported data types (911)
+    Returns mapping of custom types to database supported data types
 #}
     {% set custom_data_types = {
             "NUMERIC.COST": "NUMERIC(12,2)",
