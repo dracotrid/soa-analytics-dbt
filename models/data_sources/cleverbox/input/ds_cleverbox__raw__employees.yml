@@ -15,30 +15,15 @@ sources:
           - name: string_field_0
             data_type: STRING
             description: ""
-            meta:
-              tf_config:
-                field: name
           - name: string_field_1
             data_type: STRING
             description: ""
-            meta:
-              tf_config:
-                field: job_title
           - name: string_field_2
             data_type: STRING
             description: ""
-            meta:
-              tf_config:
-                field: status
           - name: string_field_3
             data_type: STRING
             description: ""
-            meta:
-              tf_config:
-                field: name_for_service
           - name: string_field_4
             data_type: STRING
             description: ""
-            meta:
-              tf_config:
-                field: name_for_good

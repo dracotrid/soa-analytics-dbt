@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__report_services
+    description: "CleverBox Report Services"
+    config:
+      alias: report_services
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
+    columns:
+      - name: id
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Service date of sale
+      - name: year
+        data_type: NUMERIC
+        description: Service year of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(YEAR FROM date)
+      - name: month
+        data_type: NUMERIC
+        description: Service month of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(MONTH FROM date)
+      - name: day
+        data_type: NUMERIC
+        description: Service day of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(DAY FROM date)
+      - name: branch
+        data_type: STRING
+        description: Branch of service sale
+      - name: specialist
+        data_type: STRING
+        description: ""
+      - name: speciality
+        data_type: STRING
+        description: ""
+#        meta:
+#          tf_config:
+#            mapped:
+#              field: specialist
+#              mapping: ds_cleverbox__employees
+#              current_value: name
+#              purpose_value: job_title
+#              default: NULL
+      - name: client_name
+        data_type: STRING
+        description: ""
+      - name: is_vip
+        data_type: BOOLEAN
+        description: ""
+        meta:
+          tf_config:
+            macro: is_contain
+            params: [client_name, ds_cleverbox__raw__clients, vip_clients, source]
+      - name: is_employee
+        data_type: BOOLEAN
+        description: ""
+        meta:
+          tf_config:
+            macro: is_contain
+            params: [client_name, ds_cleverbox__employees, name_for_service, model]
+      - name: name
+        data_type: STRING
+        description: Service name
