@@ -70,3 +70,27 @@ models:
       - name: name
         data_type: STRING
         description: Service name
+      - name: category
+        data_type: STRING
+        description: Service category
+        meta:
+          tf_config:
+            field: service_category
+      - name: direction
+        data_type: STRING
+        description: Service direction
+        meta:
+          tf_config:
+            field: service_direction
+      - name: amount
+        data_type: NUMERIC
+        description: Service amount
+        meta:
+          tf_config:
+            constant: 1
+      - name: unit_cost
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: paid
