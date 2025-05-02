@@ -7,7 +7,7 @@
 
 {% macro mtf__extension__config__base_type_extractor(custom_type) %}
 {#
-    "Returns database base type of a custom type provided
+    Returns database base type of a custom type provided
 #}
     {{ return(custom_type.split('.')[0]) }}
 {% endmacro %}
@@ -15,7 +15,7 @@
 
 {% macro mtf__extension__config__custom_data_types() %}
 {#
-    "Returns mapping of custom types to database supported data types
+    Returns mapping of custom types to database supported data types
 #}
     {% set custom_data_types = {
             "NUMERIC.COST": "NUMERIC(12,2)",
