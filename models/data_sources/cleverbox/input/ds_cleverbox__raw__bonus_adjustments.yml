@@ -8,9 +8,9 @@ sources:
     loader: google_sheet
 
     tables:
-      - name: raw__employees
-        identifier: raw__employees
-        description: "CleverBox raw Employees records"
+      - name: raw__bonus_adjustments
+        identifier: raw__bonus_adjustments
+        description: "CleverBox raw Bonus Adjustments"
         columns:
           - name: string_field_0
             data_type: STRING
@@ -19,11 +19,5 @@ sources:
             data_type: STRING
             description: ""
           - name: string_field_2
-            data_type: STRING
-            description: ""
-          - name: string_field_3
-            data_type: STRING
-            description: ""
-          - name: string_field_4
             data_type: STRING
             description: ""

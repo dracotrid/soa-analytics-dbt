@@ -30,6 +30,6 @@ sources:
           - name: value
             data_type: NUMERIC.COST
             description: ""
-          - name: cost_value
+          - name: cost_price
             data_type: NUMERIC.COST
             description: ""

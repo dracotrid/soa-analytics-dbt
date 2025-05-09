@@ -13,22 +13,23 @@
     "   field: source field name
     "   mapping: relation fcn
     "   current: field name of the mapping to look up a value in
-    "   target: field name of then mapping to return value of
+    "   purpose: field name of then mapping to return value of
     "   default: <any string value>, optional, the source field by default
     "Examples:
-    " - tf_column_config.source.mapped:
-    "       field: state
-    "       mapping: state_mapping
-    "       current: original_state
-    "       target: internal_state
-    "       [default: ABC]
+    " - tf_config
+    "       mapped:
+    "          field: state
+    "          mapping: state_mapping
+    "          current_value: original_state
+    "          purpose_value: internal_state
+    "          [default: ABC]
 #}
     {%- set source_config = tf_column_config.source.mapped  -%}
     {%- set target_config = tf_column_config.target  -%}
 
     {%- set source_field = source_config.field  -%}
     {%- set key_field = source_config.current_value  -%}
-    {%- set value_field = source_config.target_value  -%}
+    {%- set value_field = source_config.purpose_value  -%}
     {%- if "default" in source_config -%}
         {%- if not source_config.default or source_config.default|lower == "null"  -%}
             {%- set default_value = "NULL"  -%}

@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__report_services
+    description: "CleverBox Report Services"
+    config:
+      alias: report_services
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
+    columns:
+      - name: id
+        data_type: STRING
+        description: Record identifier
