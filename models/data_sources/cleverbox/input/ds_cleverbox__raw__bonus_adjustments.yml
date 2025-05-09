@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__bonus_adjustments
+        identifier: raw__bonus_adjustments
+        description: "CleverBox raw Bonus Adjustments"
+        columns:
+          - name: string_field_0
+            data_type: STRING
+            description: ""
+          - name: string_field_1
+            data_type: STRING
+            description: ""
+          - name: string_field_2
+            data_type: STRING
+            description: ""

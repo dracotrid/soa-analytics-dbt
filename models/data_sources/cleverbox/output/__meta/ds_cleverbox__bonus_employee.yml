@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__bonus_employee
+    description: "CleverBox Bonus Employee"
+    config:
+      alias: bonus_employee
+    columns:
+      - name: employee_name
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: name
+      - name: sale_type
+        data_type: STRING
+        description: ""
+      - name: code
+        data_type: STRING
+        description: ""
+      - name: uid
+        data_type: STRING
+        description: ""
+      - name: bonus_value
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            field: bonus
+      - name: accrual_type
+        data_type: STRING
+        description: ""
+      - name: clever_box
+        data_type: STRING
+        description: ""
+      - name: speciality
+        data_type: STRING
+        description: ""
+      - name: status
+        data_type: STRING
+        description: ""

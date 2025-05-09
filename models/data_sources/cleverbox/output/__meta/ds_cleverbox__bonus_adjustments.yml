@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__bonus_adjustments
+    description: "CleverBox Bonus Adjustments"
+    config:
+      alias: bonus_adjustments
+    columns:
+      - name: ruid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_0
+      - name: bonus_type
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_1
+      - name: note
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_2

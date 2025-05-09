@@ -33,10 +33,6 @@ models:
       - name: code
         data_type: STRING
         description: Service code
-        meta:
-          tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [ code, 6, '0' ]
       - name: date
         data_type: DATE
         description: Service date of sale
