@@ -5,6 +5,9 @@ models:
     description: "CleverBox Bonus Employee"
     config:
       alias: bonus_employee
+      meta:
+        tf_config:
+          filter: name IS NOT NULL
     columns:
       - name: employee_name
         data_type: STRING

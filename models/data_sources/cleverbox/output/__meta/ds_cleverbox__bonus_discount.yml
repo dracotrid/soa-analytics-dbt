@@ -5,55 +5,55 @@ models:
     description: "CleverBox Bonus Discount"
     config:
       alias: bonus_discount
+      meta:
+        tf_config:
+          filter: name IS NOT NULL
     columns:
-          - name: bonus_discount_name
-            data_type: STRING
-            description: ""
-            meta:
-              tf_config:
-                field: name
-          - name: type
-            data_type: STRING
-            description: ""
-          - name: category
-            data_type: STRING
-            description: ""
-          - name: period
-            data_type: STRING
-            description: ""
-          - name: bonus
-            data_type: STRING
-            description: ""
-          - name: usage
-            data_type: STRING
-            description: ""
-          - name: start_date
-            data_type: DATE
-            description: ""
-          - name: finish_date
-            data_type: DATE
-            description: ""
-          - name: bonus_service
-            data_type: STRING
-            description: ""
-          - name: service_from_value
-            data_type: BOOLEAN
-            description: ""
-          - name: accrual_type_service
-            data_type: STRING
-            description: ""
-          - name: bonus_goods
-            data_type: STRING
-            description: ""
-          - name: goods_from_value
-            data_type: BOOLEAN
-            description: ""
-          - name: accrual_type_goods
-            data_type: STRING
-            description: ""
-          - name: stopped
-            data_type: BOOLEAN
-            description: ""
-          - name: note
-            data_type: STRING
-            description: ""
+      - name: name
+        data_type: STRING
+        description: ""
+      - name: type
+        data_type: STRING
+        description: ""
+      - name: category
+        data_type: STRING
+        description: ""
+      - name: period
+        data_type: STRING
+        description: ""
+      - name: bonus
+        data_type: STRING
+        description: ""
+      - name: usage
+        data_type: STRING
+        description: ""
+      - name: start_date
+        data_type: DATE
+        description: ""
+      - name: finish_date
+        data_type: DATE
+        description: ""
+      - name: bonus_service
+        data_type: NUMERIC.COST
+        description: ""
+      - name: service_from_value
+        data_type: BOOLEAN
+        description: ""
+      - name: accrual_type_service
+        data_type: STRING
+        description: ""
+      - name: bonus_goods
+        data_type: NUMERIC.COST
+        description: ""
+      - name: goods_from_value
+        data_type: BOOLEAN
+        description: ""
+      - name: accrual_type_goods
+        data_type: STRING
+        description: ""
+      - name: stopped
+        data_type: BOOLEAN
+        description: ""
+      - name: note
+        data_type: STRING
+        description: ""
