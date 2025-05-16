@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__intermediate_report_services
+  - name: ds_cleverbox__interm__report_services
     description: "CleverBox Intermediate Report Services"
     config:
-      alias: intermediate_report_services
+      alias: interm__report_services
       meta:
         tf_config:
           filter: id IS NOT NULL

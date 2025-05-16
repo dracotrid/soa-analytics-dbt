@@ -1,16 +1,16 @@
 WITH bonus_employee_service_code AS (
     SELECT uid AS bonus_service_code_code
-    FROM {{ tf_source('ds_cleverbox__raw__bonus_employee') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__bonus_employee') }}
 ),
 
 bonus_employee_service_category AS (
     SELECT uid AS bonus_service_category_code
-    FROM {{ tf_source('ds_cleverbox__raw__bonus_employee') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__bonus_employee') }}
 ),
 
 bonus_employee_service_all AS (
     SELECT uid AS bonus_service_all_code
-    FROM {{ tf_source('ds_cleverbox__raw__bonus_employee') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__bonus_employee') }}
 ),
 
 bonus_employee AS (
@@ -18,7 +18,7 @@ bonus_employee AS (
         uid AS bonus_employee_code,
         bonus_value AS bonus_employee_value,
         accrual_type AS bonus_employee_type
-    FROM {{ tf_ref('ds_cleverbox__bonus_employee') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__bonus_employee') }}
 ),
 
 bonus_discount AS (
@@ -26,21 +26,22 @@ bonus_discount AS (
         name AS bonus_discount_name,
         accrual_type_service AS bonus_discount_type,
         bonus_service AS bonus_discount_value
-    FROM {{ tf_ref('ds_cleverbox__bonus_discount') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__bonus_discount') }}
 ),
 
 discount_usage AS (
     SELECT
         ruid AS discount_usage_id,
         discount_name AS discount_usage_discount_name
-    FROM {{ tf_ref('ds_cleverbox__discount_usage') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__discount_usage') }}
+    GROUP BY ruid, discount_name
 ),
 
 bonus_adjustment AS (
     SELECT
         ruid AS bonus_adjustment_id,
         bonus_type AS bonus_adjustment_type
-    FROM {{ tf_ref('ds_cleverbox__bonus_adjustments') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__bonus_adjustments') }}
 ),
 
 vip_clients AS (
@@ -50,7 +51,7 @@ vip_clients AS (
 
 employees AS (
     SELECT name_for_service
-    FROM {{ tf_ref('ds_cleverbox__employees') }}
+    FROM {{ tf_ref('ds_cleverbox__prepared__employees') }}
 ),
 
 intermediate_step_1_source AS (
@@ -65,7 +66,7 @@ intermediate_step_1_source AS (
         NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
         CASE WHEN COALESCE(cost, 0) = 0 OR COALESCE(discount, 0) = 0 THEN 0 ELSE discount / cost END AS discount_rate
-    FROM {{ tf_ref('ds_cleverbox__intermediate_report_services') }} AS service_sales
+    FROM {{ tf_ref('ds_cleverbox__interm__report_services') }} AS service_sales
     LEFT JOIN bonus_employee_service_code
         ON CONCAT(service_sales.specialist, '-Послуга-', service_sales.service_code) = bonus_employee_service_code.bonus_service_code_code
     LEFT JOIN bonus_employee_service_category
@@ -139,7 +140,7 @@ intermediate_step_5_source AS (
     FROM intermediate_step_4_source
 ),
 
-source AS (
+intermediate_step_6_source AS (
     SELECT
         *,
         CASE
@@ -147,6 +148,10 @@ source AS (
             ELSE base_for_bonus * bonus_value
         END AS bonus_unit
     FROM intermediate_step_5_source
+),
+
+final AS (
+    SELECT * FROM intermediate_step_6_source
 )
 
-{{ tf_transform_model('source') }}
+{{ tf_transform_model('final') }}

@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__services
-    description: "CleverBox Services"
+  - name: ds_cleverbox__prepared__services
+    description: "CleverBox Prepared Services"
     config:
-      alias: services
+      alias: prepared__services
       meta:
         tf_config:
           filter: guid IS NOT NULL

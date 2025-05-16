@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__service_sales
-    description: "CleverBox Service Sales"
+  - name: ds_cleverbox__prepared__service_sales
+    description: "CleverBox Prepared Service Sales"
     config:
-      alias: service_sales
+      alias: prepared__service_sales
       meta:
         tf_config:
           filter: yuid IS NOT NULL

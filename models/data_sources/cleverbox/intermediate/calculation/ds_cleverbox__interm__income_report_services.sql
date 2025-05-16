@@ -8,8 +8,10 @@ WITH certificates_balance AS (
 bonus AS (
     SELECT
         id AS bonus_id,
-        bonus_total
-    FROM {{ tf_ref('ds_cleverbox__intermediate_bonus_report_services') }}
+        bonus_total,
+        is_vip,
+        is_employee
+    FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_services') }}
 ),
 
 intermediate_step_1_source AS (
@@ -24,7 +26,7 @@ intermediate_step_1_source AS (
             WHEN COALESCE(paid, 0) - certificates_balance_sum < 1 THEN 0
             ELSE COALESCE(paid, 0) - certificates_balance_sum
         END AS income
-    FROM {{ tf_ref('ds_cleverbox__intermediate_report_services') }} AS service_sales
+    FROM {{ tf_ref('ds_cleverbox__interm__report_services') }} AS service_sales
     LEFT JOIN certificates_balance
         ON service_sales.id = certificates_balance.certificates_balance_id
     LEFT JOIN bonus
@@ -46,12 +48,16 @@ intermediate_step_3_source AS (
     FROM intermediate_step_2_source
 ),
 
-source AS (
+intermediate_step_4_source AS (
     SELECT
         *,
         CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE profit_total / income_total END AS bonus_margin,
         CASE WHEN income_total = 0 THEN 0 ELSE profit_total / income_total END AS margin
     FROM intermediate_step_3_source
+),
+
+final AS (
+    SELECT * FROM intermediate_step_4_source
 )
 
-{{ tf_transform_model('source') }}
+{{ tf_transform_model('final') }}

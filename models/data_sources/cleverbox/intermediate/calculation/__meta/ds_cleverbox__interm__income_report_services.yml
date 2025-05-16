@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__intermediate_income_report_services
+  - name: ds_cleverbox__interm__income_report_services
     description: "CleverBox Intermediate Income Report Services"
     config:
-      alias: intermediate_income_report_services
+      alias: interm__income_report_services
       meta:
         tf_config:
           filter: id IS NOT NULL
@@ -36,6 +36,12 @@ models:
       - name: client_name
         data_type: STRING
         description: ""
+      - name: is_vip
+        data_type: BOOLEAN
+        description: ""
+      - name: is_employee
+        data_type: BOOLEAN
+        description: ""
       - name: service_name
         data_type: STRING
         description: Service name
@@ -51,6 +57,12 @@ models:
       - name: paid
         data_type: NUMERIC.PRICE
         description: ""
+      - name: price
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            field: paid
       - name: cost
         data_type: NUMERIC.COST
         description: ""
@@ -63,6 +75,9 @@ models:
       - name: discount_total
         data_type: NUMERIC.COST
         description: ""
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: ""
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: ""
@@ -73,6 +88,9 @@ models:
         data_type: NUMERIC.COST
         description: ""
       - name: income_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: bonus_total
         data_type: NUMERIC.COST
         description: ""
       - name: profit_total
