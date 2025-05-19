@@ -13,6 +13,15 @@ sources:
           - name: ruid
             data_type: STRING
             description: ""
+          - name: yuid
+            data_type: STRING
+            description: ""
+          - name: muid
+            data_type: STRING
+            description: ""
+          - name: eid
+            data_type: STRING
+            description: ""
           - name: type
             data_type: STRING
             description: ""

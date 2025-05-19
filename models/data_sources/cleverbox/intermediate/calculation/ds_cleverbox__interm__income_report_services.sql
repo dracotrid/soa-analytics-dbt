@@ -1,8 +1,9 @@
 WITH certificates_balance AS (
     SELECT
-        ruid AS certificates_balance_id,
+        yuid AS certificates_balance_id,
         sum AS certificates_balance_sum
     FROM {{ tf_source('ds_cleverbox__raw__certificates_and_balance') }}
+    GROUP BY yuid, sum
 ),
 
 bonus AS (
@@ -23,8 +24,8 @@ intermediate_step_1_source AS (
         CASE WHEN COALESCE(cost, 0) = 0 THEN 0 ELSE COALESCE(discount, 0) / COALESCE(cost, 0) * 100 END AS discount_persent,
         CASE
             WHEN COALESCE(subscription, 0) > 0 THEN 0
-            WHEN COALESCE(paid, 0) - certificates_balance_sum < 1 THEN 0
-            ELSE COALESCE(paid, 0) - certificates_balance_sum
+            WHEN COALESCE(paid, 0) - COALESCE(certificates_balance_sum, 0) < 1 THEN 0
+            ELSE COALESCE(paid, 0) - COALESCE(certificates_balance_sum, 0)
         END AS income
     FROM {{ tf_ref('ds_cleverbox__interm__report_services') }} AS service_sales
     LEFT JOIN certificates_balance
@@ -51,8 +52,8 @@ intermediate_step_3_source AS (
 intermediate_step_4_source AS (
     SELECT
         *,
-        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE profit_total / income_total END AS bonus_margin,
-        CASE WHEN income_total = 0 THEN 0 ELSE profit_total / income_total END AS margin
+        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(bonus_total / income_total * 100, 0) END AS bonus_margin,
+        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(profit_total / income_total * 100, 0) END AS margin
     FROM intermediate_step_3_source
 ),
 

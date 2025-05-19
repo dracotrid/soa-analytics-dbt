@@ -39,12 +39,12 @@ discount_usage AS (
 
 bonus_adjustment AS (
     SELECT
-        ruid AS bonus_adjustment_id,
+        yuid AS bonus_adjustment_id,
         bonus_type AS bonus_adjustment_type
     FROM {{ tf_ref('ds_cleverbox__prepared__bonus_adjustments') }}
 ),
 
-vip_clients AS (
+vip_clients_table AS (
     SELECT vip_clients
     FROM {{ tf_source('ds_cleverbox__raw__clients') }}
 ),
@@ -73,8 +73,8 @@ intermediate_step_1_source AS (
         ON CONCAT(service_sales.specialist, '-Послуга-', service_sales.category) = bonus_employee_service_category.bonus_service_category_code
     LEFT JOIN bonus_employee_service_all
         ON CONCAT(service_sales.specialist, '-Послуга-ВСЕ') = bonus_employee_service_all.bonus_service_all_code
-    LEFT JOIN vip_clients
-        ON service_sales.client_name = vip_clients.vip_clients
+    LEFT JOIN vip_clients_table
+        ON service_sales.client_name = vip_clients_table.vip_clients
     LEFT JOIN employees
         ON service_sales.client_name = employees.name_for_service
 ),
