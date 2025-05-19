@@ -33,6 +33,9 @@ models:
       - name: category
         data_type: STRING
         description: Service category
+      - name: client_name
+        data_type: STRING
+        description: Client name
       - name: amount
         data_type: NUMERIC
         description: Service amount

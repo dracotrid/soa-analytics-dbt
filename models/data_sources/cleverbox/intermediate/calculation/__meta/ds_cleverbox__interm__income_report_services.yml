@@ -69,6 +69,12 @@ models:
       - name: subscription
         data_type: NUMERIC.COST
         description: ""
+      - name: certificate
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: certificates_balance_sum
       - name: cost_total
         data_type: NUMERIC.COST
         description: ""
