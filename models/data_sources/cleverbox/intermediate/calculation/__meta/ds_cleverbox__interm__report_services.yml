@@ -98,3 +98,9 @@ models:
       - name: subscription
         data_type: NUMERIC.COST
         description: ""
+      - name: profit_source
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: profit

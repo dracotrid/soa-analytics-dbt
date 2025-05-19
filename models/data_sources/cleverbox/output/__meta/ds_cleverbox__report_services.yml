@@ -63,8 +63,9 @@ models:
       - name: subscription
         data_type: NUMERIC.COST
         description: ""
-
-
+      - name: payback
+        data_type: NUMERIC.COST
+        description: ""
       - name: cost_total
         data_type: NUMERIC.COST
         description: ""
@@ -77,9 +78,6 @@ models:
       - name: discount_total
         data_type: NUMERIC.COST
         description: ""
-      - name: discount_total
-        data_type: NUMERIC.COST
-        description: ""
       - name: bonus_total
         data_type: NUMERIC.COST
         description: ""
@@ -87,5 +85,8 @@ models:
         data_type: NUMERIC.COST
         description: ""
       - name: margin
+        data_type: NUMERIC.COST
+        description: ""
+      - name: bonus_cleverbox_total
         data_type: NUMERIC.COST
         description: ""
