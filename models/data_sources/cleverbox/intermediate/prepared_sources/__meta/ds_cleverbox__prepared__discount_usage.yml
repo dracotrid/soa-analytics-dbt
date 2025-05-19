@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__discount_usage
-    description: "CleverBox Discount Usage"
+  - name: ds_cleverbox__prepared__discount_usage
+    description: "CleverBox Prepared Discount Usage"
     config:
-      alias: discount_usage
+      alias: prepared__discount_usage
       meta:
         tf_config:
           filter: yuid IS NOT NULL

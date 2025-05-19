@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__interm__report_services
+    description: "CleverBox Intermediate Report Services"
+    config:
+      alias: interm__report_services
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
+    columns:
+      - name: id
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Service date of sale
+      - name: year
+        data_type: NUMERIC
+        description: Service year of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(YEAR FROM date)
+      - name: month
+        data_type: NUMERIC
+        description: Service month of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(MONTH FROM date)
+      - name: day
+        data_type: NUMERIC
+        description: Service day of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(DAY FROM date)
+      - name: branch
+        data_type: STRING
+        description: Branch of service sale
+      - name: specialist
+        data_type: STRING
+        description: ""
+      - name: speciality
+        data_type: STRING
+        description: ""
+      - name: client_name
+        data_type: STRING
+        description: ""
+      - name: service_name
+        data_type: STRING
+        description: Service name
+        meta:
+          tf_config:
+            field: name
+      - name: service_code
+        data_type: STRING
+        description: Service code
+        meta:
+          tf_config:
+            field: code
+      - name: category
+        data_type: STRING
+        description: Service category
+        meta:
+          tf_config:
+            field: service_category
+      - name: direction
+        data_type: STRING
+        description: Service direction
+        meta:
+          tf_config:
+            field: service_direction
+      - name: amount
+        data_type: NUMERIC
+        description: Service amount
+        meta:
+          tf_config:
+            constant: 1
+      - name: paid
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: value
+      - name: discount
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            expression: CASE WHEN EXTRACT(YEAR FROM date) = 2024 THEN cost_price
+                             WHEN IFNULL(service_cost_price, 0) = 0 THEN cost_price
+                             ELSE service_cost_price END
+      - name: subscription
+        data_type: NUMERIC.COST
+        description: ""
