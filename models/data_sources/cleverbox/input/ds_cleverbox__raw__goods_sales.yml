@@ -1,0 +1,77 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__goods_sales
+        identifier: raw__goods_sales
+        description: "CleverBox raw Goods Sales"
+        columns:
+          - name: guid
+            data_type: STRING
+            description: ""
+          - name: yuid
+            data_type: STRING
+            description: ""
+          - name: i
+            data_type: NUMERIC
+            description: ""
+          - name: date
+            data_type: STRING
+            description: ""
+          - name: branch
+            data_type: STRING
+            description: ""
+          - name: receipt
+            data_type: STRING
+            description: ""
+          - name: base
+            data_type: STRING
+            description: ""
+          - name: employee
+            data_type: STRING
+            description: ""
+          - name: client_name
+            data_type: STRING
+            description: ""
+          - name: phone_number
+            data_type: NUMERIC
+            description: ""
+          - name: goods_name
+            data_type: STRING
+            description: ""
+          - name: brand
+            data_type: STRING
+            description: ""
+          - name: barcode
+            data_type: NUMERIC
+            description: ""
+          - name: article
+            data_type: NUMERIC
+            description: ""
+          - name: amount
+            data_type: NUMERIC.COST
+            description: ""
+          - name: price
+            data_type: NUMERIC.PRICE
+            description: ""
+          - name: cost_price_unit
+            data_type: NUMERIC.PRICE
+            description: ""
+          - name: cost
+            data_type: NUMERIC.COST
+            description: ""
+          - name: cost_price_total
+            data_type: NUMERIC.PRICE
+            description: ""
+          - name: profit
+            data_type: NUMERIC.COST
+            description: ""
+          - name: profitability
+            data_type: NUMERIC.COST
+            description: ""
