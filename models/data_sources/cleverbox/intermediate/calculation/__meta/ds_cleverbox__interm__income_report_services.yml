@@ -108,3 +108,9 @@ models:
       - name: margin
         data_type: NUMERIC.COST
         description: ""
+      - name: bonus_cleverbox_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: payback
+        data_type: NUMERIC.COST
+        description: ""

@@ -6,6 +6,13 @@ WITH certificates_balance AS (
     GROUP BY yuid, sum
 ),
 
+bonus_cleverbox AS (
+    SELECT
+        id AS bonus_cleverbox_id,
+        bonus_cleverbox_total
+    FROM {{ tf_ref('ds_cleverbox__interm__bonus_cleverbox_report_services') }}
+),
+
 bonus AS (
     SELECT
         id AS bonus_id,
@@ -53,8 +60,11 @@ intermediate_step_4_source AS (
     SELECT
         *,
         CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(bonus_total / income_total * 100, 0) END AS bonus_margin,
-        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(profit_total / income_total * 100, 0) END AS margin
+        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(profit_total / income_total * 100, 0) END AS margin,
+        CASE WHEN profit_source = 0 THEN 0 ELSE ROUND(COST / profit_source, 2) END AS payback
     FROM intermediate_step_3_source
+    LEFT JOIN bonus_cleverbox
+        ON intermediate_step_3_source.id = bonus_cleverbox.bonus_cleverbox_id
 ),
 
 final AS (
