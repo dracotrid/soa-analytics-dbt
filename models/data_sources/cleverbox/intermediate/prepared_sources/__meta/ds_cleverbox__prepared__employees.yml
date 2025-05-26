@@ -33,7 +33,7 @@ models:
         meta:
           tf_config:
             field: string_field_3
-      - name: name_for_good
+      - name: name_for_goods
         data_type: STRING
         description: ""
         meta:

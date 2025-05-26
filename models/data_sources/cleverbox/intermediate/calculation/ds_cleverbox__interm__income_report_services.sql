@@ -59,8 +59,8 @@ intermediate_step_3_source AS (
 intermediate_step_4_source AS (
     SELECT
         *,
-        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(bonus_total / income_total * 100, 0) END AS bonus_margin,
-        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(profit_total / income_total * 100, 0) END AS margin,
+        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(bonus_total / income_total, 0) END AS bonus_margin,
+        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(profit_total / income_total, 0) END AS margin,
         CASE WHEN profit_source = 0 THEN 0 ELSE ROUND(COST / profit_source, 2) END AS payback
     FROM intermediate_step_3_source
     LEFT JOIN bonus_cleverbox
