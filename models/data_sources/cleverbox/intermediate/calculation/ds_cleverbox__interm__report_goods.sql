@@ -9,31 +9,58 @@ WITH employees_speciality AS (
 bonus_report_goods AS (
     SELECT
         id AS bonus_id,
-        bonus_total
+        bonus_unit,
+        bonus_total,
+        cleverbox_bonus_total
     FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_goods') }}
+),
+
+certificates_balance AS (
+    SELECT
+        yuid AS certificates_balance_id,
+        sum AS certificates_balance_sum
+    FROM {{ tf_source('ds_cleverbox__raw__certificates_and_balance_goods') }}
+    GROUP BY yuid, sum
 ),
 
 report_goods_step_1 AS (
     SELECT
         *,
         COALESCE(cost, 0) * COALESCE(amount, 0) AS cost_total,
-        COALESCE(cost_price_unit, 0) * COALESCE(amount, 0) AS cost_price_total,
-        COALESCE(cost, 0) - COALESCE(price, 0) AS discount_unit
-
+        COALESCE(cost_price_unit, 0) * COALESCE(amount, 0) AS calculated_cost_price_total,
+        COALESCE(cost, 0) - COALESCE(price, 0) AS discount_unit,
+        COALESCE(price, 0) * COALESCE(amount, 0) AS full_income_total,
+        COALESCE(price, 0) - COALESCE(cost_price_unit, 0) - COALESCE(bonus_unit, 0) AS profit_unit
     FROM {{ tf_ref('ds_cleverbox__prepared__goods_sales') }} AS goods_sales
     LEFT JOIN employees_speciality
         ON goods_sales.employee = employees_speciality.employees_speciality_name
     LEFT JOIN bonus_report_goods
         ON goods_sales.id = bonus_report_goods.bonus_id
+    LEFT JOIN certificates_balance
+        ON goods_sales.id = certificates_balance.certificates_balance_id
+),
+
+report_goods_step_2 AS (
+    SELECT
+        *,
+        discount_unit * COALESCE(amount, 0) AS discount_total,
+        full_income_total - COALESCE(certificates_balance_sum, 0) AS income_total,
+        ROUND(CASE WHEN profit_unit = 0 THEN 0 ELSE COALESCE(price, 0) / profit_unit END, 2) AS payback
+    FROM report_goods_step_1
+),
+
+report_goods_step_3 AS (
+    SELECT
+        *,
+        income_total - calculated_cost_price_total - COALESCE(bonus_total, 0) AS profit_total
+    FROM report_goods_step_2
 ),
 
 final AS (
     SELECT
         *,
-        discount_unit * COALESCE(amount, 0) AS discount_total
-    FROM report_goods_step_1
+        CASE WHEN full_income_total = 0 THEN 0 ELSE profit_total / full_income_total END AS margin
+    FROM report_goods_step_3
 )
-
-
 
 {{ tf_transform_model('final') }}

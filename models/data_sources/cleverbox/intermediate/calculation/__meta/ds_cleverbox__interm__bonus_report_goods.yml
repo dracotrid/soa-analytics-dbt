@@ -72,3 +72,6 @@ models:
       - name: bonus_total
         data_type: NUMERIC.COST
         description: ""
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.COST
+        description: ""

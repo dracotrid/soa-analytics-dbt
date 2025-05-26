@@ -94,7 +94,8 @@ bonus_report_goods_step_5 AS (
 final AS (
     SELECT
         *,
-        ROUND(bonus_unit * amount, 2) AS bonus_total
+        ROUND(bonus_unit * amount, 2) AS bonus_total,
+        ROUND(COALESCE(price, 0) * bonus_value * amount, 2) AS cleverbox_bonus_total
     FROM bonus_report_goods_step_5
 )
 
