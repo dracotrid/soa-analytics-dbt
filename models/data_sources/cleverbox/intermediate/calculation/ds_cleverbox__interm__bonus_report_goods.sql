@@ -19,10 +19,10 @@ bonus_employee AS (
 
 discount_usage AS (
     SELECT
-        ruid AS discount_usage_id,
+        yuid AS discount_usage_id,
         discount_name AS discount_usage_discount_name
     FROM {{ tf_ref('ds_cleverbox__prepared__discount_usage') }}
-    GROUP BY ruid, discount_name
+    GROUP BY yuid, discount_name
 ),
 
 bonus_discount AS (

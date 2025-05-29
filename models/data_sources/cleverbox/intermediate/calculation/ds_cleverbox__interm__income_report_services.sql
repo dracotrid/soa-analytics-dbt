@@ -1,9 +1,9 @@
 WITH certificates_balance AS (
     SELECT
         yuid AS certificates_balance_id,
-        sum AS certificates_balance_sum
+        sum(sum) AS certificates_balance_sum
     FROM {{ tf_source('ds_cleverbox__raw__certificates_and_balance') }}
-    GROUP BY yuid, sum
+    GROUP BY yuid
 ),
 
 bonus_cleverbox AS (
@@ -25,14 +25,14 @@ bonus AS (
 intermediate_step_1_source AS (
     SELECT
         *,
-        COALESCE(amount, 0) * COALESCE(cost, 0) AS cost_total,
-        COALESCE(amount, 0) * COALESCE(discount, 0) AS discount_total,
-        COALESCE(amount, 0) * COALESCE(cost_price_unit, 0) AS cost_price_total,
-        CASE WHEN COALESCE(cost, 0) = 0 THEN 0 ELSE COALESCE(discount, 0) / COALESCE(cost, 0) * 100 END AS discount_persent,
+        coalesce(amount, 0) * coalesce(cost, 0) AS cost_total,
+        coalesce(amount, 0) * coalesce(discount, 0) AS discount_total,
+        coalesce(amount, 0) * coalesce(cost_price_unit, 0) AS cost_price_total,
+        CASE WHEN coalesce(cost, 0) = 0 THEN 0 ELSE coalesce(discount, 0) / coalesce(cost, 0) * 100 END AS discount_persent,
         CASE
-            WHEN COALESCE(subscription, 0) > 0 THEN 0
-            WHEN COALESCE(paid, 0) - COALESCE(certificates_balance_sum, 0) < 1 THEN 0
-            ELSE COALESCE(paid, 0) - COALESCE(certificates_balance_sum, 0)
+            WHEN coalesce(subscription, 0) > 0 THEN 0
+            WHEN coalesce(paid, 0) - coalesce(certificates_balance_sum, 0) < 1 THEN 0
+            ELSE coalesce(paid, 0) - coalesce(certificates_balance_sum, 0)
         END AS income
     FROM {{ tf_ref('ds_cleverbox__interm__report_services') }} AS service_sales
     LEFT JOIN certificates_balance
@@ -45,23 +45,23 @@ intermediate_step_1_source AS (
 intermediate_step_2_source AS (
     SELECT
         *,
-        ROUND(COALESCE(amount, 0) * COALESCE(income, 0), 2) AS income_total
+        round(coalesce(amount, 0) * coalesce(income, 0), 2) AS income_total
     FROM intermediate_step_1_source
 ),
 
 intermediate_step_3_source AS (
     SELECT
         *,
-        income_total - cost_price_total - bonus_total AS profit_total
+        coalesce(income_total, 0) - coalesce(cost_price_total, 0) - coalesce(bonus_total, 0) AS profit_total
     FROM intermediate_step_2_source
 ),
 
 intermediate_step_4_source AS (
     SELECT
         *,
-        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(bonus_total / income_total, 0) END AS bonus_margin,
-        CASE WHEN COALESCE(income_total, 0) = 0 THEN 0 ELSE ROUND(profit_total / income_total, 0) END AS margin,
-        CASE WHEN profit_source = 0 THEN 0 ELSE ROUND(COST / profit_source, 2) END AS payback
+        CASE WHEN coalesce(income_total, 0) = 0 THEN 0 ELSE round(bonus_total / income_total, 0) END AS bonus_margin,
+        CASE WHEN coalesce(income_total, 0) = 0 THEN 0 ELSE round(profit_total / income_total, 0) END AS margin,
+        CASE WHEN profit_source = 0 THEN 0 ELSE round(COST / profit_source, 2) END AS payback
     FROM intermediate_step_3_source
     LEFT JOIN bonus_cleverbox
         ON intermediate_step_3_source.id = bonus_cleverbox.bonus_cleverbox_id
