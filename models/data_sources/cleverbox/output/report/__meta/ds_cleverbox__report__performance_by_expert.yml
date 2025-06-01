@@ -5,8 +5,6 @@ models:
     description: "Report: Performance by Expert "
     config:
       alias: report__performance_by_expert
-      contract:
-        enforced: false
     columns:
       - name: period
         description: ''

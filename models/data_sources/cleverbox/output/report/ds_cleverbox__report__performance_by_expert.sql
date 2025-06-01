@@ -95,8 +95,9 @@ prepared_product AS (
         SELECT * FROM prepared_goods
     ) AS t
     LEFT JOIN src__employees AS empl ON t.specialist = empl.name
-    WHERE t.year = 2025
-    -- and t.month = 5
+    WHERE
+        t.year = 2025
+        AND t.month = 5
 ),
 
 day_count AS (
@@ -132,6 +133,8 @@ kpi_service AS (
         PERCENTILE_CONT(profit_total, 0.5) OVER (PARTITION BY specialist, period) AS visit_service_profit_50p,
 
         SUM(bonus_total) OVER (PARTITION BY specialist, period) AS service_bonus_total
+
+
     FROM prepared_product
     WHERE ptype = "SERVICE"
 --ORDER BY period, job_title, specialist
@@ -213,7 +216,7 @@ kpi_detailed AS (
 ),
 
 
-final_kpi AS (
+interm_kpi AS (
     SELECT
         kpi.period,
         kpi.specialist,
@@ -224,29 +227,25 @@ final_kpi AS (
         ROUND(IF(visit_count > 0 AND visit_count >= visit_goods_count, visit_goods_count / visit_count, 0), 4) AS visit_goods_rate,
 
 
-        COALESCE(service_count_total, 0) AS service_count_total,
-        COALESCE(goods_count_total, 0) AS goods_count_total,
-        COALESCE(product_count_total, 0) AS product_count_total,
+        COALESCE(service_count_total, 0) AS service_count,
+        COALESCE(goods_count_total, 0) AS goods_count,
+        COALESCE(product_count_total, 0) AS product_count,
 
         COALESCE(service_count_avg, 0) AS service_count_avg,
         COALESCE(goods_count_avg, 0) AS goods_count_avg,
         COALESCE(product_count_avg, 0) AS product_count_avg,
 
-        -- COALESCE(service_count_50p, 0) AS service_count_50p,
-        -- COALESCE(goods_count_50p, 0) AS goods_count_50p,
-        -- COALESCE(product_count_50p, 0) AS product_count_50p,
+        COALESCE(service_income_total, 0) AS service_income,
+        COALESCE(goods_income_total, 0) AS goods_income,
+        COALESCE(product_income_total, 0) AS product_income,
 
-        COALESCE(service_income_total, 0) AS service_income_total,
-        COALESCE(goods_income_total, 0) AS goods_income_total,
-        COALESCE(product_income_total, 0) AS product_income_total,
+        COALESCE(service_bonus_total, 0) AS service_bonus,
+        COALESCE(goods_bonus_total, 0) AS goods_bonus,
+        COALESCE(product_bonus_total, 0) AS product_bonus,
 
-        COALESCE(service_bonus_total, 0) AS service_bonus_total,
-        COALESCE(goods_bonus_total, 0) AS goods_bonus_total,
-        COALESCE(product_bonus_total, 0) AS product_bonus_total,
-
-        COALESCE(service_profit_total, 0) AS service_profit_total,
-        COALESCE(goods_profit_total, 0) AS goods_profit_total,
-        COALESCE(product_profit_total, 0) AS product_profit_total,
+        COALESCE(service_profit_total, 0) AS service_profit,
+        COALESCE(goods_profit_total, 0) AS goods_profit,
+        COALESCE(product_profit_total, 0) AS product_profit,
 
         COALESCE(visit_service_income_50p, 0) AS visit_service_income_avg,
         COALESCE(visit_goods_income_50p, 0) AS visit_goods_income_avg,
@@ -261,7 +260,40 @@ final_kpi AS (
         ROUND(product_profit_total / product_income_total, 4) AS product_margin
     FROM kpi_detailed AS kpi
     LEFT JOIN day_count AS dcntv ON kpi.specialist = dcntv.specialist AND kpi.period = dcntv.period
+),
+
+prepared_kpi AS (
+    SELECT
+        *,
+        SUM(service_income) OVER (PARTITION BY job_title, period) AS dir_service_income,
+        SUM(goods_income) OVER (PARTITION BY job_title, period) AS dir_goods_income,
+        SUM(product_income) OVER (PARTITION BY job_title, period) AS dir_product_income,
+
+        SUM(service_income) OVER (PARTITION BY period) AS total_service_income,
+        SUM(goods_income) OVER (PARTITION BY period) AS total_goods_income,
+        SUM(product_income) OVER (PARTITION BY period) AS total_product_income
+    FROM interm_kpi
+),
+
+final_kpi AS (
+    SELECT
+        *,
+        ROUND(IF(dir_product_income > 0, service_income / dir_product_income, NULL), 4) AS service_income_rate,
+        ROUND(IF(dir_product_income > 0, goods_income / dir_product_income, NULL), 4) AS goods_income_rate,
+
+        ROUND(IF(dir_service_income > 0, service_income / dir_service_income, NULL), 4) AS dir_service_income_rate,
+        ROUND(IF(dir_goods_income > 0, goods_income / dir_goods_income, NULL), 4) AS dir_goods_income_rate,
+        ROUND(IF(dir_product_income > 0, product_income / dir_product_income, NULL), 4) AS dir_product_income_rate,
+
+        ROUND(IF(total_service_income > 0, service_income / total_service_income, NULL), 4) AS total_service_income_rate,
+        ROUND(IF(total_service_income > 0, goods_income / total_service_income, NULL), 4) AS total_goods_income_rate,
+        ROUND(IF(total_service_income > 0, product_income / total_service_income, NULL), 4) AS total_product_income_rate
+    FROM prepared_kpi
+),
+
+final AS (
+    SELECT * FROM final_kpi
+    ORDER BY period, job_title, specialist
 )
 
-SELECT * FROM final_kpi
-ORDER BY period, job_title, specialist
+{{ tf_transform_model('final') }}
