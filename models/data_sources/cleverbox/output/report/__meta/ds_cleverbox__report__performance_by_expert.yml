@@ -1,0 +1,109 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__report__performance_by_expert
+    description: "Report: Performance by Expert "
+    config:
+      alias: report__performance_by_expert
+      contract:
+        enforced: false
+    columns:
+      - name: period
+        description: ''
+        data_type: STRING
+      - name: specialist
+        description: ''
+        data_type: STRING
+        meta:
+          tf_config:
+            field: employee
+      - name: job_title
+        description: ''
+        data_type: STRING
+        meta:
+          tf_config:
+            field: string_field_1
+      - name: day_count
+        description: ''
+        data_type: INT64
+      - name: visit_count
+        description: ''
+        data_type: INT64
+      - name: visit_goods_count
+        description: ''
+        data_type: INT64
+      - name: visit_goods_rate
+        description: ''
+        data_type: FLOAT64
+      - name: service_count_total
+        description: ''
+        data_type: INT64
+      - name: goods_count_total
+        description: ''
+        data_type: INT64
+      - name: product_count_total
+        description: ''
+        data_type: INT64
+      - name: service_count_avg
+        description: ''
+        data_type: FLOAT64
+      - name: goods_count_avg
+        description: ''
+        data_type: FLOAT64
+      - name: product_count_avg
+        description: ''
+        data_type: FLOAT64
+      - name: service_income_total
+        description: ''
+        data_type: NUMERIC
+      - name: goods_income_total
+        description: ''
+        data_type: NUMERIC
+      - name: product_income_total
+        description: ''
+        data_type: NUMERIC
+      - name: service_bonus_total
+        description: ''
+        data_type: NUMERIC
+      - name: goods_bonus_total
+        description: ''
+        data_type: NUMERIC
+      - name: product_bonus_total
+        description: ''
+        data_type: NUMERIC
+      - name: service_profit_total
+        description: ''
+        data_type: NUMERIC
+      - name: goods_profit_total
+        description: ''
+        data_type: NUMERIC
+      - name: product_profit_total
+        description: ''
+        data_type: NUMERIC
+      - name: visit_service_income_avg
+        description: ''
+        data_type: FLOAT64
+      - name: visit_goods_income_avg
+        description: ''
+        data_type: FLOAT64
+      - name: visit_product_income_avg
+        description: ''
+        data_type: FLOAT64
+      - name: visit_service_profit_avg
+        description: ''
+        data_type: FLOAT64
+      - name: visit_goods_profit_avg
+        description: ''
+        data_type: FLOAT64
+      - name: visit_product_profit_avg
+        description: ''
+        data_type: FLOAT64
+      - name: service_margin
+        description: ''
+        data_type: NUMERIC
+      - name: goods_margin
+        description: ''
+        data_type: NUMERIC
+      - name: product_margin
+        description: ''
+        data_type: NUMERIC
