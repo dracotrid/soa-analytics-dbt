@@ -12,96 +12,114 @@ models:
       - name: specialist
         description: ''
         data_type: STRING
-        meta:
-          tf_config:
-            field: employee
       - name: job_title
         description: ''
         data_type: STRING
-        meta:
-          tf_config:
-            field: string_field_1
       - name: day_count
         description: ''
-        data_type: INT64
+        data_type: INT
       - name: visit_count
         description: ''
-        data_type: INT64
+        data_type: INT
       - name: visit_goods_count
         description: ''
-        data_type: INT64
+        data_type: INT
       - name: visit_goods_rate
         description: ''
-        data_type: FLOAT64
-      - name: service_count_total
+        data_type: FLOAT
+      - name: service_count
         description: ''
-        data_type: INT64
-      - name: goods_count_total
+        data_type: INT
+      - name: goods_count
         description: ''
-        data_type: INT64
-      - name: product_count_total
+        data_type: INT
+      - name: product_count
         description: ''
-        data_type: INT64
+        data_type: INT
       - name: service_count_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: goods_count_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: product_count_avg
         description: ''
-        data_type: FLOAT64
-      - name: service_income_total
+        data_type: NUMERIC.RATE
+      - name: service_income
         description: ''
-        data_type: NUMERIC
-      - name: goods_income_total
+        data_type: NUMERIC.COST
+      - name: goods_income
         description: ''
-        data_type: NUMERIC
-      - name: product_income_total
+        data_type: NUMERIC.COST
+      - name: product_income
         description: ''
-        data_type: NUMERIC
-      - name: service_bonus_total
+        data_type: NUMERIC.COST
+      - name: service_income_rate
         description: ''
-        data_type: NUMERIC
-      - name: goods_bonus_total
+        data_type: NUMERIC.RATE
+      - name: goods_income_rate
         description: ''
-        data_type: NUMERIC
-      - name: product_bonus_total
+        data_type: NUMERIC.RATE
+      - name: dir_service_income_rate
         description: ''
-        data_type: NUMERIC
-      - name: service_profit_total
+        data_type: NUMERIC.RATE
+      - name: dir_goods_income_rate
         description: ''
-        data_type: NUMERIC
-      - name: goods_profit_total
+        data_type: NUMERIC.RATE
+      - name: dir_product_income_rate
         description: ''
-        data_type: NUMERIC
-      - name: product_profit_total
+        data_type: NUMERIC.RATE
+      - name: total_service_income_rate
         description: ''
-        data_type: NUMERIC
+        data_type: NUMERIC.RATE
+      - name: total_goods_income_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: total_product_income_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: service_bonus
+        description: ''
+        data_type: NUMERIC.COST
+      - name: goods_bonus
+        description: ''
+        data_type: NUMERIC.COST
+      - name: product_bonus
+        description: ''
+        data_type: NUMERIC.COST
+      - name: service_profit
+        description: ''
+        data_type: NUMERIC.COST
+      - name: goods_profit
+        description: ''
+        data_type: NUMERIC.COST
+      - name: product_profit
+        description: ''
+        data_type: NUMERIC.COST
       - name: visit_service_income_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: visit_goods_income_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: visit_product_income_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: visit_service_profit_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: visit_goods_profit_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: visit_product_profit_avg
         description: ''
-        data_type: FLOAT64
+        data_type: NUMERIC.RATE
       - name: service_margin
         description: ''
-        data_type: NUMERIC
+        data_type: NUMERIC.RATE
       - name: goods_margin
         description: ''
-        data_type: NUMERIC
+        data_type: NUMERIC.RATE
       - name: product_margin
         description: ''
-        data_type: NUMERIC
+        data_type: NUMERIC.RATE

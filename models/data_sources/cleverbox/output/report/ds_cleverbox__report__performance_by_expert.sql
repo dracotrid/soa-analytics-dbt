@@ -97,7 +97,7 @@ prepared_product AS (
     LEFT JOIN src__employees AS empl ON t.specialist = empl.name
     WHERE
         t.year = 2025
-        AND t.month = 5
+        -- AND t.month = 5
 ),
 
 day_count AS (
