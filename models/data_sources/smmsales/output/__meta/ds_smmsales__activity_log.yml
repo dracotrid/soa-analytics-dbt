@@ -47,11 +47,17 @@ models:
             tf_config:
               macro: smmsales__extract__ad_name
               params: [source]
-        - name: ad_name__original
+        - name: ad_audience
           data_type: STRING
           meta:
             tf_config:
-              macro: smmsales__extract__original_ad_name
+              macro: smmsales__extract__ad_audience
+              params: [source, date]
+        - name: ad_name__canonical
+          data_type: STRING
+          meta:
+            tf_config:
+              macro: smmsales__extract__canonical_ad_name
               params: [source]
         - name: first_message
           description: ''
