@@ -1,0 +1,89 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__report_subscriptions
+    description: "CleverBox Report Subscriptions"
+    config:
+      alias: report_subscriptions
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
+    columns:
+      - name: id
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Goods date of sale
+      - name: year
+        data_type: NUMERIC
+        description: Goods year of sale
+      - name: month
+        data_type: NUMERIC
+        description: Goods month of sale
+      - name: day
+        data_type: NUMERIC
+        description: Goods day of sale
+      - name: branch
+        data_type: STRING
+        description: Branch of goods sale
+      - name: specialist
+        data_type: STRING
+        description: ""
+      - name: speciality
+        data_type: STRING
+        description: ""
+      - name: client
+        data_type: STRING
+        description: ""
+      - name: is_vip
+        data_type: BOOLEAN
+        description: ""
+      - name: is_employee
+        data_type: BOOLEAN
+        description: ""
+      - name: subscription_name
+        data_type: STRING
+        description: ""
+      - name: direction
+        data_type: STRING
+        description: ""
+      - name: category
+        data_type: STRING
+        description: ""
+      - name: amount
+        data_type: NUMERIC
+        description: ""
+      - name: price
+        data_type: NUMERIC.PRICE
+        description: ""
+      - name: cost_price_unit
+        data_type: NUMERIC.COST
+        description: ""
+      - name: payback
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: income_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost_price_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: discount_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: bonus_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: profit_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: margin
+        data_type: NUMERIC.PRICE
+        description: ""
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: ""
