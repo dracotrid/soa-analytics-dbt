@@ -1,0 +1,56 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__subscriptions_sales
+        identifier: raw__subscriptions_sales
+        description: "CleverBox raw Subscriptions Sales"
+        columns:
+          - name: uid
+            data_type: STRING
+            description: ""
+          - name: id
+            data_type: NUMERIC
+            description: ""
+          - name: code
+            data_type: NUMERIC
+            description: ""
+          - name: type
+            data_type: STRING
+            description: ""
+          - name: client
+            data_type: STRING
+            description: ""
+          - name: phone
+            data_type: NUMERIC
+            description: ""
+          - name: branch
+            data_type: STRING
+            description: ""
+          - name: date_of_sale
+            data_type: STRING
+            description: ""
+          - name: author
+            data_type: STRING
+            description: ""
+          - name: employee
+            data_type: STRING
+            description: ""
+          - name: cost
+            data_type: NUMERIC.COST
+            description: ""
+          - name: valid_date
+            data_type: STRING
+            description: ""
+          - name: note
+            data_type: STRING
+            description: ""
+          - name: status
+            data_type: STRING
+            description: ""
