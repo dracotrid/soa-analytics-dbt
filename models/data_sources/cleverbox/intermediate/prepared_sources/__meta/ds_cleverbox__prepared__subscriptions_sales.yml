@@ -36,6 +36,42 @@ models:
       - name: employee
         data_type: STRING
         description: ""
+      - name: category
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Абонемент'
+      - name: direction
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Абонемент'
+      - name: amount
+        data_type: NUMERIC
+        description: ""
+        meta:
+          tf_config:
+            constant: 1
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: bonus_total
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
       - name: cost
         data_type: NUMERIC.COST
         description: ""
