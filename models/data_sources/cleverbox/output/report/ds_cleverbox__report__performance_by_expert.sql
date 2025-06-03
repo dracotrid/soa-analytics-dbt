@@ -53,6 +53,7 @@ prepared_service AS (
         specialist,
         client_name,
         period,
+        date,
         year,
         month,
         day,
@@ -62,8 +63,8 @@ prepared_service AS (
         SUM(profit_total) AS profit_total,
         SUM(bonus_total) AS bonus_total
     FROM input_service
-    GROUP BY specialist, client_name, period, year, month, day
-    ORDER BY specialist, year, month, day, client_name
+    GROUP BY specialist, client_name, period, date, year, month, day
+    --ORDER BY specialist, date, client_name
 ),
 
 prepared_goods AS (
@@ -72,6 +73,7 @@ prepared_goods AS (
         specialist,
         client_name,
         period,
+        date,
         year,
         month,
         day,
@@ -81,8 +83,8 @@ prepared_goods AS (
         SUM(profit_total) AS profit_total,
         SUM(bonus_total) AS bonus_total
     FROM input_goods
-    GROUP BY specialist, client_name, period, year, month, day
-    ORDER BY specialist, year, month, day, client_name
+    GROUP BY specialist, client_name, period, date, year, month, day
+    --ORDER BY specialist, date, client_name
 ),
 
 prepared_product AS (
@@ -104,7 +106,7 @@ day_count AS (
     SELECT
         specialist,
         period,
-        COUNT(DISTINCT DAY) AS day_count
+        COUNT(DISTINCT date) AS day_count
     FROM
         prepared_service
     GROUP BY
@@ -271,13 +273,22 @@ prepared_kpi AS (
 
         SUM(service_income) OVER (PARTITION BY period) AS total_service_income,
         SUM(goods_income) OVER (PARTITION BY period) AS total_goods_income,
-        SUM(product_income) OVER (PARTITION BY period) AS total_product_income
+        SUM(product_income) OVER (PARTITION BY period) AS total_product_income,
+
+        SUM(service_profit) OVER (PARTITION BY job_title, period) AS dir_service_profit,
+        SUM(goods_profit) OVER (PARTITION BY job_title, period) AS dir_goods_profit,
+        SUM(product_profit) OVER (PARTITION BY job_title, period) AS dir_product_profit,
+
+        SUM(service_profit) OVER (PARTITION BY period) AS total_service_profit,
+        SUM(goods_profit) OVER (PARTITION BY period) AS total_goods_profit,
+        SUM(product_profit) OVER (PARTITION BY period) AS total_product_profit
     FROM interm_kpi
 ),
 
 final_kpi AS (
     SELECT
         *,
+        -- INCOME RATE
         ROUND(IF(dir_product_income > 0, service_income / dir_product_income, NULL), 4) AS service_income_rate,
         ROUND(IF(dir_product_income > 0, goods_income / dir_product_income, NULL), 4) AS goods_income_rate,
 
@@ -287,13 +298,25 @@ final_kpi AS (
 
         ROUND(IF(total_service_income > 0, service_income / total_service_income, NULL), 4) AS total_service_income_rate,
         ROUND(IF(total_service_income > 0, goods_income / total_service_income, NULL), 4) AS total_goods_income_rate,
-        ROUND(IF(total_service_income > 0, product_income / total_service_income, NULL), 4) AS total_product_income_rate
+        ROUND(IF(total_service_income > 0, product_income / total_service_income, NULL), 4) AS total_product_income_rate,
+
+        -- PROFIT RATE
+        ROUND(IF(dir_product_profit > 0, service_profit / dir_product_profit, NULL), 4) AS service_profit_rate,
+        ROUND(IF(dir_product_profit > 0, goods_profit / dir_product_profit, NULL), 4) AS goods_profit_rate,
+
+        ROUND(IF(dir_service_profit > 0, service_profit / dir_service_profit, NULL), 4) AS dir_service_profit_rate,
+        ROUND(IF(dir_goods_profit > 0, goods_profit / dir_goods_profit, NULL), 4) AS dir_goods_profit_rate,
+        ROUND(IF(dir_product_profit > 0, product_profit / dir_product_profit, NULL), 4) AS dir_product_profit_rate,
+
+        ROUND(IF(total_service_profit > 0, service_profit / total_service_profit, NULL), 4) AS total_service_profit_rate,
+        ROUND(IF(total_goods_profit > 0, goods_profit / total_goods_profit, NULL), 4) AS total_goods_profit_rate,
+        ROUND(IF(total_product_profit > 0, product_profit / total_product_profit, NULL), 4) AS total_product_profit_rate
     FROM prepared_kpi
 ),
 
 final AS (
     SELECT * FROM final_kpi
-    ORDER BY period, job_title, specialist
+    -- ORDER BY period, job_title, specialist
 )
 
 {{ tf_transform_model('final') }}

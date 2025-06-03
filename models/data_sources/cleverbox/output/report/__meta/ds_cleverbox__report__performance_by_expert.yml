@@ -96,6 +96,30 @@ models:
       - name: product_profit
         description: ''
         data_type: NUMERIC.COST
+      - name: service_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: goods_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: dir_service_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: dir_goods_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: dir_product_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: total_service_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: total_goods_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
+      - name: total_product_profit_rate
+        description: ''
+        data_type: NUMERIC.RATE
       - name: visit_service_income_avg
         description: ''
         data_type: NUMERIC.RATE
