@@ -33,6 +33,18 @@ models:
       - name: branch
         data_type: STRING
         description: ""
+      - name: category
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Сертифікат'
+      - name: direction
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Сертифікат'
       - name: amount
         data_type: NUMERIC
         description: ""
@@ -45,13 +57,7 @@ models:
         meta:
           tf_config:
             field: cost
-      - name: cost
-        data_type: NUMERIC.COST
-        description: ""
-        meta:
-          tf_config:
-            field: grade
-      - name: cost_price
+      - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: ""
         meta:
