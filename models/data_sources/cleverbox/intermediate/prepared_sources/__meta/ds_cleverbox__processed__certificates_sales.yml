@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__processed__certificates_sales
+    description: "CleverBox Processed Certificates Sales"
+    config:
+      alias: processed__certificates_sales
+      meta:
+        tf_config:
+          filter: uid IS NOT NULL
+    columns:
+      - name: id
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: uid
+      - name: certificate_name
+        data_type: STRING
+        description: ""
+      - name: client
+        data_type: STRING
+        description: ""
+      - name: employee
+        data_type: STRING
+        description: ""
+      - name: date
+        data_type: DATE
+        description: ""
+        meta:
+          tf_config:
+            expression: PARSE_DATE('%d.%m.%Y', date)
+      - name: branch
+        data_type: STRING
+        description: ""
+      - name: amount
+        data_type: NUMERIC
+        description: ""
+        meta:
+          tf_config:
+            constant: 1
+      - name: price
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: cost
+      - name: cost
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: grade
+      - name: cost_price
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: bonus_total
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
