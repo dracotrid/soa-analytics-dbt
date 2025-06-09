@@ -54,14 +54,32 @@ models:
         meta:
           tf_config:
             constant: 'Баланс'
+      - name: device
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: ''
       - name: amount
         data_type: NUMERIC
         description: ""
         meta:
           tf_config:
             constant: 1
+      - name: price
+        data_type: NUMERIC.COST
+        description: ""
+        meta:
+          tf_config:
+            field: sum
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: discount
+        data_type: NUMERIC.COST
         description: ""
         meta:
           tf_config:
