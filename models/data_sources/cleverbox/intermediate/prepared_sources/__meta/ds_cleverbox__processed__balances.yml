@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__processed__balances
+    description: "CleverBox Processed Balances"
+    config:
+      alias: processed__balances
+      meta:
+        tf_config:
+          filter: uid IS NOT NULL AND type = 'Поповнення'
+    columns:
+      - name: id
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: uid
+      - name: date
+        data_type: DATE
+        description: ""
+        meta:
+          tf_config:
+            expression: DATE(PARSE_DATETIME('%d.%m.%Y %H:%M', date))
+      - name: name
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: type
+      - name: branch
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Рахунок клієнта'
+      - name: specialist
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: author
+      - name: client
+        data_type: STRING
+        description: ""
+      - name: category
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Баланс'
+      - name: direction
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'Баланс'
+      - name: amount
+        data_type: NUMERIC
+        description: ""
+        meta:
+          tf_config:
+            constant: 1
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: bonus_total
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            constant: 0
