@@ -27,7 +27,7 @@ models:
       - name: client
         data_type: STRING
         description: ""
-      - name: name
+      - name: product_name
         data_type: STRING
         description: ""
       - name: direction
