@@ -29,7 +29,7 @@ models:
         description: ""
         meta:
           tf_config:
-            expression: PARSE_DATE('%d.%m.%Y', date)
+            expression: PARSE_DATE('%d.%m.%y', date)
       - name: branch
         data_type: STRING
         description: ""
