@@ -1,11 +1,11 @@
 WITH source AS (
     SELECT
-        id,
+        id AS eid,
         'Послуга' AS product_type,
         date,
         branch,
-        specialist,
-        client_name AS client,
+        specialist AS employee_name,
+        client_name,
         service_name AS product_name,
         direction,
         category,
@@ -25,12 +25,12 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id,
+        id AS eid,
         'Товар' AS product_type,
         date,
         branch,
-        specialist,
-        client_name AS client,
+        specialist AS employee_name,
+        client_name,
         goods_name AS product_name,
         'Товар' AS direction,
         brand AS category,
@@ -50,12 +50,12 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id,
+        id AS eid,
         'Абонемент' AS product_type,
         date,
         branch,
-        specialist,
-        client,
+        specialist AS employee_name,
+        client AS client_name,
         subscription_name AS product_name,
         direction,
         category,
@@ -75,12 +75,12 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id,
+        id AS eid,
         'Сертифікат' AS product_type,
         date,
         branch,
-        specialist,
-        client,
+        specialist AS employee_name,
+        client AS client_name,
         certificate_name AS product_name,
         direction,
         category,
@@ -100,12 +100,12 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id,
+        id AS eid,
         'Баланс' AS product_type,
         date,
         branch,
-        specialist,
-        client,
+        specialist AS employee_name,
+        client AS client_name,
         name AS product_name,
         direction,
         category,
