@@ -7,9 +7,9 @@ models:
       alias: report_product_sales
       meta:
         tf_config:
-          filter: id IS NOT NULL
+          filter: eid IS NOT NULL
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: ""
       - name: product_type
@@ -21,10 +21,10 @@ models:
       - name: branch
         data_type: STRING
         description: ""
-      - name: specialist
+      - name: employee_name
         data_type: STRING
         description: ""
-      - name: client
+      - name: client_name
         data_type: STRING
         description: ""
       - name: product_name
