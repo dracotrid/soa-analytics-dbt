@@ -20,7 +20,7 @@ WITH source AS (
         bonus_total AS bonus,
         profit_total AS profit,
         margin
-    FROM {{ tf_ref('ds_cleverbox__report_services') }}
+    FROM {{ tf_ref('ds_cleverbox__report_services_sales') }}
 
     UNION ALL
 
@@ -45,7 +45,7 @@ WITH source AS (
         bonus_total AS bonus,
         profit_total AS profit,
         margin
-    FROM {{ tf_ref('ds_cleverbox__report_goods') }}
+    FROM {{ tf_ref('ds_cleverbox__report_goods_sales') }}
 
     UNION ALL
 
@@ -70,7 +70,7 @@ WITH source AS (
         bonus_total AS bonus,
         profit_total AS profit,
         margin
-    FROM {{ tf_ref('ds_cleverbox__report_subscriptions') }}
+    FROM {{ tf_ref('ds_cleverbox__report_subscriptions_sales') }}
 
     UNION ALL
 

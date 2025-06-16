@@ -9,7 +9,7 @@ WITH source AS (
         bonus_total AS bonus,
         amount,
         bonus_cleverbox_total AS bonus_cleverbox
-    FROM {{ tf_ref('ds_cleverbox__report_services') }}
+    FROM {{ tf_ref('ds_cleverbox__report_services_sales') }}
 
     UNION ALL
 
@@ -23,7 +23,7 @@ WITH source AS (
         bonus_total AS bonus,
         amount,
         cleverbox_bonus_total AS bonus_cleverbox
-    FROM {{ tf_ref('ds_cleverbox__report_goods') }}
+    FROM {{ tf_ref('ds_cleverbox__report_goods_sales') }}
 )
 
 {{ tf_transform_model('source') }}
