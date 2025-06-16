@@ -1,58 +1,55 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__report_certificates_sales
-    description: "CleverBox Report Certificates Sales"
+  - name: ds_cleverbox__prepared__report_goods_sales
+    description: "CleverBox Prepared Report Goods Sales"
     config:
-      alias: report_certificates_sales
+      alias: prepared__report_goods_sales
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: date
         data_type: DATE
-        description: Certificate date of sale
+        description: Goods date of sale
       - name: year
         data_type: NUMERIC
-        description: Certificate year of sale
+        description: Goods year of sale
       - name: month
         data_type: NUMERIC
-        description: Certificate month of sale
+        description: Goods month of sale
       - name: day
         data_type: NUMERIC
-        description: Certificate day of sale
+        description: Goods day of sale
       - name: branch
         data_type: STRING
-        description: Branch of certificate sale
+        description: Branch of goods sale
+      - name: base
+        data_type: STRING
+        description: Base of goods sale
       - name: specialist
         data_type: STRING
         description: ""
       - name: speciality
         data_type: STRING
         description: ""
-      - name: client
+      - name: client_name
         data_type: STRING
         description: ""
-      - name: is_vip
-        data_type: BOOLEAN
-        description: ""
-      - name: is_employee
-        data_type: BOOLEAN
-        description: ""
-      - name: certificate_name
+      - name: goods_name
         data_type: STRING
         description: ""
-      - name: direction
-        data_type: STRING
-        description: ""
-      - name: category
+      - name: brand
         data_type: STRING
         description: ""
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.COST
         description: ""
       - name: price
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.PRICE
         description: ""
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
@@ -60,16 +57,16 @@ models:
       - name: payback
         data_type: NUMERIC.COST
         description: ""
-      - name: cost_total
+      - name: income_total
         data_type: NUMERIC.COST
         description: ""
-      - name: income_total
+      - name: cost_total
         data_type: NUMERIC.COST
         description: ""
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: ""
-      - name: discount
+      - name: discount_total
         data_type: NUMERIC.COST
         description: ""
       - name: bonus_total
@@ -79,8 +76,8 @@ models:
         data_type: NUMERIC.COST
         description: ""
       - name: margin
-        data_type: NUMERIC.PRICE
+        data_type: NUMERIC.COST
         description: ""
       - name: cleverbox_bonus_total
-        data_type: NUMERIC.PRICE
+        data_type: NUMERIC.COST
         description: ""

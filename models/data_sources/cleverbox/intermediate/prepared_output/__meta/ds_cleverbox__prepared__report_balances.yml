@@ -1,29 +1,29 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__report_certificates_sales
-    description: "CleverBox Report Certificates Sales"
+  - name: ds_cleverbox__prepared__report_balances
+    description: "CleverBox Prepared Report Balances"
     config:
-      alias: report_certificates_sales
+      alias: prepared__report_balances
     columns:
       - name: id
         data_type: STRING
         description: ""
       - name: date
         data_type: DATE
-        description: Certificate date of sale
+        description: Balance date of replenish
       - name: year
         data_type: NUMERIC
-        description: Certificate year of sale
+        description: Balance year of replenish
       - name: month
         data_type: NUMERIC
-        description: Certificate month of sale
+        description: Balance month of replenish
       - name: day
         data_type: NUMERIC
-        description: Certificate day of sale
+        description: Balance day of replenish
       - name: branch
         data_type: STRING
-        description: Branch of certificate sale
+        description: Branch of balance replenish
       - name: specialist
         data_type: STRING
         description: ""
@@ -39,13 +39,16 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: ""
-      - name: certificate_name
+      - name: name
         data_type: STRING
         description: ""
       - name: direction
         data_type: STRING
         description: ""
       - name: category
+        data_type: STRING
+        description: ""
+      - name: device
         data_type: STRING
         description: ""
       - name: amount

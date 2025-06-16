@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__processed__goods_sales
+    description: "CleverBox Processed Goods Sales"
+    config:
+      alias: processed__goods_sales
+      meta:
+        tf_config:
+          filter: yuid IS NOT NULL
+    columns:
+      - name: id
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: yuid
+      - name: i
+        data_type: NUMERIC
+        description: ""
+      - name: date
+        data_type: DATE
+        description: ""
+        meta:
+          tf_config:
+            expression: PARSE_DATE('%d.%m.%Y', date)
+      - name: branch
+        data_type: STRING
+        description: ""
+      - name: receipt
+        data_type: STRING
+        description: ""
+      - name: base
+        data_type: STRING
+        description: ""
+      - name: employee
+        data_type: STRING
+        description: ""
+      - name: client_name
+        data_type: STRING
+        description: ""
+      - name: phone_number
+        data_type: STRING
+        description: ""
+      - name: goods_name
+        data_type: STRING
+        description: ""
+      - name: brand
+        data_type: STRING
+        description: ""
+      - name: barcode
+        data_type: STRING
+        description: ""
+      - name: article
+        data_type: STRING
+        description: ""
+      - name: amount
+        data_type: NUMERIC.COST
+        description: ""
+      - name: price
+        data_type: NUMERIC.PRICE
+        description: ""
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: ""
+      - name: cost
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost_price_total
+        data_type: NUMERIC.PRICE
+        description: ""
+      - name: profit
+        data_type: NUMERIC.COST
+        description: ""
+      - name: profitability
+        data_type: NUMERIC.COST
+        description: ""

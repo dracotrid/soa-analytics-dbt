@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__processed__bonus_employee
+    description: "CleverBox Processed Bonus Employee"
+    config:
+      alias: processed__bonus_employee
+      meta:
+        tf_config:
+          filter: name IS NOT NULL
+    columns:
+      - name: employee_name
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: name
+      - name: sale_type
+        data_type: STRING
+        description: ""
+      - name: code
+        data_type: STRING
+        description: ""
+      - name: uid
+        data_type: STRING
+        description: ""
+      - name: bonus_value
+        data_type: NUMERIC.PRICE
+        description: ""
+        meta:
+          tf_config:
+            field: bonus
+      - name: accrual_type
+        data_type: STRING
+        description: ""
+      - name: clever_box
+        data_type: STRING
+        description: ""
+      - name: speciality
+        data_type: STRING
+        description: ""
+      - name: status
+        data_type: STRING
+        description: ""

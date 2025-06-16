@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__processed__bonus_adjustments
+    description: "CleverBox Bonus Adjustments"
+    config:
+      alias: processed__bonus_adjustments
+    columns:
+      - name: ruid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_0
+      - name: yuid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_1
+      - name: muid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_2
+      - name: eid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_3
+      - name: bonus_type
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_4
+      - name: note
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: string_field_5
