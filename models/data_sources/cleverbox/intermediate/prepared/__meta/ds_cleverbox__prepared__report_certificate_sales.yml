@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__prepared__report_certificates_sales
-    description: "CleverBox Prepared Report Certificates Sales"
+  - name: ds_cleverbox__prepared__report_certificate_sales
+    description: "CleverBox Prepared Report Certificate Sales"
     config:
-      alias: prepared__report_certificates_sales
+      alias: prepared__report_certificate_sales
     columns:
       - name: id
         data_type: STRING

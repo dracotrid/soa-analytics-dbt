@@ -1,29 +1,29 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__report_certificates_sales
-    description: "CleverBox Report Certificates Sales"
+  - name: ds_cleverbox__report_subscription_sales
+    description: "CleverBox Report Subscription Sales"
     config:
-      alias: report_certificates_sales
+      alias: report_subscription_sales
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: date
         data_type: DATE
-        description: Certificate date of sale
+        description: Goods date of sale
       - name: year
         data_type: NUMERIC
-        description: Certificate year of sale
+        description: Goods year of sale
       - name: month
         data_type: NUMERIC
-        description: Certificate month of sale
+        description: Goods month of sale
       - name: day
         data_type: NUMERIC
-        description: Certificate day of sale
+        description: Goods day of sale
       - name: branch
         data_type: STRING
-        description: Branch of certificate sale
+        description: Branch of goods sale
       - name: specialist
         data_type: STRING
         description: ""
@@ -39,7 +39,7 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: ""
-      - name: certificate_name
+      - name: subscription_name
         data_type: STRING
         description: ""
       - name: direction
@@ -52,10 +52,10 @@ models:
         data_type: NUMERIC
         description: ""
       - name: price
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.PRICE
         description: ""
       - name: cost_price_unit
-        data_type: NUMERIC.PRICE
+        data_type: NUMERIC.COST
         description: ""
       - name: payback
         data_type: NUMERIC.COST
@@ -69,7 +69,7 @@ models:
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: ""
-      - name: discount
+      - name: discount_total
         data_type: NUMERIC.COST
         description: ""
       - name: bonus_total

@@ -1,10 +1,13 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__report_salary
-    description: "CleverBox Report Salary"
+  - name: ds_cleverbox__prepared__report_salary
+    description: "CleverBox Prepared Report Salary"
     config:
-      alias: report_salary
+      alias: prepared__report_salary
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
     columns:
       - name: id
         data_type: STRING
@@ -12,6 +15,9 @@ models:
       - name: type
         data_type: STRING
         description: Product type
+        meta:
+          tf_config:
+            field: product_type
       - name: date
         data_type: DATE
         description: Date when product was sold

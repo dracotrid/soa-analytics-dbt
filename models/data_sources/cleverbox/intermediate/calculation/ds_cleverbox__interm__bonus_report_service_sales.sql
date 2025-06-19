@@ -66,7 +66,7 @@ intermediate_step_1_source AS (
         NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
         CASE WHEN COALESCE(cost, 0) = 0 OR COALESCE(discount, 0) = 0 THEN 0 ELSE discount / cost END AS discount_rate
-    FROM {{ tf_ref('ds_cleverbox__interm__report_services_sales') }} AS service_sales
+    FROM {{ tf_ref('ds_cleverbox__interm__report_service_sales') }} AS service_sales
     LEFT JOIN bonus_employee_service_code
         ON CONCAT(service_sales.specialist, '-Послуга-', service_sales.service_code) = bonus_employee_service_code.bonus_service_code_code
     LEFT JOIN bonus_employee_service_category

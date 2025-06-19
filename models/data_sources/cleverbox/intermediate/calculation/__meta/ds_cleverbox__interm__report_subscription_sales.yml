@@ -1,38 +1,41 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__interm__report_certificates_sales
-    description: "CleverBox Interm Report Certificates Sales"
+  - name: ds_cleverbox__interm__report_subscription_sales
+    description: "CleverBox Intermediate Report Subscription Sales"
     config:
-      alias: interm__report_certificates_sales
+      alias: interm__report_subscription_sales
+      meta:
+        tf_config:
+          filter: id IS NOT NULL
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: date
         data_type: DATE
-        description: Certificate date of sale
+        description: Subscription date of sale
       - name: year
         data_type: NUMERIC
-        description: Certificate year of sale
+        description: Subscription year of sale
         meta:
           tf_config:
             expression: EXTRACT(YEAR FROM date)
       - name: month
         data_type: NUMERIC
-        description: Certificate month of sale
+        description: Subscription month of sale
         meta:
           tf_config:
             expression: EXTRACT(MONTH FROM date)
       - name: day
         data_type: NUMERIC
-        description: Certificate day of sale
+        description: Subscription day of sale
         meta:
           tf_config:
             expression: EXTRACT(DAY FROM date)
       - name: branch
         data_type: STRING
-        description: Branch of certificate sale
+        description: Branch of subscription sale
       - name: specialist
         data_type: STRING
         description: ""
@@ -51,9 +54,12 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: ""
-      - name: certificate_name
+      - name: subscription_name
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: subscription_type
       - name: direction
         data_type: STRING
         description: ""
@@ -64,10 +70,10 @@ models:
         data_type: NUMERIC
         description: ""
       - name: price
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.PRICE
         description: ""
       - name: cost_price_unit
-        data_type: NUMERIC.PRICE
+        data_type: NUMERIC.COST
         description: ""
       - name: payback
         data_type: NUMERIC.COST
@@ -81,7 +87,7 @@ models:
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: ""
-      - name: discount
+      - name: discount_total
         data_type: NUMERIC.COST
         description: ""
       - name: bonus_total
