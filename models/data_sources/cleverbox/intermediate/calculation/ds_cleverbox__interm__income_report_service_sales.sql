@@ -10,7 +10,7 @@ bonus_cleverbox AS (
     SELECT
         id AS bonus_cleverbox_id,
         bonus_cleverbox_total
-    FROM {{ tf_ref('ds_cleverbox__interm__bonus_cleverbox_report_services_sales') }}
+    FROM {{ tf_ref('ds_cleverbox__interm__bonus_cleverbox_report_service_sales') }}
 ),
 
 bonus AS (
@@ -19,7 +19,7 @@ bonus AS (
         bonus_total,
         is_vip,
         is_employee
-    FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_services_sales') }}
+    FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_service_sales') }}
 ),
 
 intermediate_step_1_source AS (
@@ -34,7 +34,7 @@ intermediate_step_1_source AS (
             WHEN coalesce(paid, 0) - coalesce(certificates_balance_sum, 0) < 1 THEN 0
             ELSE coalesce(paid, 0) - coalesce(certificates_balance_sum, 0)
         END AS income
-    FROM {{ tf_ref('ds_cleverbox__interm__report_services_sales') }} AS service_sales
+    FROM {{ tf_ref('ds_cleverbox__interm__report_service_sales') }} AS service_sales
     LEFT JOIN certificates_balance
         ON service_sales.id = certificates_balance.certificates_balance_id
     LEFT JOIN bonus

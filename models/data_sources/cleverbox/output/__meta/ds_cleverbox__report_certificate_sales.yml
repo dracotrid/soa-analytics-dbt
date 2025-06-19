@@ -1,39 +1,36 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__report_services_sales
-    description: "CleverBox Report Services Sales"
+  - name: ds_cleverbox__report_certificate_sales
+    description: "CleverBox Report Certificate Sales"
     config:
-      alias: report_services_sales
-      meta:
-        tf_config:
-          filter: id IS NOT NULL
+      alias: report_certificate_sales
     columns:
       - name: id
         data_type: STRING
-        description: Record identifier
+        description: ""
       - name: date
         data_type: DATE
-        description: Service date of sale
+        description: Certificate date of sale
       - name: year
         data_type: NUMERIC
-        description: Service year of sale
+        description: Certificate year of sale
       - name: month
         data_type: NUMERIC
-        description: Service month of sale
+        description: Certificate month of sale
       - name: day
         data_type: NUMERIC
-        description: Service day of sale
+        description: Certificate day of sale
       - name: branch
         data_type: STRING
-        description: Branch of service sale
+        description: Branch of certificate sale
       - name: specialist
         data_type: STRING
         description: ""
       - name: speciality
         data_type: STRING
         description: ""
-      - name: client_name
+      - name: client
         data_type: STRING
         description: ""
       - name: is_vip
@@ -42,26 +39,23 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: ""
-      - name: service_name
+      - name: certificate_name
         data_type: STRING
-        description: Service name
+        description: ""
       - name: direction
         data_type: STRING
-        description: Service direction
+        description: ""
       - name: category
         data_type: STRING
-        description: Service category
+        description: ""
       - name: amount
         data_type: NUMERIC
-        description: Service amount
+        description: ""
       - name: price
-        data_type: NUMERIC.PRICE
+        data_type: NUMERIC.COST
         description: ""
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
-      - name: subscription
-        data_type: NUMERIC.COST
         description: ""
       - name: payback
         data_type: NUMERIC.COST
@@ -75,7 +69,7 @@ models:
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: ""
-      - name: discount_total
+      - name: discount
         data_type: NUMERIC.COST
         description: ""
       - name: bonus_total
@@ -85,8 +79,8 @@ models:
         data_type: NUMERIC.COST
         description: ""
       - name: margin
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.PRICE
         description: ""
-      - name: bonus_cleverbox_total
-        data_type: NUMERIC.COST
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
         description: ""

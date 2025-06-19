@@ -2,7 +2,7 @@ WITH service_sales AS (
     SELECT
         id AS service_sales_id,
         cost_price
-    FROM {{ tf_ref('ds_cleverbox__processed__services_sales') }}
+    FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }}
 ),
 
 intermediate_step_1 AS (
@@ -13,7 +13,7 @@ intermediate_step_1 AS (
             WHEN paid = 0 THEN 0
             ELSE (paid - COALESCE(cost_price, 0)) * bonus_value
         END AS bonus_cleverbox_unit
-    FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_services_sales') }} AS bonus_report
+    FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_service_sales') }} AS bonus_report
     LEFT JOIN service_sales
         ON bonus_report.id = service_sales.service_sales_id
 

@@ -17,7 +17,7 @@ services AS (
 
 final AS (
     SELECT *
-    FROM {{ tf_ref('ds_cleverbox__processed__services_sales') }} AS service_sales
+    FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
     LEFT JOIN employees_speciality
         ON service_sales.specialist = employees_speciality.employees_speciality_name
     LEFT JOIN services

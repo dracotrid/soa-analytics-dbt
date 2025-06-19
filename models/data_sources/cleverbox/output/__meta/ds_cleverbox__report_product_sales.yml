@@ -5,9 +5,6 @@ models:
     description: "CleverBox Report Product Sales"
     config:
       alias: report_product_sales
-      meta:
-        tf_config:
-          filter: eid IS NOT NULL
     columns:
       - name: eid
         data_type: STRING
