@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__interm__bonus_report_services_sales
-    description: "CleverBox Intermediate Bonus Report Services Sales"
+  - name: ds_cleverbox__interm__bonus_report_service_sales
+    description: "CleverBox Intermediate Bonus Report Service Sales"
     config:
-      alias: interm__bonus_report_services_sales
+      alias: interm__bonus_report_service_sales
       meta:
         tf_config:
           filter: id IS NOT NULL

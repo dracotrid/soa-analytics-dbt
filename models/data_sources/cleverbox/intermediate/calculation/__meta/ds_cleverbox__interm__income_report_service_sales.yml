@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__prepared__report_services_sales
-    description: "CleverBox Prepared Report Services Sales"
+  - name: ds_cleverbox__interm__income_report_service_sales
+    description: "CleverBox Intermediate Income Report Service Sales"
     config:
-      alias: prepared__report_services_sales
+      alias: interm__income_report_service_sales
       meta:
         tf_config:
           filter: id IS NOT NULL
@@ -45,37 +45,55 @@ models:
       - name: service_name
         data_type: STRING
         description: Service name
-      - name: direction
-        data_type: STRING
-        description: Service direction
       - name: category
         data_type: STRING
         description: Service category
+      - name: direction
+        data_type: STRING
+        description: Service direction
       - name: amount
         data_type: NUMERIC
         description: Service amount
+      - name: paid
+        data_type: NUMERIC.PRICE
+        description: ""
       - name: price
         data_type: NUMERIC.PRICE
         description: ""
-      - name: cost_price_unit
-        data_type: NUMERIC.PRICE
+        meta:
+          tf_config:
+            field: paid
+      - name: cost
+        data_type: NUMERIC.COST
         description: ""
       - name: subscription
         data_type: NUMERIC.COST
         description: ""
-      - name: payback
+      - name: certificate
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: certificates_balance_sum
       - name: cost_total
         data_type: NUMERIC.COST
         description: ""
-      - name: income_total
+      - name: discount_total
         data_type: NUMERIC.COST
+        description: ""
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
         description: ""
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: ""
-      - name: discount_total
+      - name: discount_persent
+        data_type: NUMERIC.COST
+        description: ""
+      - name: income
+        data_type: NUMERIC.COST
+        description: ""
+      - name: income_total
         data_type: NUMERIC.COST
         description: ""
       - name: bonus_total
@@ -84,9 +102,15 @@ models:
       - name: profit_total
         data_type: NUMERIC.COST
         description: ""
+      - name: bonus_margin
+        data_type: NUMERIC.COST
+        description: ""
       - name: margin
         data_type: NUMERIC.COST
         description: ""
       - name: bonus_cleverbox_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: payback
         data_type: NUMERIC.COST
         description: ""
