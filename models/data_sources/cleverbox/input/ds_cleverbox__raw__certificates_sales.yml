@@ -14,52 +14,52 @@ sources:
         columns:
           - name: uid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: i
             data_type: NUMERIC
-            description: ""
+            description: Counter
           - name: id
             data_type: NUMERIC
-            description: ""
+            description: Record identifier
           - name: certificate_code
             data_type: NUMERIC
-            description: ""
+            description: Certificate code
           - name: certificate_name
             data_type: STRING
-            description: ""
+            description: Certificate name
           - name: client
             data_type: STRING
-            description: ""
+            description: Client name
           - name: phone
             data_type: NUMERIC
-            description: ""
+            description: Phone of client
           - name: employee
             data_type: STRING
-            description: ""
+            description: The employee who sold the certificate
           - name: date
             data_type: STRING
-            description: ""
+            description: Certificate date of sale
           - name: time
             data_type: STRING
-            description: ""
+            description: Certificate time of sale
           - name: branch
             data_type: STRING
-            description: ""
+            description: Branch of certificate sale
           - name: cost
             data_type: NUMERIC.COST
-            description: ""
+            description: Cost of certificates
           - name: grade
             data_type: NUMERIC.COST
-            description: ""
+            description: Grade of certificates
           - name: balance
             data_type: NUMERIC.COST
-            description: ""
+            description: Balance of certificate
           - name: valid_date
             data_type: STRING
-            description: ""
+            description: Certificate valid date
           - name: note
             data_type: STRING
-            description: ""
+            description: Note
           - name: status
             data_type: STRING
-            description: ""
+            description: Certificate status

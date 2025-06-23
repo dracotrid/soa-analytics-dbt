@@ -14,49 +14,49 @@ sources:
         columns:
           - name: name
             data_type: STRING
-            description: ""
+            description: Bonus name
           - name: type
             data_type: STRING
-            description: ""
+            description: Bonus type
           - name: category
             data_type: STRING
-            description: ""
+            description: Bonus category
           - name: period
             data_type: STRING
-            description: ""
+            description: Bonus period
           - name: bonus
             data_type: STRING
             description: ""
           - name: usage
             data_type: STRING
-            description: ""
+            description: Use for
           - name: start_date
             data_type: DATE
-            description: ""
+            description: Start date
           - name: finish_date
             data_type: DATE
-            description: ""
+            description: Finish date
           - name: bonus_service
             data_type: STRING
-            description: ""
+            description: Bonus for service
           - name: service_from_value
             data_type: BOOLEAN
-            description: ""
+            description: Service from value
           - name: accrual_type_service
             data_type: STRING
-            description: ""
+            description: Accrual type for service
           - name: bonus_goods
             data_type: STRING
-            description: ""
+            description: Bonus for goods
           - name: goods_from_value
             data_type: BOOLEAN
-            description: ""
+            description: Goods from value
           - name: accrual_type_goods
             data_type: STRING
-            description: ""
+            description: Accrual type for goods
           - name: stopped
             data_type: BOOLEAN
-            description: ""
+            description: Is stopped
           - name: note
             data_type: STRING
-            description: ""
+            description: Note

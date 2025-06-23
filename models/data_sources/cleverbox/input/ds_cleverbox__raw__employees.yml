@@ -14,16 +14,16 @@ sources:
         columns:
           - name: string_field_0
             data_type: STRING
-            description: ""
+            description: Employee name
           - name: string_field_1
             data_type: STRING
-            description: ""
+            description: Employee job title
           - name: string_field_2
             data_type: STRING
-            description: ""
+            description: Employee status
           - name: string_field_3
             data_type: STRING
-            description: ""
+            description: Name as client for service sale
           - name: string_field_4
             data_type: STRING
-            description: ""
+            description: Name as client for goods sale

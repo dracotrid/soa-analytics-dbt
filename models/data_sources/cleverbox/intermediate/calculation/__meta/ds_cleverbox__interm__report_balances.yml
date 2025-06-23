@@ -8,7 +8,7 @@ models:
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: date
         data_type: DATE
         description: Balance date of replenish
@@ -35,64 +35,64 @@ models:
         description: Branch of balance replenish
       - name: specialist
         data_type: STRING
-        description: ""
+        description: The employee who served of client
       - name: speciality
         data_type: STRING
-        description: ""
+        description: Speciality of employee
       - name: client
         data_type: STRING
-        description: ""
+        description: Client name
       - name: is_vip
         data_type: BOOLEAN
-        description: ""
+        description: Client is VIP
       - name: is_employee
         data_type: BOOLEAN
-        description: ""
+        description: Client is employee
       - name: name
         data_type: STRING
-        description: ""
+        description: Balance name
       - name: direction
         data_type: STRING
-        description: ""
+        description: Direction of the product
       - name: category
         data_type: STRING
-        description: ""
+        description: Category of the product
       - name: device
         data_type: STRING
         description: ""
       - name: amount
         data_type: NUMERIC
-        description: ""
+        description: Amount of replenished balances
       - name: price
         data_type: NUMERIC.COST
-        description: ""
+        description: Sum of replenish
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of replenish one balance
       - name: payback
         data_type: NUMERIC.COST
-        description: ""
+        description: Payback
       - name: cost_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Total sum of replenish
       - name: income_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Income from balances replenishment
       - name: cost_price_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost price of replenish all balances
       - name: discount
         data_type: NUMERIC.COST
-        description: ""
+        description: Discount on balance replenishment
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Employee bonus for balance replenishment
       - name: profit_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Profit from balances replenishment
       - name: margin
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Margin from balances replenishment
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Employee bonus for balance replenishment according Cleverbox

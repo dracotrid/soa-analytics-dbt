@@ -11,37 +11,38 @@ models:
     columns:
       - name: ruid
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: yuid
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: date
         data_type: DATE
-        description: ""
+        description: Date of discount
       - name: discount_name
         data_type: STRING
-        description: ""
+        description: Discount name
       - name: value
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost of service
       - name: discount_percent
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Discount percent
       - name: discount_value
         data_type: NUMERIC.COST
-        description: ""
+        description: Discount value
       - name: service
         data_type: STRING
-        description: ""
+        description: Service name
       - name: client_code
         data_type: STRING
+        description: Client code
         meta:
           tf_config:
             macro: cmf__normalise__pad_left_signs
             params: [client_code, 6, '0']
       - name: client_name
         data_type: STRING
-        description: ""
+        description: Client name
       - name: specialist
         data_type: STRING
-        description: ""
+        description: Employee name

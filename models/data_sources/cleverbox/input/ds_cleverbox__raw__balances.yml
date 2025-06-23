@@ -14,25 +14,25 @@ sources:
         columns:
           - name: uid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: date
             data_type: STRING
-            description: ""
+            description: Balance date of replenish
           - name: type
             data_type: STRING
-            description: ""
+            description: Balance name
           - name: cash_register
             data_type: STRING
-            description: ""
+            description: Cash register
           - name: author
             data_type: STRING
-            description: ""
+            description: The employee who served of client
           - name: sum
             data_type: NUMERIC.COST
-            description: ""
+            description: Sum of replenish
           - name: rest
             data_type: NUMERIC.COST
-            description: ""
+            description: Rest of balance
           - name: client
             data_type: STRING
-            description: ""
+            description: Client name

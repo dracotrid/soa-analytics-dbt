@@ -11,31 +11,31 @@ models:
     columns:
       - name: name
         data_type: STRING
-        description: ""
+        description: Employee name
         meta:
           tf_config:
             field: string_field_0
       - name: job_title
         data_type: STRING
-        description: ""
+        description: Employee job title
         meta:
           tf_config:
             field: string_field_1
       - name: status
         data_type: STRING
-        description: ""
+        description: Employee status
         meta:
           tf_config:
             field: string_field_2
       - name: name_for_service
         data_type: STRING
-        description: ""
+        description: Name as client for service sale
         meta:
           tf_config:
             field: string_field_3
       - name: name_for_goods
         data_type: STRING
-        description: ""
+        description: Name as client for goods sale
         meta:
           tf_config:
             field: string_field_4

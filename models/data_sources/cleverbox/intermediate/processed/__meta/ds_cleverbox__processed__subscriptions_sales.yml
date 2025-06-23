@@ -11,76 +11,76 @@ models:
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
         meta:
           tf_config:
             field: uid
       - name: date
         data_type: DATE
-        description: ""
+        description: Subscription date of sale
         meta:
           tf_config:
             expression: PARSE_DATE('%d.%m.%Y', date_of_sale)
       - name: subscription_type
         data_type: STRING
-        description: ""
+        description: Subscription type
         meta:
           tf_config:
             field: type
       - name: client
         data_type: STRING
-        description: ""
+        description: Client name
       - name: branch
         data_type: STRING
-        description: ""
+        description: Branch of subscription sale
       - name: employee
         data_type: STRING
-        description: ""
+        description: The employee who sold the subscription
       - name: category
         data_type: STRING
-        description: ""
+        description: Category of the product
         meta:
           tf_config:
             constant: 'Абонемент'
       - name: direction
         data_type: STRING
-        description: ""
+        description: Direction of the product
         meta:
           tf_config:
             constant: 'Абонемент'
       - name: amount
         data_type: NUMERIC
-        description: ""
+        description: Amount of subscriptions sold
         meta:
           tf_config:
             constant: 1
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of one subscription
         meta:
           tf_config:
             constant: 0
       - name: bonus_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Employee bonus for selling a subscriptions
         meta:
           tf_config:
             constant: 0
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Employee bonus for selling a subscriptions according Cleverbox
         meta:
           tf_config:
             constant: 0
       - name: cost
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost of subscriptions
       - name: valid_date
         data_type: DATE
-        description: ""
+        description: Subscriptions valid date
         meta:
           tf_config:
             expression: PARSE_DATE('%d.%m.%Y', valid_date)
       - name: status
         data_type: STRING
-        description: ""
+        description: Subscriptions status

@@ -29,19 +29,19 @@ models:
         description: Branch of service sale
       - name: specialist
         data_type: STRING
-        description: ""
+        description: The employee who sold the service
       - name: speciality
         data_type: STRING
-        description: ""
+        description: Speciality of employee
       - name: client_name
         data_type: STRING
-        description: ""
+        description: Client name
       - name: is_vip
         data_type: BOOLEAN
-        description: ""
+        description: Client is VIP
       - name: is_employee
         data_type: BOOLEAN
-        description: ""
+        description: Client is employee
       - name: service_name
         data_type: STRING
         description: Service name
@@ -53,40 +53,40 @@ models:
         description: Service category
       - name: amount
         data_type: NUMERIC
-        description: Service amount
+        description: Amount of services sold
       - name: price
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Price of service
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of one service
       - name: subscription
         data_type: NUMERIC.COST
-        description: ""
+        description: Subscription
       - name: payback
         data_type: NUMERIC.COST
-        description: ""
+        description: Payback of the service
       - name: cost_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Total cost of services
       - name: income_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Income from services sales
       - name: cost_price_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost price of services
       - name: discount_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Services discount
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Employee bonus for selling a services
       - name: profit_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Profit from services sales
       - name: margin
         data_type: NUMERIC.COST
-        description: ""
+        description: Margin from services sales
       - name: bonus_cleverbox_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Employee bonus for selling a services according Cleverbox

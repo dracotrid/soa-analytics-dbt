@@ -12,19 +12,19 @@ sources:
         columns:
           - name: ruid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: yuid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: muid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: eid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: type
             data_type: STRING
-            description: ""
+            description: Certificate or balance
           - name: sum
             data_type: NUMERIC.COST
-            description: ""
+            description: Sum

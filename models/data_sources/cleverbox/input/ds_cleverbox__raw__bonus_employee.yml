@@ -14,28 +14,28 @@ sources:
         columns:
           - name: name
             data_type: STRING
-            description: ""
+            description: Employee name
           - name: sale_type
             data_type: STRING
-            description: ""
+            description: Sale product type
           - name: code
             data_type: STRING
-            description: ""
+            description: Code
           - name: uid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: bonus
             data_type: NUMERIC.PRICE
-            description: ""
+            description: Bonus value
           - name: accrual_type
             data_type: STRING
-            description: ""
+            description: Accrual type
           - name: clever_box
             data_type: STRING
             description: ""
           - name: speciality
             data_type: STRING
-            description: ""
+            description: Speciality of employee
           - name: status
             data_type: STRING
             description: ""
