@@ -13,19 +13,19 @@ models:
         data_type: DATE
         description: Balance date of replenish
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Balance year of replenish
         meta:
           tf_config:
             expression: EXTRACT(YEAR FROM date)
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Balance month of replenish
         meta:
           tf_config:
             expression: EXTRACT(MONTH FROM date)
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Balance day of replenish
         meta:
           tf_config:
@@ -61,7 +61,7 @@ models:
         data_type: STRING
         description: ""
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of replenished balances
       - name: price
         data_type: NUMERIC.COST

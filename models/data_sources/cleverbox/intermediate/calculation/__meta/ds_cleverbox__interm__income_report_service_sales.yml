@@ -16,13 +16,13 @@ models:
         data_type: DATE
         description: Service date of sale
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Service year of sale
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Service month of sale
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Service day of sale
       - name: branch
         data_type: STRING
@@ -52,7 +52,7 @@ models:
         data_type: STRING
         description: Service direction
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of services sold
       - name: paid
         data_type: NUMERIC.PRICE

@@ -13,19 +13,19 @@ models:
         data_type: DATE
         description: Certificate date of sale
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Certificate year of sale
         meta:
           tf_config:
             expression: EXTRACT(YEAR FROM date)
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Certificate month of sale
         meta:
           tf_config:
             expression: EXTRACT(MONTH FROM date)
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Certificate day of sale
         meta:
           tf_config:
@@ -61,7 +61,7 @@ models:
         data_type: STRING
         description: Category of the product
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of certificates sold
       - name: price
         data_type: NUMERIC.COST

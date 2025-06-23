@@ -46,7 +46,7 @@ models:
           tf_config:
             constant: 'Сертифікат'
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of certificates sold
         meta:
           tf_config:

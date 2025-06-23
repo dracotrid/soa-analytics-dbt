@@ -13,13 +13,13 @@ models:
         data_type: DATE
         description: Balance date of replenish
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Balance year of replenish
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Balance month of replenish
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Balance day of replenish
       - name: branch
         data_type: STRING
@@ -52,7 +52,7 @@ models:
         data_type: STRING
         description: ""
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of replenished balances
       - name: price
         data_type: NUMERIC.COST

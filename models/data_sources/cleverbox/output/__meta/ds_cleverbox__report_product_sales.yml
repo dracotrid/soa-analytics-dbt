@@ -34,7 +34,7 @@ models:
         data_type: STRING
         description: Category of the product
       - name: amount
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.AMOUNT
         description: Amount of products sold
       - name: price
         data_type: NUMERIC.PRICE

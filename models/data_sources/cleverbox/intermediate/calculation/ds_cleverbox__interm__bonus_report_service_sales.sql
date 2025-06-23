@@ -88,7 +88,7 @@ intermediate_step_2_source AS (
             WHEN discount_usage_discount_name IS NULL OR discount_usage_discount_name = '' THEN 'АБОНЕМЕНТ'
             ELSE discount_usage_discount_name
         END AS discount_name_source,
-        COALESCE(year = 2024 OR speciality IN ('Манікюр', 'Подолог'), FALSE) AS is_bonus_without_cost_price
+        COALESCE(year = '2024' OR speciality IN ('Манікюр', 'Подолог'), FALSE) AS is_bonus_without_cost_price
     FROM intermediate_step_1_source
     LEFT JOIN discount_usage
         ON intermediate_step_1_source.druid = discount_usage.discount_usage_id

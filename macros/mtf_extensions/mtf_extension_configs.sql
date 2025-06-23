@@ -19,7 +19,8 @@
 #}
     {% set custom_data_types = {
             "NUMERIC.COST": "NUMERIC(12,2)",
-            "NUMERIC.PRICE": "NUMERIC(15,5)"
+            "NUMERIC.PRICE": "NUMERIC(15,5)",
+            "NUMERIC.AMOUNT": "NUMERIC(10,2)"
         }
     %}
     {{ return(custom_data_types) }}

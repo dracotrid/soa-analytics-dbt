@@ -61,7 +61,7 @@ models:
           tf_config:
             constant: ''
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of replenished balances
         meta:
           tf_config:

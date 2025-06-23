@@ -16,19 +16,19 @@ models:
         data_type: DATE
         description: Service date of sale
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Service year of sale
         meta:
           tf_config:
             expression: EXTRACT(YEAR FROM date)
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Service month of sale
         meta:
           tf_config:
             expression: EXTRACT(MONTH FROM date)
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Service day of sale
         meta:
           tf_config:
@@ -70,7 +70,7 @@ models:
           tf_config:
             field: service_direction
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of services sold
         meta:
           tf_config:
