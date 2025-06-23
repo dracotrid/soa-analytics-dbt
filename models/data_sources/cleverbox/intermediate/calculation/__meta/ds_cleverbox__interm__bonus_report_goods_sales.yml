@@ -25,7 +25,7 @@ models:
         data_type: STRING
         description: Client name
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
       - name: price
         data_type: NUMERIC.PRICE

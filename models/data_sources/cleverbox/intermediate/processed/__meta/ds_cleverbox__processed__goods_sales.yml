@@ -27,6 +27,9 @@ models:
       - name: receipt
         data_type: STRING
         description: Receipt
+      - name: base
+        data_type: STRING
+        description: Base
       - name: employee
         data_type: STRING
         description: The employee who sold the goods
@@ -40,7 +43,7 @@ models:
         data_type: STRING
         description: Brand of goods
       - name: amount
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
       - name: price
         data_type: NUMERIC.PRICE

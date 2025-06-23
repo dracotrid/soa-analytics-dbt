@@ -16,13 +16,13 @@ models:
         data_type: DATE
         description: Goods date of sale
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Goods year of sale
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Goods month of sale
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Goods day of sale
       - name: branch
         data_type: STRING
@@ -46,7 +46,7 @@ models:
         data_type: STRING
         description: Brand of goods
       - name: amount
-        data_type: NUMERIC.COST
+        data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
       - name: price
         data_type: NUMERIC.PRICE

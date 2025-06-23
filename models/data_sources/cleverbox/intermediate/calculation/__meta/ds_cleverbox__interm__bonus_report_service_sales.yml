@@ -16,7 +16,7 @@ models:
         data_type: DATE
         description: Service date of sale
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Service year of sale
         meta:
           tf_config:
@@ -37,7 +37,7 @@ models:
         data_type: STRING
         description: Client name
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of services sold
       - name: paid
         data_type: NUMERIC.COST

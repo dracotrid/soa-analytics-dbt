@@ -34,7 +34,7 @@ models:
         data_type: NUMERIC.COST
         description: Bonus of the specialist
       - name: amount
-        data_type: NUMERIC.PRICE
+        data_type: NUMERIC.AMOUNT
         description: Amount of products sold
       - name: bonus_cleverbox
         data_type: NUMERIC.COST

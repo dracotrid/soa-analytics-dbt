@@ -12,48 +12,15 @@ models:
       - name: name
         data_type: STRING
         description: Bonus name
-      - name: type
-        data_type: STRING
-        description: Bonus type
-      - name: category
-        data_type: STRING
-        description: Bonus category
-      - name: period
-        data_type: STRING
-        description: Bonus period
-      - name: bonus
-        data_type: STRING
-        description: ""
-      - name: usage
-        data_type: STRING
-        description: Use for
-      - name: start_date
-        data_type: DATE
-        description: Start date
-      - name: finish_date
-        data_type: DATE
-        description: Finish date
       - name: bonus_service
         data_type: NUMERIC.COST
         description: Bonus for service
-      - name: service_from_value
-        data_type: BOOLEAN
-        description: Service from value
       - name: accrual_type_service
         data_type: STRING
         description: Accrual type for service
       - name: bonus_goods
         data_type: NUMERIC.COST
         description: Bonus for goods
-      - name: goods_from_value
-        data_type: BOOLEAN
-        description: Goods from value
       - name: accrual_type_goods
         data_type: STRING
         description: Accrual type for goods
-      - name: stopped
-        data_type: BOOLEAN
-        description: Is stopped
-      - name: note
-        data_type: STRING
-        description: Note

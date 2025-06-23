@@ -16,13 +16,13 @@ models:
         data_type: DATE
         description: Subscription date of sale
       - name: year
-        data_type: NUMERIC
+        data_type: STRING
         description: Subscription year of sale
       - name: month
-        data_type: NUMERIC
+        data_type: STRING
         description: Subscription month of sale
       - name: day
-        data_type: NUMERIC
+        data_type: STRING
         description: Subscription day of sale
       - name: branch
         data_type: STRING
@@ -52,7 +52,7 @@ models:
         data_type: STRING
         description: Category of the product
       - name: amount
-        data_type: NUMERIC
+        data_type: NUMERIC.AMOUNT
         description: Amount of subscriptions sold
       - name: price
         data_type: NUMERIC.PRICE

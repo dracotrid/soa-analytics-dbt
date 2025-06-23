@@ -9,18 +9,9 @@ models:
         tf_config:
           filter: name IS NOT NULL
     columns:
-      - name: employee_name
-        data_type: STRING
-        description: Employee name
-        meta:
-          tf_config:
-            field: name
       - name: sale_type
         data_type: STRING
         description: Sale product type
-      - name: code
-        data_type: STRING
-        description: Code
       - name: uid
         data_type: STRING
         description: Record identifier
@@ -33,12 +24,3 @@ models:
       - name: accrual_type
         data_type: STRING
         description: Accrual type
-      - name: clever_box
-        data_type: STRING
-        description: ""
-      - name: speciality
-        data_type: STRING
-        description: Speciality of employee
-      - name: status
-        data_type: STRING
-        description: Employee status
