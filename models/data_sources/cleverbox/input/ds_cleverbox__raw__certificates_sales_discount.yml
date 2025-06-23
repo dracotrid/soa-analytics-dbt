@@ -14,7 +14,7 @@ sources:
         columns:
           - name: uid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: discount
             data_type: NUMERIC.COST
-            description: ""
+            description: Discount

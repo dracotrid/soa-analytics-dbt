@@ -41,16 +41,16 @@ models:
         description: Branch of service sale
       - name: value
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost of service
       - name: paid
         data_type: NUMERIC.COST
-        description: ""
+        description: Client payed money
       - name: discount
         data_type: NUMERIC.COST
-        description: ""
+        description: Services discount
       - name: subscription
         data_type: NUMERIC.COST
-        description: ""
+        description: Subscription
       - name: client_code
         data_type: STRING
         description: Client code
@@ -59,16 +59,16 @@ models:
         description: Client name
       - name: specialist
         data_type: STRING
-        description: ""
+        description: The employee who sold the service
       - name: position
         data_type: STRING
         description: Specialist position
       - name: cost_price
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost price of service
       - name: profit
         data_type: NUMERIC.COST
-        description: ""
+        description: Profit from services sales
       - name: category
         data_type: STRING
         description: Service category

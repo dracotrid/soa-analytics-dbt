@@ -8,7 +8,7 @@ models:
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: date
         data_type: DATE
         description: Certificate date of sale
@@ -23,64 +23,64 @@ models:
         description: Certificate day of sale
       - name: branch
         data_type: STRING
-        description: Branch of certificate sale
+        description: Branch where certificate was sold
       - name: specialist
         data_type: STRING
-        description: ""
+        description: The employee who sold the certificate
       - name: speciality
         data_type: STRING
-        description: ""
+        description: Speciality of employee
       - name: client
         data_type: STRING
-        description: ""
+        description: Client name
       - name: is_vip
         data_type: BOOLEAN
-        description: ""
+        description: Client is VIP
       - name: is_employee
         data_type: BOOLEAN
-        description: ""
+        description: Client is employee
       - name: certificate_name
         data_type: STRING
-        description: ""
+        description: Certificate name
       - name: direction
         data_type: STRING
-        description: ""
+        description: Direction of the product
       - name: category
         data_type: STRING
-        description: ""
+        description: Category of the product
       - name: amount
         data_type: NUMERIC
-        description: ""
+        description: Amount of certificates sold
       - name: price
         data_type: NUMERIC.COST
-        description: ""
+        description: Price of certificate
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of one certificate
       - name: payback
         data_type: NUMERIC.COST
-        description: ""
+        description: Payback of the certificate
       - name: cost_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Total cost of certificates
       - name: income_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Income from certificates sales
       - name: cost_price_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost price of certificates
       - name: discount
         data_type: NUMERIC.COST
-        description: ""
+        description: Certificates discount
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Employee bonus for selling a certificates
       - name: profit_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Profit from certificates sales
       - name: margin
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Margin from certificates sales
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Employee bonus for selling a certificates according Cleverbox

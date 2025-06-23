@@ -12,10 +12,10 @@ sources:
         columns:
           - name: uid
             data_type: STRING
-            description: ""
+            description: Record identifier
           - name: type
             data_type: STRING
-            description: ""
+            description: Certificate or balance
           - name: sum
             data_type: NUMERIC.COST
-            description: ""
+            description: Sum

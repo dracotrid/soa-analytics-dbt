@@ -11,67 +11,52 @@ models:
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
         meta:
           tf_config:
             field: yuid
-      - name: i
-        data_type: NUMERIC
-        description: ""
       - name: date
         data_type: DATE
-        description: ""
+        description: Goods date of sale
         meta:
           tf_config:
             expression: PARSE_DATE('%d.%m.%Y', date)
       - name: branch
         data_type: STRING
-        description: ""
+        description: Branch of goods sale
       - name: receipt
         data_type: STRING
-        description: ""
-      - name: base
-        data_type: STRING
-        description: ""
+        description: Receipt
       - name: employee
         data_type: STRING
-        description: ""
+        description: The employee who sold the goods
       - name: client_name
         data_type: STRING
-        description: ""
-      - name: phone_number
-        data_type: STRING
-        description: ""
+        description: Client name
       - name: goods_name
         data_type: STRING
-        description: ""
+        description: Goods name
       - name: brand
         data_type: STRING
-        description: ""
-      - name: barcode
-        data_type: STRING
-        description: ""
-      - name: article
-        data_type: STRING
-        description: ""
+        description: Brand of goods
       - name: amount
         data_type: NUMERIC.COST
-        description: ""
+        description: Amount of goods sold
       - name: price
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Price of goods
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of one goods
       - name: cost
         data_type: NUMERIC.COST
-        description: ""
+        description: Total cost of goods
       - name: cost_price_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of goods
       - name: profit
         data_type: NUMERIC.COST
-        description: ""
+        description: Profit from goods sales
       - name: profitability
         data_type: NUMERIC.COST
-        description: ""
+        description: Profitability of goods sale

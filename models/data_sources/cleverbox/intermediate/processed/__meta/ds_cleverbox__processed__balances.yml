@@ -11,46 +11,46 @@ models:
     columns:
       - name: id
         data_type: STRING
-        description: ""
+        description: Record identifier
         meta:
           tf_config:
             field: uid
       - name: date
         data_type: DATE
-        description: ""
+        description: Balance date of replenish
         meta:
           tf_config:
             expression: DATE(PARSE_DATETIME('%d.%m.%Y %H:%M', date))
       - name: name
         data_type: STRING
-        description: ""
+        description: Balance name
         meta:
           tf_config:
             field: type
       - name: branch
         data_type: STRING
-        description: ""
+        description: Branch of balance replenish
         meta:
           tf_config:
             constant: 'Рахунок клієнта'
       - name: specialist
         data_type: STRING
-        description: ""
+        description: The employee who served of client
         meta:
           tf_config:
             field: author
       - name: client
         data_type: STRING
-        description: ""
+        description: Client name
       - name: category
         data_type: STRING
-        description: ""
+        description: Category of the product
         meta:
           tf_config:
             constant: 'Баланс'
       - name: direction
         data_type: STRING
-        description: ""
+        description: Direction of the product
         meta:
           tf_config:
             constant: 'Баланс'
@@ -62,37 +62,37 @@ models:
             constant: ''
       - name: amount
         data_type: NUMERIC
-        description: ""
+        description: Amount of replenished balances
         meta:
           tf_config:
             constant: 1
       - name: price
         data_type: NUMERIC.COST
-        description: ""
+        description: Sum of replenish
         meta:
           tf_config:
             field: sum
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of replenish one balance
         meta:
           tf_config:
             constant: 0
       - name: discount
         data_type: NUMERIC.COST
-        description: ""
+        description: Discount on balance replenishment
         meta:
           tf_config:
             constant: 0
       - name: bonus_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Employee bonus for balance replenishment
         meta:
           tf_config:
             constant: 0
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Employee bonus for balance replenishment according Cleverbox
         meta:
           tf_config:
             constant: 0

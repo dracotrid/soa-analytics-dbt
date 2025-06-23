@@ -41,58 +41,58 @@ models:
         description: Base of goods sale
       - name: specialist
         data_type: STRING
-        description: ""
+        description: The employee who sold the goods
         meta:
           tf_config:
             field: employee
       - name: speciality
         data_type: STRING
-        description: ""
+        description: Speciality of employee
       - name: client_name
         data_type: STRING
-        description: ""
+        description: Client name
       - name: goods_name
         data_type: STRING
-        description: ""
+        description: Goods name
       - name: brand
         data_type: STRING
-        description: ""
+        description: Brand of goods
       - name: amount
         data_type: NUMERIC.COST
-        description: ""
+        description: Amount of goods sold
       - name: price
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Price of goods
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Cost price of one goods
       - name: payback
         data_type: NUMERIC.COST
-        description: ""
+        description: Payback of the goods
       - name: income_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Income from goods sales
       - name: cost_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Total cost of goods
       - name: cost_price_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost price of goods
         meta:
           tf_config:
             field: calculated_cost_price_total
       - name: discount_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Goods discount
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Employee bonus for selling a goods
       - name: profit_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Profit from goods sales
       - name: margin
         data_type: NUMERIC.COST
-        description: ""
+        description: Margin from goods sales
       - name: cleverbox_bonus_total
         data_type: NUMERIC.COST
-        description: ""
+        description: Employee bonus for selling a goods according Cleverbox

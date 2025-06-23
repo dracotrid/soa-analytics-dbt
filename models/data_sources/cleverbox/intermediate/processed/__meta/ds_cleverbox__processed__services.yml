@@ -11,26 +11,26 @@ models:
     columns:
       - name: guid
         data_type: STRING
-        description: ""
+        description: Record identifier
         meta:
           tf_config:
             macro: cmf__normalise__pad_left_signs
             params: [guid, 6, '0']
       - name: suid
         data_type: NUMERIC
-        description: ""
+        description: Record identifier
       - name: name
         data_type: STRING
-        description: ""
+        description: Service name
       - name: direction
         data_type: STRING
-        description: ""
+        description: Service direction
       - name: category
         data_type: STRING
-        description: ""
+        description: Service category
       - name: value
         data_type: NUMERIC.COST
-        description: ""
+        description: Price of service
       - name: cost_price
         data_type: NUMERIC.COST
-        description: ""
+        description: Cost price of service

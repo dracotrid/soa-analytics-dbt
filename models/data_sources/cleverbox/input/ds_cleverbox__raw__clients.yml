@@ -14,10 +14,10 @@ sources:
         columns:
           - name: vip_clients
             data_type: STRING
-            description: ""
+            description: Client name
           - name: discount
             data_type: NUMERIC.PRICE
-            description: ""
+            description: Discount
           - name: note
             data_type: STRING
-            description: ""
+            description: Note

@@ -11,34 +11,34 @@ models:
     columns:
       - name: employee_name
         data_type: STRING
-        description: ""
+        description: Employee name
         meta:
           tf_config:
             field: name
       - name: sale_type
         data_type: STRING
-        description: ""
+        description: Sale product type
       - name: code
         data_type: STRING
-        description: ""
+        description: Code
       - name: uid
         data_type: STRING
-        description: ""
+        description: Record identifier
       - name: bonus_value
         data_type: NUMERIC.PRICE
-        description: ""
+        description: Bonus value
         meta:
           tf_config:
             field: bonus
       - name: accrual_type
         data_type: STRING
-        description: ""
+        description: Accrual type
       - name: clever_box
         data_type: STRING
         description: ""
       - name: speciality
         data_type: STRING
-        description: ""
+        description: Speciality of employee
       - name: status
         data_type: STRING
-        description: ""
+        description: Employee status
