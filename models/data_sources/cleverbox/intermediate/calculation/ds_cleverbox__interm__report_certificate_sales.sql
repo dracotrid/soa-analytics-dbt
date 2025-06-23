@@ -1,3 +1,6 @@
+--- TODO: Calculation modules for Balances, Subscriptions and Certificates equals
+--- TODO: Move it into one comon module
+
 WITH employees_speciality AS (
     SELECT
         name AS employees_speciality_name,
