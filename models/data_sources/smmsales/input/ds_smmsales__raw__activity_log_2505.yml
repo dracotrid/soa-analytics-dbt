@@ -1,0 +1,77 @@
+version: 2
+
+sources:
+  - name: ds_smmsales
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_smmsales"
+    tags: ["scope:data-source", "ds-name:smmsales", "asset-type:raw"]
+    loader: bigquery
+
+    tables:
+      - name: raw__activity_log_2505
+        identifier: raw__smm_sales_log_2505
+        description: "SMM sales log of May 2025"
+        columns:
+          - name: ruid
+            description: ''
+            data_type: STRING
+          - name: cuid
+            description: ''
+            data_type: STRING
+          - name: date
+            description: ''
+            data_type: STRING
+          - name: client
+            description: ''
+            data_type: STRING
+          - name: communication_channel
+            description: ''
+            data_type: STRING
+          - name: note
+            description: ''
+            data_type: STRING
+          - name: status
+            description: ''
+            data_type: STRING
+          - name: source
+            description: ''
+            data_type: STRING
+          - name: fist_message
+            description: ''
+            data_type: STRING
+          - name: interest
+            description: ''
+            data_type: STRING
+          - name: time_frame
+            description: ''
+            data_type: STRING
+          - name: ad_count
+            description: ''
+            data_type: STRING
+          - name: visit_id
+            description: ''
+            data_type: STRING
+          - name: client_id
+            description: ''
+            data_type: STRING
+          - name: gender
+            description: ''
+            data_type: STRING
+          - name: lead_type
+            description: ''
+            data_type: STRING
+          - name: reminder
+            description: ''
+            data_type: STRING
+          - name: inquery_details
+            description: ''
+            data_type: STRING
+          - name: firt_message_date
+            description: ''
+            data_type: STRING
+          - name: first_ad_message_date
+            description: ''
+            data_type: STRING
+          - name: visits_count
+            description: ''
+            data_type: STRING
