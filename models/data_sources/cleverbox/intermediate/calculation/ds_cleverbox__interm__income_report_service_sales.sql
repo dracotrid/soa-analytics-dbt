@@ -25,10 +25,13 @@ bonus AS (
 intermediate_step_1_source AS (
     SELECT
         *,
+        -- TODO: Create functions with check null and zero values for math operations
+        -- TODO: Create functions for calculate main indicators with rounding
         coalesce(amount, 0) * coalesce(cost, 0) AS cost_total,
         coalesce(amount, 0) * coalesce(discount, 0) AS discount_total,
         coalesce(amount, 0) * coalesce(cost_price_unit, 0) AS cost_price_total,
         CASE WHEN coalesce(cost, 0) = 0 THEN 0 ELSE coalesce(discount, 0) / coalesce(cost, 0) * 100 END AS discount_persent,
+        -- TODO: Standardize and move income calculation into a separate function
         CASE
             WHEN coalesce(subscription, 0) > 0 THEN 0
             WHEN coalesce(paid, 0) - coalesce(certificates_balance_sum, 0) < 1 THEN 0
@@ -52,6 +55,7 @@ intermediate_step_2_source AS (
 intermediate_step_3_source AS (
     SELECT
         *,
+        -- TODO: Standardize and move profit calculation into a separate function
         coalesce(income_total, 0) - coalesce(cost_price_total, 0) - coalesce(bonus_total, 0) AS profit_total
     FROM intermediate_step_2_source
 ),

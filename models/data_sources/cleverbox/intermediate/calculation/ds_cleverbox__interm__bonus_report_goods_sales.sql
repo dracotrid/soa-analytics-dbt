@@ -1,3 +1,6 @@
+--- TODO: Split intermediate tables into enrichment and data calculation tables
+--- TODO: In this case we can move calculation in comon code, inject standardized
+--- TODO: and enriched table name and use it for income date from different sources
 WITH vip_clients_table AS (
     SELECT vip_clients
     FROM {{ tf_source('ds_cleverbox__raw__clients') }}
