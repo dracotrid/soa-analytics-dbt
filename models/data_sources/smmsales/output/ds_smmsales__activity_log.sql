@@ -8,6 +8,8 @@ WITH source AS (
     SELECT * FROM {{ tf_ref('ds_smmsales__parsed__activity_log_2504') }}
     UNION ALL
     SELECT * FROM {{ tf_ref('ds_smmsales__parsed__activity_log_2505') }}
+    UNION ALL
+    SELECT * FROM {{ tf_ref('ds_smmsales__parsed__activity_log_2506') }}
 ),
 
 final AS (
