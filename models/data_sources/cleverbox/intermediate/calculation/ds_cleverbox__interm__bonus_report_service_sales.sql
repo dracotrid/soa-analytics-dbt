@@ -103,7 +103,8 @@ intermediate_step_3_source AS (
             WHEN bonus_employee_type = 'Фіксована' THEN bonus_employee_type
             WHEN is_employee = TRUE THEN '%ВідОплати'
             WHEN subscription IS NOT NULL AND subscription > 0 THEN bonus_employee_type
-            WHEN is_vip = TRUE OR COALESCE(discount_rate, 0) = 1 THEN '%ВідВартості'
+            -- '%ВідВартості' is used for VIPs and all the 100% discounts before 2025
+            WHEN is_vip = TRUE OR (date < '2025-01-01' AND COALESCE(discount_rate, 0) = 1) THEN '%ВідВартості'
             WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee_type
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
