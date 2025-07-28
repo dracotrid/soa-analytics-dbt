@@ -7,9 +7,9 @@ models:
       alias: interm__bonus_report_service_sales
       meta:
         tf_config:
-          filter: id IS NOT NULL
+          filter: eid IS NOT NULL
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date
@@ -21,10 +21,10 @@ models:
         meta:
           tf_config:
             expression: EXTRACT(YEAR FROM date)
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the service
-      - name: speciality
+      - name: expert_position
         data_type: STRING
         description: Speciality of employee
       - name: service_name
@@ -42,12 +42,12 @@ models:
       - name: paid
         data_type: NUMERIC.COST
         description: Sum which client paid
-      - name: cost
+      - name: cost_total
         data_type: NUMERIC.COST
         description: Cost of services
-      - name: cost_price_unit
+      - name: cost_price_total
         data_type: NUMERIC.PRICE
-        description: Cost price of one service
+        description: Service cost price
       - name: subscription
         data_type: NUMERIC.COST
         description: Subscription
@@ -102,12 +102,6 @@ models:
       - name: base_for_bonus
         data_type: NUMERIC.COST
         description: Base for bonus calculation
-      - name: bonus_unit
-        data_type: NUMERIC.COST
-        description: Employee bonus for selling one goods
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Total employee bonus for selling goods
-        meta:
-          tf_config:
-            expression: bonus_unit * amount

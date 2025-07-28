@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__bonus_discount
-    description: "CleverBox Processed Bonus Discount"
+  - name: ds_cleverbox__parsed__bonus_discount
+    description: "CleverBox Parsed Bonus Discount"
     config:
-      alias: processed__bonus_discount
+      alias: parsed__bonus_discount
       meta:
         tf_config:
           filter: name IS NOT NULL

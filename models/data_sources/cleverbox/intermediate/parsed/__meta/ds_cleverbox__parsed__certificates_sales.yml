@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__certificates_sales
-    description: "CleverBox Processed Certificates Sales"
+  - name: ds_cleverbox__parsed__certificates_sales
+    description: "CleverBox Parsed Certificates Sales"
     config:
-      alias: processed__certificates_sales
+      alias: parsed__certificates_sales
       meta:
         tf_config:
           filter: uid IS NOT NULL

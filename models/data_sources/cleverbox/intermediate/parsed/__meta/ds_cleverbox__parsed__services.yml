@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__services
-    description: "CleverBox Processed Services"
+  - name: ds_cleverbox__parsed__services
+    description: "CleverBox Parsed Services"
     config:
-      alias: processed__services
+      alias: parsed__services
       meta:
         tf_config:
           filter: guid IS NOT NULL

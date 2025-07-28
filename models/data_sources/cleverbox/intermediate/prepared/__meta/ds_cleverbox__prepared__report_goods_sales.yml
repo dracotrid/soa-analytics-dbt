@@ -7,9 +7,9 @@ models:
       alias: prepared__report_goods_sales
       meta:
         tf_config:
-          filter: id IS NOT NULL
+          filter: eid IS NOT NULL
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date
@@ -27,9 +27,6 @@ models:
       - name: branch
         data_type: STRING
         description: Branch of goods sale
-      - name: base
-        data_type: STRING
-        description: Base of goods sale
       - name: specialist
         data_type: STRING
         description: The employee who sold the goods

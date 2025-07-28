@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__parsed__service_sales_2025
+    description: "CleverBox Parsed Service Sales 2025"
+    config:
+      alias: parsed__service_sales_2025
+      meta:
+        tf_config:
+          filter: date IS NOT NULL AND date <> 'NO DATA'
+    columns:
+      - name: date
+        data_type: DATE
+        description: Date of service sale
+        meta:
+          tf_config:
+            expression: PARSE_DATE('%d.%m.%Y', date)
+      - name: branch
+        data_type: STRING
+        description: Branch of service sale
+      - name: code
+        data_type: STRING
+        description: Service code
+      - name: name
+        data_type: STRING
+        description: Service name
+      - name: value
+        data_type: NUMERIC.COST
+        description: Cost of service
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Client payed money
+      - name: discount
+        data_type: NUMERIC.COST
+        description: ""
+      - name: subscription
+        data_type: NUMERIC.COST
+        description: ""
+      - name: client_code
+        data_type: STRING
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: expert_name
+        data_type: STRING
+        description: ""
+      - name: expert_position
+        data_type: STRING
+        description: Specialist position
+      - name: cost_price
+        data_type: NUMERIC.COST
+        description: ""
+      - name: profit
+        data_type: NUMERIC.COST
+        description: ""
+      - name: category
+        data_type: STRING
+        description: Service category
+      - name: direction
+        data_type: STRING
+        description: Service direction

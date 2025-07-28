@@ -7,9 +7,9 @@ models:
       alias: interm__bonus_report_goods_sales
       meta:
         tf_config:
-          filter: id IS NOT NULL
+          filter: eid IS NOT NULL
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date
@@ -27,10 +27,10 @@ models:
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
-      - name: price
-        data_type: NUMERIC.PRICE
+      - name: paid
+        data_type: NUMERIC.COST
         description: Price of goods
-      - name: cost
+      - name: cost_total
         data_type: NUMERIC.COST
         description: Cost of goods
       - name: is_vip
@@ -66,9 +66,6 @@ models:
       - name: bonus_value
         data_type: NUMERIC.PRICE
         description: Bonus value
-      - name: bonus_unit
-        data_type: NUMERIC.PRICE
-        description: Employee bonus for selling one goods
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Total employee bonus for selling goods

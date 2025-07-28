@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__bonus_employee
-    description: "CleverBox Processed Bonus Employee"
+  - name: ds_cleverbox__parsed__bonus_employee
+    description: "CleverBox Parsed Bonus Employee"
     config:
-      alias: processed__bonus_employee
+      alias: parsed__bonus_employee
       meta:
         tf_config:
           filter: name IS NOT NULL

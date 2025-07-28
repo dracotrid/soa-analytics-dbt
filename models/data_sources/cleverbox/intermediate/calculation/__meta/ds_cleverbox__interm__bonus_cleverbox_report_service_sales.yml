@@ -7,9 +7,9 @@ models:
       alias: interm__bonus_cleverbox_report_service_sales
       meta:
         tf_config:
-          filter: id IS NOT NULL
+          filter: eid IS NOT NULL
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: bonus_cleverbox_unit

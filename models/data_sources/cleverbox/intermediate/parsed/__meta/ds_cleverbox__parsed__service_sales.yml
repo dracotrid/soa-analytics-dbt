@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__parsed__service_sales
+    description: "CleverBox Parsed Service Sales"
+    config:
+      alias: parsed__service_sales
+    columns:
+      - name: name
+        data_type: STRING
+        description: Service name
+      - name: code
+        data_type: STRING
+        description: Service code
+      - name: date
+        data_type: DATE
+        description: Service date of sale
+      - name: branch
+        data_type: STRING
+        description: Branch of service sale
+      - name: value
+        data_type: NUMERIC.COST
+        description: Cost of service
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Client payed money
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Services discount
+      - name: subscription
+        data_type: NUMERIC.COST
+        description: Subscription
+      - name: client_code
+        data_type: STRING
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: expert_name
+        data_type: STRING
+        description: The employee who sold the service
+      - name: cost_price
+        data_type: NUMERIC.COST
+        description: Cost price of service

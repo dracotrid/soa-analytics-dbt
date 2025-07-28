@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__employees
-    description: "CleverBox Processed Employees"
+  - name: ds_cleverbox__parsed__employees
+    description: "CleverBox Parsed Employees"
     config:
-      alias: processed__employees
+      alias: parsed__employees
       meta:
         tf_config:
           filter: string_field_0 IS NOT NULL

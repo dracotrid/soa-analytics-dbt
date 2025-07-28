@@ -2,7 +2,7 @@ WITH employees_speciality AS (
     SELECT
         name AS employees_speciality_name,
         job_title AS speciality
-    FROM {{ tf_ref('ds_cleverbox__processed__employees') }}
+    FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
     GROUP BY name, job_title
 ),
 
@@ -13,7 +13,7 @@ vip_clients_table AS (
 
 employees AS (
     SELECT name_for_service
-    FROM {{ tf_ref('ds_cleverbox__processed__employees') }}
+    FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
 ),
 
 report_balance_step_1 AS (
@@ -25,7 +25,7 @@ report_balance_step_1 AS (
         COALESCE(amount, 0) * COALESCE(price, 0) - COALESCE(discount, 0) AS income_total,
         CASE WHEN COALESCE(price, 0) = 0 THEN 0 ELSE 1 END AS payback,
         COALESCE(amount, 0) * COALESCE(cost_price_unit, 0) AS cost_price_total
-    FROM {{ tf_ref('ds_cleverbox__processed__balances') }} AS balances
+    FROM {{ tf_ref('ds_cleverbox__parsed__balances') }} AS balances
     LEFT JOIN employees_speciality
         ON balances.specialist = employees_speciality.employees_speciality_name
     LEFT JOIN vip_clients_table

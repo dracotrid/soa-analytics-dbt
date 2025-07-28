@@ -6,7 +6,7 @@ models:
     config:
       alias: report_service_sales
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date
@@ -24,10 +24,10 @@ models:
       - name: branch
         data_type: STRING
         description: Branch of service sale
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the service
-      - name: speciality
+      - name: expert_position
         data_type: STRING
         description: Speciality of employee
       - name: client_name
