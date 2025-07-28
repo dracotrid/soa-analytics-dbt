@@ -8,18 +8,12 @@ sources:
     loader: google_sheet
 
     tables:
-      - name: raw__service_sales_2025
-        identifier: raw__service_sales_2025
+      - name: raw__service_sales_2025_q3
+        identifier: raw__service_sales_2025_q3
         description: "CleverBox raw Service Sales records"
         columns:
-          - name: yuid
-            data_type: STRING
-            description: Unique record id withing year
-          - name: muid
-            data_type: STRING
-            description: Unique record id withing month
           - name: date
-            data_type: DATE
+            data_type: STRING
             description: Date of service sale
           - name: branch
             data_type: STRING
@@ -31,16 +25,16 @@ sources:
             data_type: STRING
             description: Service name
           - name: value
-            data_type: NUMERIC.COST
+            data_type: STRING
             description: Cost of service
           - name: paid
-            data_type: NUMERIC.COST
+            data_type: STRING
             description: Client payed money
           - name: discount
-            data_type: NUMERIC.COST
+            data_type: STRING
             description: ""
           - name: subscription
-            data_type: NUMERIC.COST
+            data_type: STRING
             description: ""
           - name: client_code
             data_type: STRING
@@ -48,17 +42,26 @@ sources:
           - name: client_name
             data_type: STRING
             description: Client name
-          - name: specialist
+          - name: client_groups
+            data_type: STRING
+            description: Client groups
+          - name: phone
+            data_type: STRING
+            description: Client phone number
+          - name: expert_name
             data_type: STRING
             description: ""
-          - name: position
+          - name: expert_position
             data_type: STRING
             description: Specialist position
+          - name: bonus_value
+            data_type: STRING
+            description: Bonus value
           - name: cost_price
-            data_type: NUMERIC.COST
+            data_type: STRING
             description: ""
           - name: profit
-            data_type: NUMERIC.COST
+            data_type: STRING
             description: ""
           - name: category
             data_type: STRING
@@ -66,3 +69,6 @@ sources:
           - name: direction
             data_type: STRING
             description: Service direction
+          - name: notes
+            data_type: STRING
+            description: Notes

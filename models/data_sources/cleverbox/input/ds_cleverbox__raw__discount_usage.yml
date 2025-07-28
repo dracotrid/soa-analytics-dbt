@@ -33,6 +33,9 @@ sources:
           - name: discount_value
             data_type: NUMERIC.COST
             description: ""
+          - name: product_id
+            data_type: STRING
+            description: ""
           - name: service
             data_type: STRING
             description: ""

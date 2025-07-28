@@ -6,7 +6,7 @@ models:
     config:
       alias: prepared__report_balances
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date

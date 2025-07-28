@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__subscriptions_sales
-    description: "CleverBox Processed Subscriptions Sales"
+  - name: ds_cleverbox__parsed__subscriptions_sales
+    description: "CleverBox Parsed Subscriptions Sales"
     config:
-      alias: processed__subscriptions_sales
+      alias: parsed__subscriptions_sales
       meta:
         tf_config:
           filter: uid IS NOT NULL

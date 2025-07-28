@@ -5,7 +5,7 @@ WITH vip_clients_table AS (
 
 employees AS (
     SELECT name_for_goods
-    FROM {{ tf_ref('ds_cleverbox__processed__employees') }}
+    FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
 ),
 
 bonus_employee AS (
@@ -13,16 +13,15 @@ bonus_employee AS (
         uid AS bonus_employee_code,
         bonus_value AS bonus_employee_value,
         accrual_type AS bonus_employee_type
-    FROM {{ tf_ref('ds_cleverbox__processed__bonus_employee') }}
+    FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
     WHERE sale_type = 'Товар'
 ),
 
 discount_usage AS (
     SELECT
-        yuid AS discount_usage_id,
+        goods_id AS discount_usage_id,
         discount_name AS discount_usage_discount_name
     FROM {{ tf_ref('ds_cleverbox__processed__discount_usage') }}
-    GROUP BY yuid, discount_name
 ),
 
 bonus_discount AS (
@@ -30,7 +29,7 @@ bonus_discount AS (
         name AS bonus_discount_name,
         accrual_type_goods AS bonus_discount_type,
         bonus_goods AS bonus_discount_value
-    FROM {{ tf_ref('ds_cleverbox__processed__bonus_discount') }}
+    FROM {{ tf_ref('ds_cleverbox__parsed__bonus_discount') }}
 ),
 
 bonus_report_goods_step_1 AS (
@@ -38,7 +37,21 @@ bonus_report_goods_step_1 AS (
         *,
         NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_goods IS NULL, FALSE) AS is_employee,
-        CONCAT('DISCOUNT++', FORMAT_DATE('%d.%m.%Y', date), '--', goods_name, '--', employee, '--', client_name) AS druid
+        REPLACE(
+            CONCAT(
+                FORMAT_DATE('%Y-%m-%d', date),
+                '__',
+                branch,
+                '__',
+                COALESCE(goods_name, ''),
+                '__',
+                COALESCE(client_name, ''),
+                '__',
+                COALESCE(employee, '')
+            ),
+            ' ',
+            '_'
+        ) AS du_id
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
     LEFT JOIN vip_clients_table
         ON goods_sales.client_name = vip_clients_table.vip_clients
@@ -52,7 +65,7 @@ bonus_report_goods_step_2 AS (
     SELECT *
     FROM bonus_report_goods_step_1
     LEFT JOIN discount_usage
-        ON bonus_report_goods_step_1.druid = discount_usage.discount_usage_id
+        ON bonus_report_goods_step_1.du_id = discount_usage.discount_usage_id
 ),
 
 bonus_report_goods_step_3 AS (
@@ -60,7 +73,7 @@ bonus_report_goods_step_3 AS (
         *,
         CASE
             WHEN is_employee = TRUE THEN 'БезПремії'
-            WHEN is_vip = TRUE AND cost < 0 THEN '%ВідВартості'
+            WHEN is_vip = TRUE AND cost_total < 0 THEN '%ВідВартості'
             ELSE NULLIF(bonus_employee_type, '<<НЕВІДОМО>>')
         END AS bonus_type_for_calculation
     FROM bonus_report_goods_step_2
@@ -72,31 +85,24 @@ bonus_report_goods_step_4 AS (
     SELECT
         *,
         CASE
-            WHEN bonus_type_for_calculation = '%ВідОплати' THEN COALESCE(price, 0)
-            WHEN bonus_type_for_calculation = '%ВідВартості' THEN COALESCE(cost, 0)
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN COALESCE(bonus_employee_value, 0)
+            WHEN bonus_type_for_calculation = '%ВідОплати' THEN paid
+            WHEN bonus_type_for_calculation = '%ВідВартості' THEN cost_total
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_employee_value
             ELSE 0
         END AS base_for_bonus,
         CASE
-            WHEN COALESCE(bonus_discount_value, 0) = 0 THEN COALESCE(bonus_employee_value, 0)
-            ELSE COALESCE(bonus_discount_value, 0)
+            WHEN COALESCE(bonus_discount_value, 0) = 0 THEN bonus_employee_value
+            ELSE bonus_discount_value
         END AS bonus_value
     FROM bonus_report_goods_step_3
-),
-
-bonus_report_goods_step_5 AS (
-    SELECT
-        *,
-        base_for_bonus * bonus_value AS bonus_unit
-    FROM bonus_report_goods_step_4
 ),
 
 final AS (
     SELECT
         *,
-        ROUND(bonus_unit * amount, 2) AS bonus_total,
-        ROUND(COALESCE(price, 0) * bonus_value * amount, 2) AS cleverbox_bonus_total
-    FROM bonus_report_goods_step_5
+        base_for_bonus * bonus_value AS bonus_total,
+        ROUND(paid * bonus_value, 2) AS cleverbox_bonus_total
+    FROM bonus_report_goods_step_4
 )
 
 {{ tf_transform_model('final') }}

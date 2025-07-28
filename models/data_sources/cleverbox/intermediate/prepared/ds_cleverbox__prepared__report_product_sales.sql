@@ -1,10 +1,10 @@
 WITH source AS (
     SELECT
-        id AS eid,
+        eid,
         'Послуга' AS product_type,
         date,
         branch,
-        specialist AS employee_name,
+        expert_name AS employee_name,
         client_name,
         service_name AS product_name,
         direction,
@@ -25,7 +25,7 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id AS eid,
+        eid,
         'Товар' AS product_type,
         date,
         branch,
@@ -100,7 +100,7 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id AS eid,
+        eid,
         'Баланс' AS product_type,
         date,
         branch,

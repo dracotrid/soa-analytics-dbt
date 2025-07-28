@@ -6,7 +6,7 @@ models:
     config:
       alias: interm__report_balances
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date

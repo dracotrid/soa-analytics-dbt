@@ -6,7 +6,7 @@ models:
     config:
       alias: report_salary
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: type
@@ -18,7 +18,7 @@ models:
       - name: branch
         data_type: STRING
         description: Branch where product was sold
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The specialist who sold the product
       - name: product_name

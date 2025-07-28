@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__bonus_adjustments
-    description: "CleverBox Bonus Adjustments"
+  - name: ds_cleverbox__parsed__bonus_adjustments
+    description: "CleverBox Parsed Bonus Adjustments"
     config:
-      alias: processed__bonus_adjustments
+      alias: parsed__bonus_adjustments
     columns:
       - name: yuid
         data_type: STRING

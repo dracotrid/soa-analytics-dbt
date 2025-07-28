@@ -1,32 +1,23 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__processed__balances
+  - name: ds_cleverbox__parsed__balances
     description: "CleverBox Processed Balances"
     config:
-      alias: processed__balances
+      alias: parsed__balances
       meta:
         tf_config:
-          filter: uid IS NOT NULL AND type = 'Поповнення'
+          filter: eid IS NOT NULL AND name = 'Поповнення'
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
-        meta:
-          tf_config:
-            field: uid
       - name: date
         data_type: DATE
         description: Balance date of replenish
-        meta:
-          tf_config:
-            expression: DATE(PARSE_DATETIME('%d.%m.%Y %H:%M', date))
       - name: name
         data_type: STRING
         description: Balance name
-        meta:
-          tf_config:
-            field: type
       - name: branch
         data_type: STRING
         description: Branch of balance replenish
@@ -36,9 +27,6 @@ models:
       - name: specialist
         data_type: STRING
         description: The employee who served of client
-        meta:
-          tf_config:
-            field: author
       - name: client
         data_type: STRING
         description: Client name
@@ -63,15 +51,9 @@ models:
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of replenished balances
-        meta:
-          tf_config:
-            constant: 1
       - name: price
         data_type: NUMERIC.COST
         description: Sum of replenish
-        meta:
-          tf_config:
-            field: sum
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of replenish one balance

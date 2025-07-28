@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__prepared__report_service_sales
-    description: "CleverBox Prepared Report Service Sales"
+  - name: ds_cleverbox__processed__report_service_sales
+    description: "CleverBox Processed Report Service Sales"
     config:
-      alias: prepared__report_service_sales
+      alias: processed__report_service_sales
       meta:
         tf_config:
           filter: eid IS NOT NULL
@@ -18,12 +18,21 @@ models:
       - name: year
         data_type: STRING
         description: Service year of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(YEAR FROM date)
       - name: month
         data_type: STRING
         description: Service month of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(MONTH FROM date)
       - name: day
         data_type: STRING
         description: Service day of sale
+        meta:
+          tf_config:
+            expression: EXTRACT(DAY FROM date)
       - name: branch
         data_type: STRING
         description: Branch of service sale
@@ -36,57 +45,54 @@ models:
       - name: client_name
         data_type: STRING
         description: Client name
-      - name: is_vip
-        data_type: BOOLEAN
-        description: Client is VIP
-      - name: is_employee
-        data_type: BOOLEAN
-        description: Client is employee
       - name: service_name
         data_type: STRING
         description: Service name
-      - name: direction
+        meta:
+          tf_config:
+            field: name
+      - name: service_code
         data_type: STRING
-        description: Service direction
+        description: Service code
+        meta:
+          tf_config:
+            field: code
       - name: category
         data_type: STRING
         description: Service category
+        meta:
+          tf_config:
+            field: service_category
+      - name: direction
+        data_type: STRING
+        description: Service direction
+        meta:
+          tf_config:
+            field: service_direction
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of services sold
-      - name: price
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Sum which client paid
+      - name: cost_total
+        data_type: NUMERIC.COST
+        description: Cost of services
+        meta:
+          tf_config:
+            field: value
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Services discount
+      - name: cost_price_total
         data_type: NUMERIC.PRICE
-        description: Price of service
-      - name: cost_price_unit
-        data_type: NUMERIC.PRICE
-        description: Cost price of one service
+        description: Cost price of services
       - name: subscription
         data_type: NUMERIC.COST
         description: Subscription
-      - name: payback
+      - name: cleverbox_cost_price_total
         data_type: NUMERIC.COST
-        description: Payback of the service
-      - name: cost_total
-        data_type: NUMERIC.COST
-        description: Total cost of services
-      - name: income_total
-        data_type: NUMERIC.COST
-        description: Income from services sales
-      - name: cost_price_total
-        data_type: NUMERIC.COST
-        description: Cost price of services
-      - name: discount_total
-        data_type: NUMERIC.COST
-        description: Services discount
-      - name: bonus_total
-        data_type: NUMERIC.COST
-        description: Employee bonus for selling a services
-      - name: profit_total
-        data_type: NUMERIC.COST
-        description: Profit from services sales
-      - name: margin
-        data_type: NUMERIC.COST
-        description: Margin from services sales
-      - name: bonus_cleverbox_total
-        data_type: NUMERIC.COST
-        description: Employee bonus for selling a services according Cleverbox
+        description: Subscription
+        meta:
+          tf_config:
+            field: cost_price

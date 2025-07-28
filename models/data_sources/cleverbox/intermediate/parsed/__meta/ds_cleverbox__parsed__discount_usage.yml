@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__parsed__discount_usage
+    description: "CleverBox Parsed Discount Usage"
+    config:
+      alias: parsed__discount_usage
+    columns:
+      - name: date
+        data_type: DATE
+        description: ""
+      - name: discount_name
+        data_type: STRING
+        description: Discount name
+      - name: value
+        data_type: NUMERIC.COST
+        description: ""
+      - name: discount_value
+        data_type: NUMERIC.COST
+        description: ""
+      - name: product_id
+        data_type: STRING
+        description: ""
+      - name: product_name
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: service
+      - name: client_code #TODO String, all id with leading 0
+        data_type: STRING
+        description: ""
+      - name: client_name
+        data_type: STRING
+        description: ""
+      - name: expert_name
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: specialist

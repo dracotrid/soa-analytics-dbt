@@ -7,9 +7,12 @@ models:
       alias: processed__discount_usage
       meta:
         tf_config:
-          filter: yuid IS NOT NULL
+          filter: eid IS NOT NULL
     columns:
-      - name: yuid
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: goods_id
         data_type: STRING
         description: Record identifier
       - name: discount_name
