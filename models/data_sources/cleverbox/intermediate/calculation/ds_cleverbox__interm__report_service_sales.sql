@@ -25,13 +25,13 @@ bonus AS (
 intermediate_step_1_source AS (
     SELECT
         *,
-        CASE WHEN coalesce(amount, 0) = 0 THEN 0 ELSE coalesce(paid, 0) / coalesce(amount, 0) END AS price,
-        CASE WHEN coalesce(amount, 0) = 0 THEN 0 ELSE coalesce(cost_price_total, 0) / coalesce(amount, 0) END AS cost_price_unit,
-        CASE WHEN coalesce(cost_total, 0) = 0 THEN 0 ELSE coalesce(discount, 0) / coalesce(cost_total, 0) * 100 END AS discount_persent,
+        CASE WHEN amount = 0 THEN 0 ELSE paid / amount END AS price,
+        CASE WHEN amount = 0 THEN 0 ELSE cost_price_total / amount END AS cost_price_unit,
+        CASE WHEN cost_total = 0 THEN 0 ELSE discount / cost_total * 100 END AS discount_persent,
         CASE
-            WHEN coalesce(subscription, 0) > 0 THEN 0
-            WHEN coalesce(paid, 0) - coalesce(certificates_balance_sum, 0) < 1 THEN 0
-            ELSE coalesce(paid, 0) - coalesce(certificates_balance_sum, 0)
+            WHEN subscription > 0 THEN 0
+            WHEN paid - coalesce(certificates_balance_sum, 0) < 1 THEN 0
+            ELSE paid - coalesce(certificates_balance_sum, 0)
         END AS income_total
     FROM {{ tf_ref('ds_cleverbox__processed__report_service_sales') }} AS service_sales
     LEFT JOIN certificates_balance
@@ -44,15 +44,15 @@ intermediate_step_1_source AS (
 intermediate_step_2_source AS (
     SELECT
         *,
-        coalesce(income_total, 0) - coalesce(cost_price_total, 0) - coalesce(bonus_total, 0) AS profit_total
+        income_total - cost_price_total - coalesce(bonus_total, 0) AS profit_total
     FROM intermediate_step_1_source
 ),
 
 intermediate_step_3_source AS (
     SELECT
         *,
-        CASE WHEN coalesce(income_total, 0) = 0 THEN 0 ELSE round(bonus_total / income_total, 0) END AS bonus_margin,
-        CASE WHEN coalesce(income_total, 0) = 0 THEN 0 ELSE round(profit_total / income_total, 0) END AS margin,
+        CASE WHEN income_total = 0 THEN 0 ELSE round(bonus_total / income_total, 0) END AS bonus_margin,
+        CASE WHEN income_total = 0 THEN 0 ELSE round(profit_total / income_total, 0) END AS margin,
         CASE WHEN profit_total = 0 THEN 0 ELSE round(cost_total / profit_total, 2) END AS payback
     FROM intermediate_step_2_source
     LEFT JOIN bonus_cleverbox

@@ -25,7 +25,7 @@ certificates_balance AS (
 report_goods_step_1 AS (
     SELECT
         *,
-        coalesce(cost_total, 0) - paid AS discount_total,
+        cost_total - paid AS discount_total,
         paid - coalesce(certificates_balance_sum, 0) AS income_total,
         round(paid / amount, 5) AS price,
         round(cost_price_total / amount, 5) AS cost_price_unit
@@ -41,14 +41,14 @@ report_goods_step_1 AS (
 report_goods_step_2 AS (
     SELECT
         *,
-        coalesce(income_total, 0) - coalesce(cost_price_total, 0) - coalesce(bonus_total, 0) AS profit_total
+        income_total - cost_price_total - coalesce(bonus_total, 0) AS profit_total
     FROM report_goods_step_1
 ),
 
 final AS (
     SELECT
         *,
-        round(CASE WHEN profit_total = 0 THEN 0 ELSE coalesce(paid, 0) / profit_total END, 2) AS payback,
+        round(CASE WHEN profit_total = 0 THEN 0 ELSE paid / profit_total END, 2) AS payback,
         CASE WHEN paid = 0 THEN 0 ELSE profit_total / paid END AS margin
     FROM report_goods_step_2
 )

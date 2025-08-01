@@ -8,6 +8,11 @@ models:
       meta:
         tf_config:
           filter: uid IS NOT NULL
+                  AND client IS NOT NULL
+                  AND employee IS NOT NULL
+                  AND date_of_sale IS NOT NULL
+                  AND branch IS NOT NULL
+                  AND cost IS NOT NULL
     columns:
       - name: id
         data_type: STRING

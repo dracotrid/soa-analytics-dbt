@@ -11,7 +11,7 @@ intermediate_step_1 AS (
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
             WHEN paid = 0 THEN 0
-            ELSE (paid - COALESCE(cleverbox_cost_price_total, 0)) * bonus_value
+            ELSE (paid - cleverbox_cost_price_total) * bonus_value
         END AS bonus_cleverbox_total
     FROM {{ tf_ref('ds_cleverbox__interm__bonus_report_service_sales') }} AS bonus_report
     LEFT JOIN service_sales

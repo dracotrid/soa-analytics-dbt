@@ -7,7 +7,13 @@ models:
       alias: parsed__balances
       meta:
         tf_config:
-          filter: eid IS NOT NULL AND name = 'Поповнення'
+          filter: eid IS NOT NULL
+                  AND name = 'Поповнення'
+                  AND date IS NOT NULL
+                  AND client IS NOT NULL
+                  AND amount IS NOT NULL
+                  AND price IS NOT NULL
+                  AND specialist IS NOT NULL
     columns:
       - name: eid
         data_type: STRING
