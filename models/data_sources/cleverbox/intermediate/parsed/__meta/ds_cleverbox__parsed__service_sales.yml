@@ -5,6 +5,16 @@ models:
     description: "CleverBox Parsed Service Sales"
     config:
       alias: parsed__service_sales
+      meta:
+        tf_config:
+          filter: name IS NOT NULL
+                  AND code IS NOT NULL
+                  AND date IS NOT NULL
+                  AND branch IS NOT NULL
+                  AND value IS NOT NULL
+                  AND client_code IS NOT NULL
+                  AND client_name IS NOT NULL
+                  AND expert_name IS NOT NULL
     columns:
       - name: name
         data_type: STRING
@@ -24,12 +34,21 @@ models:
       - name: paid
         data_type: NUMERIC.COST
         description: Client payed money
+        meta:
+          tf_config:
+            expression: COALESCE(paid, 0)
       - name: discount
         data_type: NUMERIC.COST
         description: Services discount
+        meta:
+          tf_config:
+            expression: COALESCE(discount, 0)
       - name: subscription
         data_type: NUMERIC.COST
         description: Subscription
+        meta:
+          tf_config:
+            expression: COALESCE(subscription, 0)
       - name: client_code
         data_type: STRING
         description: Client code
@@ -42,3 +61,6 @@ models:
       - name: cost_price
         data_type: NUMERIC.COST
         description: Cost price of service
+        meta:
+          tf_config:
+            expression: COALESCE(cost_price, 0)

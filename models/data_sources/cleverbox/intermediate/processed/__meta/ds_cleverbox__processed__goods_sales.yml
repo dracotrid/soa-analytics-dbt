@@ -7,7 +7,7 @@ models:
       alias: processed__goods_sales
       meta:
         tf_config:
-          filter: eid IS NOT NULL AND amount <> 0
+          filter: amount <> 0
     columns:
       - name: eid
         data_type: STRING

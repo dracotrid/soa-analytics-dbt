@@ -8,6 +8,9 @@ models:
       meta:
         tf_config:
           filter: guid IS NOT NULL
+                  AND name IS NOT NULL
+                  AND direction IS NOT NULL
+                  AND category IS NOT NULL
     columns:
       - name: guid
         data_type: STRING
@@ -31,6 +34,12 @@ models:
       - name: value
         data_type: NUMERIC.COST
         description: Price of service
+        meta:
+          tf_config:
+            expression: COALESCE(value, 0)
       - name: cost_price
         data_type: NUMERIC.COST
         description: Cost price of service
+        meta:
+          tf_config:
+            expression: COALESCE(cost_price, 0)

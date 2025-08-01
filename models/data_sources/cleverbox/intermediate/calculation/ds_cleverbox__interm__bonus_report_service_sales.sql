@@ -63,7 +63,7 @@ intermediate_step_1_source AS (
         END AS expert_bonus_code,
         NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
-        CASE WHEN COALESCE(cost_total, 0) = 0 OR COALESCE(discount, 0) = 0 THEN 0 ELSE discount / cost_total END AS discount_rate
+        CASE WHEN cost_total = 0 OR discount = 0 THEN 0 ELSE discount / cost_total END AS discount_rate
     FROM {{ tf_ref('ds_cleverbox__processed__report_service_sales') }} AS service_sales
     LEFT JOIN bonus_employee_service_code
         ON CONCAT(service_sales.expert_name, '-Послуга-', service_sales.service_code) = bonus_employee_service_code.bonus_service_code_code
@@ -102,7 +102,7 @@ intermediate_step_3_source AS (
             WHEN is_employee = TRUE THEN '%ВідОплати'
             WHEN subscription IS NOT NULL AND subscription > 0 THEN bonus_employee_type
             -- '%ВідВартості' is used for VIPs and all the 100% discounts before 2025
-            WHEN is_vip = TRUE OR (date < '2025-01-01' AND COALESCE(discount_rate, 0) = 1) THEN '%ВідВартості'
+            WHEN is_vip = TRUE OR (date < '2025-01-01' AND discount_rate = 1) THEN '%ВідВартості'
             WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee_type
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,

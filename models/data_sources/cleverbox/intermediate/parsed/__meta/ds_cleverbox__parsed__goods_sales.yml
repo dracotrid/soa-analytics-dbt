@@ -8,6 +8,13 @@ models:
       meta:
         tf_config:
           filter: date IS NOT NULL
+                  AND branch IS NOT NULL
+                  AND receipt IS NOT NULL
+                  AND employee IS NOT NULL
+                  AND client_name IS NOT NULL
+                  AND goods_name IS NOT NULL
+                  AND amount IS NOT NULL
+                  AND cost IS NOT NULL
     columns:
       - name: date
         data_type: DATE
@@ -33,15 +40,24 @@ models:
       - name: brand
         data_type: STRING
         description: Brand of goods
+        meta:
+          tf_config:
+            expression: COALESCE(brand, 'UNKNOWN_BRAND')
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
       - name: price
         data_type: NUMERIC.PRICE
         description: Price of goods
+        meta:
+          tf_config:
+            expression: COALESCE(price, '0')
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of one goods
+        meta:
+          tf_config:
+            expression: COALESCE(cost_price_unit, '0')
       - name: cost
         data_type: NUMERIC.COST
         description: Total cost of goods

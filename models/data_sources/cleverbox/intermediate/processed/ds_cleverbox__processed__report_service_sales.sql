@@ -21,17 +21,17 @@ intermediate_step_1 AS (
             CONCAT(
                 FORMAT_DATE('%Y-%m-%d', date),
                 '__',
-                COALESCE(branch, ''),
+                branch,
                 '__',
-                COALESCE(code, ''),
+                code,
                 '__',
-                COALESCE(client_code, ''),
+                client_code,
                 '__',
-                COALESCE(expert_name, ''),
+                expert_name,
                 '__',
-                COALESCE(discount, 0),
+                discount,
                 '__',
-                COALESCE(subscription, 0)
+                subscription
             ),
             ' ',
             '_'
@@ -73,7 +73,7 @@ final AS (
     LEFT JOIN employees_position
         ON service_sales.expert_name = employees_position.employees_position_name
     LEFT JOIN services
-        ON LPAD(CAST(service_sales.code AS STRING), 6, '0') = services.guid
+        ON LPAD(service_sales.code, 6, '0') = services.guid
 )
 
 {{ tf_transform_model('final') }}

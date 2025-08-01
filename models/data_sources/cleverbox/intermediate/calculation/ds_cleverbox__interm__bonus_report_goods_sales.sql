@@ -43,11 +43,11 @@ bonus_report_goods_step_1 AS (
                 '__',
                 branch,
                 '__',
-                COALESCE(goods_name, ''),
+                goods_name,
                 '__',
-                COALESCE(client_name, ''),
+                client_name,
                 '__',
-                COALESCE(employee, '')
+                employee
             ),
             ' ',
             '_'

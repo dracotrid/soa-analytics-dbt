@@ -28,10 +28,10 @@ report_certificates_sales_step_1 AS (
         *,
         NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
-        COALESCE(amount, 0) * COALESCE(price, 0) AS cost_total,
-        COALESCE(amount, 0) * COALESCE(price, 0) - COALESCE(discount, 0) AS income_total,
-        CASE WHEN COALESCE(price, 0) = 0 THEN 0 ELSE 1 END AS payback,
-        COALESCE(amount, 0) * COALESCE(cost_price_unit, 0) AS cost_price_total
+        amount * price AS cost_total,
+        amount * price - discount AS income_total,
+        CASE WHEN price = 0 THEN 0 ELSE 1 END AS payback,
+        amount * cost_price_unit AS cost_price_total
     FROM {{ tf_ref('ds_cleverbox__parsed__certificates_sales') }} AS certificates_sales
     LEFT JOIN employees_speciality
         ON certificates_sales.employee = employees_speciality.employees_speciality_name
@@ -46,14 +46,14 @@ report_certificates_sales_step_1 AS (
 report_certificates_sales_step_2 AS (
     SELECT
         *,
-        COALESCE(income_total, 0) - COALESCE(cost_price_total, 0) - COALESCE(bonus_total, 0) AS profit_total
+        income_total - cost_price_total - bonus_total AS profit_total
     FROM report_certificates_sales_step_1
 ),
 
 final AS (
     SELECT
         *,
-        CASE WHEN COALESCE(profit_total, 0) = 0 THEN 0 ELSE COALESCE(income_total, 0) / COALESCE(profit_total, 0) END AS margin
+        CASE WHEN profit_total = 0 THEN 0 ELSE income_total / profit_total END AS margin
     FROM report_certificates_sales_step_2
 )
 
