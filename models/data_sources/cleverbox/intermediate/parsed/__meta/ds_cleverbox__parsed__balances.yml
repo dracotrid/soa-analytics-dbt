@@ -18,9 +18,17 @@ models:
       - name: eid
         data_type: STRING
         description: Record identifier
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: date
         data_type: DATE
         description: Balance date of replenish
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: name
         data_type: STRING
         description: Balance name
@@ -33,9 +41,17 @@ models:
       - name: specialist
         data_type: STRING
         description: The employee who served of client
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: client
         data_type: STRING
         description: Client name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: category
         data_type: STRING
         description: Category of the product
@@ -57,9 +73,17 @@ models:
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of replenished balances
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: price
         data_type: NUMERIC.COST
         description: Sum of replenish
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of replenish one balance
