@@ -20,24 +20,44 @@ models:
         meta:
           tf_config:
             field: uid
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: certificate_name
         data_type: STRING
         description: Certificate name
       - name: client
         data_type: STRING
         description: Client name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: employee
         data_type: STRING
         description: The employee who sold the certificate
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: date
         data_type: DATE
         description: Certificate date of sale
         meta:
           tf_config:
             expression: PARSE_DATE('%d.%m.%y', date)
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: branch
         data_type: STRING
         description: Branch where certificate was sold
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: category
         data_type: STRING
         description: Category of the product
@@ -62,6 +82,10 @@ models:
         meta:
           tf_config:
             field: cost
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of one certificate

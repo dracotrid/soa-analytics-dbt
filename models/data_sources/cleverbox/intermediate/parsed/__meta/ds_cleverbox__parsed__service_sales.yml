@@ -19,18 +19,38 @@ models:
       - name: name
         data_type: STRING
         description: Service name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: code
         data_type: STRING
         description: Service code
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: date
         data_type: DATE
         description: Service date of sale
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: branch
         data_type: STRING
         description: Branch of service sale
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: value
         data_type: NUMERIC.COST
         description: Cost of service
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: paid
         data_type: NUMERIC.COST
         description: Client payed money
@@ -52,12 +72,24 @@ models:
       - name: client_code
         data_type: STRING
         description: Client code
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: client_name
         data_type: STRING
         description: Client name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: expert_name
         data_type: STRING
         description: The employee who sold the service
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: cost_price
         data_type: NUMERIC.COST
         description: Cost price of service

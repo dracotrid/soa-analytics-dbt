@@ -12,6 +12,10 @@ models:
       - name: name
         data_type: STRING
         description: Bonus name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: bonus_service
         data_type: NUMERIC.COST
         description: Bonus for service

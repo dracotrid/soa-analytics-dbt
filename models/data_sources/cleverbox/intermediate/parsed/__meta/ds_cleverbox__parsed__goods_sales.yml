@@ -19,27 +19,55 @@ models:
       - name: date
         data_type: DATE
         description: Goods date of sale
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: branch
         data_type: STRING
         description: Branch of goods sale
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: receipt
         data_type: STRING
         description: Receipt
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: employee
         data_type: STRING
         description: The employee who sold the goods
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: client_name
         data_type: STRING
         description: Client name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: goods_name
         data_type: STRING
         description: Goods name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: brand
         data_type: STRING
         description: Brand of goods
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: price
         data_type: NUMERIC.PRICE
         description: Price of goods
@@ -49,3 +77,7 @@ models:
       - name: cost
         data_type: NUMERIC.COST
         description: Total cost of goods
+        tests:
+          - not_null:
+              config:
+                severity: warn

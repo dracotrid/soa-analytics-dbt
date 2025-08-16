@@ -19,18 +19,34 @@ models:
           tf_config:
             macro: cmf__normalise__pad_left_signs
             params: [guid, 6, '0']
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: suid
         data_type: NUMERIC
         description: Record identifier
       - name: name
         data_type: STRING
         description: Service name
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: direction
         data_type: STRING
         description: Service direction
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: category
         data_type: STRING
         description: Service category
+        tests:
+          - not_null:
+              config:
+                severity: warn
       - name: value
         data_type: NUMERIC.COST
         description: Price of service
