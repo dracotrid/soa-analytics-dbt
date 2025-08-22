@@ -2,7 +2,7 @@ WITH discount_usage_step_1 AS (
     SELECT
         *,
         CASE
-            WHEN COALESCE(discount_name, '') = '' THEN COALESCE(value, 0) - COALESCE(discount_value, 0)
+            WHEN COALESCE(discount_name, '') = '' THEN COALESCE(product_cost, 0) - COALESCE(discount_value, 0)
             ELSE 0
         END AS subscription
     FROM {{ tf_ref('ds_cleverbox__parsed__discount_usage') }}

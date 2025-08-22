@@ -1,0 +1,50 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__discount_usage_2025
+        identifier: raw__discount_usage_2025
+        description: "CleverBox raw Discount Usage records 2025"
+        columns:
+          - name: date
+            data_type: STRING
+            description: ""
+          - name: end_date
+            data_type: STRING
+            description: ""
+          - name: discount_name
+            data_type: STRING
+            description: ""
+          - name: discount_value
+            data_type: STRING
+            description: ""
+          - name: discount_percent
+            data_type: STRING
+            description: ""
+          - name: cost
+            data_type: STRING
+            description: ""
+          - name: product_code
+            data_type: STRING
+            description: ""
+          - name: product_name
+            data_type: STRING
+            description: ""
+          - name: client_code
+            data_type: STRING
+            description: ""
+          - name: client_name
+            data_type: STRING
+            description: ""
+          - name: expert_name
+            data_type: STRING
+            description: ""
+          - name: phone_number
+            data_type: STRING
+            description: ""
