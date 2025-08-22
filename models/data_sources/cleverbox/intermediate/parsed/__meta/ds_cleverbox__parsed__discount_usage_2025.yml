@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: ds_cleverbox__parsed__discount_usage_2025
-    description: "CleverBox Parsed Discount Usage"
+    description: "CleverBox Parsed Discount Usage 2025"
     config:
       alias: parsed__discount_usage_2025
     columns:
@@ -15,15 +15,21 @@ models:
       - name: discount_name
         data_type: STRING
         description: Discount name
-      - name: cost
+      - name: product_cost
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: cost
       - name: discount_value
         data_type: NUMERIC.COST
         description: ""
-      - name: product_code
+      - name: product_id
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: product_code
       - name: product_name
         data_type: STRING
         description: ""
