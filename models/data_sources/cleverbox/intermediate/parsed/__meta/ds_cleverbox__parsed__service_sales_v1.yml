@@ -1,62 +1,107 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__parsed__service_sales_2025
-    description: "CleverBox Parsed Service Sales 2025"
+  - name: ds_cleverbox__parsed__service_sales_v1
+    description: "CleverBox Parsed Service Sales V1"
     config:
-      alias: parsed__service_sales_2025
+      alias: parsed__service_sales_v1
       meta:
         tf_config:
-          filter: date IS NOT NULL AND date <> 'NO DATA'
+          filter: field_0 is not null and field_0 <> 'NO DATA' and file_name like '%_pv_1%'
     columns:
       - name: date
         data_type: DATE
-        description: Date of service sale
+        description: Service date of sale
         meta:
           tf_config:
-            expression: PARSE_DATE('%d.%m.%Y', date)
+            expression: PARSE_DATE('%d.%m.%Y', field_0)
       - name: branch
         data_type: STRING
-        description: Branch of service sale
+        description: Service date of sale
+        meta:
+          tf_config:
+            field: field_1
       - name: code
         data_type: STRING
         description: Service code
+        meta:
+          tf_config:
+            field: field_2
       - name: name
         data_type: STRING
         description: Service name
+        meta:
+          tf_config:
+            field: field_3
       - name: value
         data_type: NUMERIC.COST
         description: Cost of service
+        meta:
+          tf_config:
+            field: field_4
       - name: paid
         data_type: NUMERIC.COST
         description: Client payed money
+        meta:
+          tf_config:
+            field: field_5
       - name: discount
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: field_6
       - name: subscription
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: field_7
       - name: client_code
         data_type: STRING
         description: Client code
+        meta:
+          tf_config:
+            field: field_8
       - name: client_name
         data_type: STRING
         description: Client name
+        meta:
+          tf_config:
+            field: field_9
       - name: expert_name
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: field_12
       - name: expert_position
         data_type: STRING
         description: Specialist position
+        meta:
+          tf_config:
+            field: field_13
       - name: cost_price
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: field_15
       - name: profit
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: field_16
       - name: category
         data_type: STRING
         description: Service category
+        meta:
+          tf_config:
+            field: field_17
       - name: direction
         data_type: STRING
         description: Service direction
+        meta:
+          tf_config:
+            field: field_15

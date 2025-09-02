@@ -1,44 +1,65 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__parsed__discount_usage_2025
-    description: "CleverBox Parsed Discount Usage 2025"
+  - name: ds_cleverbox__parsed__discount_usage_v1
+    description: "CleverBox Parsed Goods Sales v1"
     config:
-      alias: parsed__discount_usage_2025
+      alias: parsed__discount_usage_v1
+      meta:
+        tf_config:
+          filter: field_0 is not null and file_name like '%_pv_1%'
     columns:
       - name: date
         data_type: DATE
         description: ""
         meta:
           tf_config:
-            expression: PARSE_DATE('%d.%m.%Y', date)
+            expression: PARSE_DATE('%d.%m.%Y', field_0)
       - name: discount_name
         data_type: STRING
         description: Discount name
+        meta:
+          tf_config:
+            field: field_2
       - name: product_cost
         data_type: NUMERIC.COST
         description: ""
         meta:
           tf_config:
-            field: cost
+            field: field_5
       - name: discount_value
         data_type: NUMERIC.COST
         description: ""
+        meta:
+          tf_config:
+            field: field_3
       - name: product_id
         data_type: STRING
         description: ""
         meta:
           tf_config:
-            field: product_code
+            field: field_6
       - name: product_name
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: field_7
       - name: client_code #TODO String, all id with leading 0
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: field_8
       - name: client_name
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: field_9
       - name: expert_name
         data_type: STRING
         description: ""
+        meta:
+          tf_config:
+            field: field_10

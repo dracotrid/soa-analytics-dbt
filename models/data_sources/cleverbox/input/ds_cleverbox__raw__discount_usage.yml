@@ -5,46 +5,57 @@ sources:
     database: "{{ var('primary_bigquery_database_name') }}"
     schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
     tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
-    loader: google_sheet
 
     tables:
       - name: raw__discount_usage
         identifier: raw__discount_usage
         description: "CleverBox raw Discount Usage records"
         columns:
-          - name: ruid
+          - name: field_0
             data_type: STRING
             description: ""
-          - name: yuid
+          - name: field_1
             data_type: STRING
             description: ""
-          - name: date
-            data_type: DATE
-            description: ""
-          - name: discount_name
+          - name: field_2
             data_type: STRING
             description: ""
-          - name: value
-            data_type: NUMERIC.COST
-            description: ""
-          - name: discount_percent
-            data_type: NUMERIC.PRICE
-            description: ""
-          - name: discount_value
-            data_type: NUMERIC.COST
-            description: ""
-          - name: product_id
+          - name: field_3
             data_type: STRING
             description: ""
-          - name: service
+          - name: field_4
             data_type: STRING
             description: ""
-          - name: client_code
-            data_type: NUMERIC
-            description: ""
-          - name: client_name
+          - name: field_5
             data_type: STRING
             description: ""
-          - name: specialist
+          - name: field_6
+            data_type: STRING
+            description: ""
+          - name: field_7
+            data_type: STRING
+            description: ""
+          - name: field_8
+            data_type: STRING
+            description: ""
+          - name: field_9
+            data_type: STRING
+            description: ""
+          - name: field_10
+            data_type: STRING
+            description: ""
+          - name: field_11
+            data_type: STRING
+            description: ""
+          - name: field_12
+            data_type: STRING
+            description: ""
+          - name: field_13
+            data_type: STRING
+            description: ""
+          - name: field_14
+            data_type: STRING
+            description: ""
+          - name: field_15
             data_type: STRING
             description: ""
