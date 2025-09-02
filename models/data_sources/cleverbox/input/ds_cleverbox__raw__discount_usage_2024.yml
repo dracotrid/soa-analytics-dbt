@@ -8,43 +8,43 @@ sources:
     loader: google_sheet
 
     tables:
-      - name: raw__discount_usage_2025
-        identifier: raw__discount_usage_2025
-        description: "CleverBox raw Discount Usage records 2025"
+      - name: raw__discount_usage_2024
+        identifier: raw__discount_usage_2024
+        description: "CleverBox raw Discount Usage records"
         columns:
-          - name: date
+          - name: ruid
             data_type: STRING
             description: ""
-          - name: end_date
+          - name: yuid
             data_type: STRING
+            description: ""
+          - name: date
+            data_type: DATE
             description: ""
           - name: discount_name
             data_type: STRING
             description: ""
-          - name: discount_value
-            data_type: STRING
+          - name: value
+            data_type: NUMERIC.COST
             description: ""
           - name: discount_percent
+            data_type: NUMERIC.PRICE
+            description: ""
+          - name: discount_value
+            data_type: NUMERIC.COST
+            description: ""
+          - name: product_id
             data_type: STRING
             description: ""
-          - name: cost
-            data_type: STRING
-            description: ""
-          - name: product_code
-            data_type: STRING
-            description: ""
-          - name: product_name
+          - name: service
             data_type: STRING
             description: ""
           - name: client_code
-            data_type: STRING
+            data_type: NUMERIC
             description: ""
           - name: client_name
             data_type: STRING
             description: ""
-          - name: expert_name
-            data_type: STRING
-            description: ""
-          - name: phone_number
+          - name: specialist
             data_type: STRING
             description: ""

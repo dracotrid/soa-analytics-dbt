@@ -7,9 +7,9 @@ sources:
     tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
 
     tables:
-      - name: raw__goods_sales
-        identifier: raw__goods_sales
-        description: "CleverBox raw Goods Sales records"
+      - name: raw__service_sales
+        identifier: raw__service_sales
+        description: "CleverBox raw Service Sales records"
         columns:
           - name: field_0
             data_type: STRING

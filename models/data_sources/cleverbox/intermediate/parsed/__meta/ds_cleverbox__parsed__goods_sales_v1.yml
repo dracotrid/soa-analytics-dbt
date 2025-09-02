@@ -1,62 +1,83 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__parsed__goods_sales_2025
-    description: "CleverBox Parsed Goods Sales 2025"
+  - name: ds_cleverbox__parsed__goods_sales_v1
+    description: "CleverBox Parsed Goods Sales v1"
     config:
-      alias: parsed__goods_sales_2025
+      alias: parsed__goods_sales_v1
+      meta:
+        tf_config:
+          filter: field_0 is not null and field_0 <> 'NO DATA' and file_name like '%_pv_1%'
     columns:
       - name: date
         data_type: DATE
         description: Goods date of sale
         meta:
           tf_config:
-            expression: PARSE_DATE('%d.%m.%Y', REGEXP_EXTRACT(receipt, r'\d{2}\.\d{2}\.\d{4}'))
+            expression: PARSE_DATE('%d.%m.%Y', REGEXP_EXTRACT(field_0, r'\d{2}\.\d{2}\.\d{4}'))
       - name: branch
         data_type: STRING
         description: Branch of goods sale
+        meta:
+          tf_config:
+            field: field_1
       - name: receipt
         data_type: STRING
         description: Receipt
+        meta:
+          tf_config:
+            field: field_0
       - name: employee
         data_type: STRING
         description: The employee who sold the goods
+        meta:
+          tf_config:
+            field: field_3
       - name: client_id
         data_type: STRING
         description: Client id
+        meta:
+          tf_config:
+            field: field_4
       - name: client_name
         data_type: STRING
         description: Client name
+        meta:
+          tf_config:
+            field: field_5
       - name: goods_name
         data_type: STRING
         description: Goods name
+        meta:
+          tf_config:
+            field: field_7
       - name: brand
         data_type: STRING
         description: Brand of goods
         meta:
           tf_config:
-            expression: COALESCE(brand, 'UNKNOWN_BRAND')
+            expression: COALESCE(field_8, 'UNKNOWN_BRAND')
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
         meta:
           tf_config:
-            expression: REPLACE(amount, ',', '')
+            expression: REPLACE(field_11, ',', '')
       - name: price
         data_type: NUMERIC.PRICE
         description: Price of goods
         meta:
           tf_config:
-            expression: REPLACE(COALESCE(price, '0'), ',', '')
+            expression: REPLACE(COALESCE(field_12, '0'), ',', '')
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of one goods
         meta:
           tf_config:
-            expression: REPLACE(COALESCE(cost_price_unit, '0'), ',', '')
+            expression: REPLACE(COALESCE(field_13, '0'), ',', '')
       - name: cost
         data_type: NUMERIC.COST
         description: Total cost of goods
         meta:
           tf_config:
-            expression: REPLACE(cost, ',', '')
+            expression: REPLACE(field_14, ',', '')
