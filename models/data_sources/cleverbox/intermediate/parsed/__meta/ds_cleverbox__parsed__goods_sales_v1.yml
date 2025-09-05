@@ -7,7 +7,7 @@ models:
       alias: parsed__goods_sales_v1
       meta:
         tf_config:
-          filter: field_0 is not null and field_0 <> 'NO DATA' and file_name like '%_pv_1%'
+          filter: field_0 IS NOT NULL AND field_0 NOT IN ('NO DATA', 'Total:', 'Разом') AND file_name LIKE '%_pv_1%'
     columns:
       - name: date
         data_type: DATE
