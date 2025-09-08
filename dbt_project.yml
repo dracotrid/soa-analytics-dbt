@@ -134,6 +134,17 @@ models:
         output:
           +access: public
           +tags: ["asset-type:output"]
+      smmsales:
+        +schema: "ds_smmsales"
+        +group: "ds_smmsales"
+        +tags: ["ds-name:smmsales"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
+        output:
+          +access: public
+          +tags: ["asset-type:output"]
     foundational:
       +tags: "scope:foundational"
       +access: private
