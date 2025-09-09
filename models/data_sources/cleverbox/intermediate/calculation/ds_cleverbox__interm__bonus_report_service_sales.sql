@@ -106,7 +106,10 @@ intermediate_step_3_source AS (
             WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee_type
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
-        COALESCE(bonus_discount_value, bonus_employee_value) AS bonus_value
+        CASE
+            WHEN expert_name = 'Могалова Надія' AND date >= '2025-08-16' THEN 0.4 -- FIXEME SOA-77
+            ELSE COALESCE(bonus_discount_value, bonus_employee_value)
+        END AS bonus_value
     FROM intermediate_step_2_source
     LEFT JOIN bonus_employee
         ON intermediate_step_2_source.expert_bonus_code = bonus_employee.bonus_employee_code
