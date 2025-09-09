@@ -148,12 +148,22 @@ intermediate_step_6_source AS (
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
             ELSE base_for_bonus * bonus_value
-        END AS bonus_total
+        END AS bonus_calculated
     FROM intermediate_step_5_source
 ),
 
+intermediate_step_7_source AS (
+    SELECT
+        *,
+        CASE
+            WHEN bonus_calculated < 0 THEN 0
+            ELSE bonus_calculated
+        END AS bonus_total
+    FROM intermediate_step_6_source
+),
+
 final AS (
-    SELECT * FROM intermediate_step_6_source
+    SELECT * FROM intermediate_step_7_source
 )
 
 {{ tf_transform_model('final') }}
