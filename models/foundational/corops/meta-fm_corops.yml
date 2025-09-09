@@ -1,5 +1,5 @@
 groups:
-  - name: corops
+  - name: fm_corops
     owner:
       # 'name' or 'email' is required; additional properties allowed
       name: SoloMia Team

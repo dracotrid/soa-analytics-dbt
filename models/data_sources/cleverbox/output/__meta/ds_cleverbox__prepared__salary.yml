@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__prepared__salary
+    description: "CleverBox Salary"
+    config:
+      alias: prepared__salary
+      meta:
+        tf_config:
+          filter: eid IS NOT NULL
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: type
+        data_type: STRING
+        description: Product type
+        meta:
+          tf_config:
+            field: product_type
+      - name: date
+        data_type: DATE
+        description: Date when product was sold
+      - name: branch
+        data_type: STRING
+        description: Branch where product was sold
+      - name: expert_name
+        data_type: STRING
+        description: The specialist who sold the product
+      - name: product_name
+        data_type: STRING
+        description: Name of the product
+      - name: bonus
+        data_type: NUMERIC.COST
+        description: Bonus of the specialist
+      - name: amount
+        data_type: NUMERIC.AMOUNT
+        description: Amount of products sold
+      - name: bonus_cleverbox
+        data_type: NUMERIC.COST
+        description: Bonus of the specialist according Cleverbox
