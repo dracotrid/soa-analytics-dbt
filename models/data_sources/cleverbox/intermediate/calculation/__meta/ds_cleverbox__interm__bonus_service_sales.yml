@@ -8,6 +8,7 @@ models:
       meta:
         tf_config:
           filter: eid IS NOT NULL
+                  AND category IS NOT NULL
     columns:
       - name: eid
         data_type: STRING
