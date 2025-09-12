@@ -9,8 +9,6 @@ WITH employees_position AS (
 services AS (
     SELECT
         guid,
-        category AS service_category,
-        direction AS service_direction,
         cost_price AS service_cost_price
     FROM {{ tf_ref('ds_cleverbox__parsed__services') }}
 ),
@@ -48,7 +46,9 @@ intermediate_step_1 AS (
         client_code,
         client_name, -- TODO: deprecate field usage and move to client list export (task SOA-60)
         expert_name,
-        SUM(cost_price) AS cost_price
+        SUM(cost_price) AS cost_price,
+        category,
+        direction
     FROM {{ tf_ref('ds_cleverbox__parsed__service_sales') }}
     GROUP BY
         eid,
@@ -58,7 +58,9 @@ intermediate_step_1 AS (
         name,
         client_code,
         client_name,
-        expert_name
+        expert_name,
+        category,
+        direction
 ),
 
 final AS (

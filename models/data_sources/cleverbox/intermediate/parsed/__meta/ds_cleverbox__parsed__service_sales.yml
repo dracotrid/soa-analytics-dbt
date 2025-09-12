@@ -96,3 +96,9 @@ models:
         meta:
           tf_config:
             expression: COALESCE(cost_price, 0)
+      - name: category
+        data_type: STRING
+        description: Service category
+      - name: direction
+        data_type: STRING
+        description: Service direction
