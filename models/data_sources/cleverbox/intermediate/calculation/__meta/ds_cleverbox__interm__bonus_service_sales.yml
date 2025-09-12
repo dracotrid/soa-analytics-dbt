@@ -102,6 +102,9 @@ models:
       - name: base_for_bonus
         data_type: NUMERIC.COST
         description: Base for bonus calculation
+      - name: bonus_calculated
+        data_type: NUMERIC.COST
+        description: Calculated total employee bonus for selling service. Can be negative
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: Total employee bonus for selling goods
+        description: Total employee bonus for selling service

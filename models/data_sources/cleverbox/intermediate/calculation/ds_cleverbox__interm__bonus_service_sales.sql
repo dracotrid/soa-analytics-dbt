@@ -106,7 +106,10 @@ intermediate_step_3_source AS (
             WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee_type
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
-        COALESCE(bonus_discount_value, bonus_employee_value) AS bonus_value
+        CASE
+            WHEN expert_name = 'Могалова Надія' AND date < '2025-08-16' THEN 0.3 -- FIXEME SOA-77
+            ELSE COALESCE(bonus_discount_value, bonus_employee_value)
+        END AS bonus_value
     FROM intermediate_step_2_source
     LEFT JOIN bonus_employee
         ON intermediate_step_2_source.expert_bonus_code = bonus_employee.bonus_employee_code
@@ -145,12 +148,22 @@ intermediate_step_6_source AS (
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
             ELSE base_for_bonus * bonus_value
-        END AS bonus_total
+        END AS bonus_calculated
     FROM intermediate_step_5_source
 ),
 
+intermediate_step_7_source AS (
+    SELECT
+        *,
+        CASE
+            WHEN bonus_calculated < 0 THEN 0
+            ELSE bonus_calculated
+        END AS bonus_total
+    FROM intermediate_step_6_source
+),
+
 final AS (
-    SELECT * FROM intermediate_step_6_source
+    SELECT * FROM intermediate_step_7_source
 )
 
 {{ tf_transform_model('final') }}
