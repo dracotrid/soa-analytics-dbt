@@ -60,15 +60,9 @@ models:
       - name: category
         data_type: STRING
         description: Service category
-        meta:
-          tf_config:
-            field: service_category
       - name: direction
         data_type: STRING
         description: Service direction
-        meta:
-          tf_config:
-            field: service_direction
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of services sold

@@ -9,8 +9,6 @@ WITH employees_position AS (
 services AS (
     SELECT
         guid,
-        category AS service_category,
-        direction AS service_direction,
         cost_price AS service_cost_price
     FROM {{ tf_ref('ds_cleverbox__parsed__services') }}
 ),
