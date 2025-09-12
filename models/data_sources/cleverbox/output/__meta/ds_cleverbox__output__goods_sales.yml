@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__output__goods_sales
+    description: "CleverBox Output Goods Sales"
+    config:
+      alias: output__goods_sales
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Goods date of sale
+      - name: year
+        data_type: STRING
+        description: Goods year of sale
+      - name: month
+        data_type: STRING
+        description: Goods month of sale
+      - name: day
+        data_type: STRING
+        description: Goods day of sale
+      - name: branch
+        data_type: STRING
+        description: Branch of goods sale
+      - name: specialist
+        data_type: STRING
+        description: The employee who sold the goods
+      - name: speciality
+        data_type: STRING
+        description: Speciality of employee
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: goods_name
+        data_type: STRING
+        description: Goods name
+      - name: brand
+        data_type: STRING
+        description: Brand of goods
+      - name: amount
+        data_type: NUMERIC.AMOUNT
+        description: Amount of goods sold
+      - name: price
+        data_type: NUMERIC.PRICE
+        description: Price of goods
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: Cost price of one goods
+      - name: payback
+        data_type: NUMERIC.COST
+        description: Payback of the goods
+      - name: income_total
+        data_type: NUMERIC.COST
+        description: Income from goods sales
+      - name: cost_total
+        data_type: NUMERIC.COST
+        description: Total cost of goods
+      - name: cost_price_total
+        data_type: NUMERIC.COST
+        description: Cost price of goods
+      - name: discount_total
+        data_type: NUMERIC.COST
+        description: Goods discount
+      - name: bonus_total
+        data_type: NUMERIC.COST
+        description: Employee bonus for selling a goods
+      - name: profit_total
+        data_type: NUMERIC.COST
+        description: Profit from goods sales
+      - name: margin
+        data_type: NUMERIC.COST
+        description: Margin from goods sales
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.COST
+        description: Employee bonus for selling a goods according Cleverbox

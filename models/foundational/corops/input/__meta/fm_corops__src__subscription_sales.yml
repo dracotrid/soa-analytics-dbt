@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: fm_corops__src__subscription_sales
+    description: "Corops Source Subscription Sales"
+    config:
+      alias: src__subscription_sales
+    columns:
+      - name: id
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Subscription date of sale
+      - name: year
+        data_type: STRING
+        description: Subscription year of sale
+      - name: month
+        data_type: STRING
+        description: Subscription month of sale
+      - name: day
+        data_type: STRING
+        description: Subscription day of sale
+      - name: branch
+        data_type: STRING
+        description: Branch of subscription sale
+      - name: specialist
+        data_type: STRING
+        description: The employee who sold the subscription
+      - name: speciality
+        data_type: STRING
+        description: Speciality of employee
+      - name: client
+        data_type: STRING
+        description: Client name
+      - name: is_vip
+        data_type: BOOLEAN
+        description: Client is VIP
+      - name: is_employee
+        data_type: BOOLEAN
+        description: Client is employee
+      - name: subscription_name
+        data_type: STRING
+        description: Subscription name
+      - name: direction
+        data_type: STRING
+        description: Direction of the product
+      - name: category
+        data_type: STRING
+        description: Category of the product
+      - name: amount
+        data_type: NUMERIC.AMOUNT
+        description: Amount of subscriptions sold
+      - name: price
+        data_type: NUMERIC.PRICE
+        description: Price of subscription
+      - name: cost_price_unit
+        data_type: NUMERIC.COST
+        description: Cost price of one subscription
+      - name: payback
+        data_type: NUMERIC.COST
+        description: Payback of the subscription
+      - name: cost_total
+        data_type: NUMERIC.COST
+        description: Total cost of subscriptions
+      - name: income_total
+        data_type: NUMERIC.COST
+        description: Income from subscriptions sales
+      - name: cost_price_total
+        data_type: NUMERIC.COST
+        description: Cost price of subscriptions
+      - name: discount_total
+        data_type: NUMERIC.COST
+        description: Subscriptions discount
+      - name: bonus_total
+        data_type: NUMERIC.COST
+        description: Employee bonus for selling a subscriptions
+      - name: profit_total
+        data_type: NUMERIC.COST
+        description: Profit from subscriptions sales
+      - name: margin
+        data_type: NUMERIC.PRICE
+        description: Margin from subscriptions sales
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: Employee bonus for selling a subscriptions according Cleverbox

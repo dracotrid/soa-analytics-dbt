@@ -1,0 +1,89 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__output__balances
+    description: "CleverBox Output Balances"
+    config:
+      alias: output__balances
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Balance date of replenish
+      - name: year
+        data_type: STRING
+        description: Balance year of replenish
+      - name: month
+        data_type: STRING
+        description: Balance month of replenish
+      - name: day
+        data_type: STRING
+        description: Balance day of replenish
+      - name: branch
+        data_type: STRING
+        description: Branch of balance replenish
+      - name: specialist
+        data_type: STRING
+        description: The employee who served of client
+      - name: speciality
+        data_type: STRING
+        description: Speciality of employee
+      - name: client
+        data_type: STRING
+        description: Client name
+      - name: is_vip
+        data_type: BOOLEAN
+        description: Client is VIP
+      - name: is_employee
+        data_type: BOOLEAN
+        description: Client is employee
+      - name: name
+        data_type: STRING
+        description: Balance name
+      - name: direction
+        data_type: STRING
+        description: Direction of the product
+      - name: category
+        data_type: STRING
+        description: Category of the product
+      - name: device
+        data_type: STRING
+        description: ""
+      - name: amount
+        data_type: NUMERIC.AMOUNT
+        description: Amount of replenished balances
+      - name: price
+        data_type: NUMERIC.COST
+        description: Sum of replenish
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: Cost price of replenish one balance
+      - name: payback
+        data_type: NUMERIC.COST
+        description: ""
+      - name: cost_total
+        data_type: NUMERIC.COST
+        description: Total sum of replenish
+      - name: income_total
+        data_type: NUMERIC.COST
+        description: Income from balances replenishment
+      - name: cost_price_total
+        data_type: NUMERIC.COST
+        description: Cost price of replenish all balances
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Discount on balance replenishment
+      - name: bonus_total
+        data_type: NUMERIC.COST
+        description: Employee bonus for balance replenishment
+      - name: profit_total
+        data_type: NUMERIC.COST
+        description: Profit from balances replenishment
+      - name: margin
+        data_type: NUMERIC.PRICE
+        description: Margin from balances replenishment
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: Employee bonus for balance replenishment according Cleverbox
