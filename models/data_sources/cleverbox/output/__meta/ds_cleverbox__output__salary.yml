@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: fm_corops__src__salary
-    description: "Corops Salary"
+  - name: ds_cleverbox__output__salary
+    description: "CleverBox Salary"
     config:
-      alias: src__salary
+      alias: output__salary
     columns:
       - name: eid
         data_type: STRING
