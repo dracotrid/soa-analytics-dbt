@@ -39,3 +39,6 @@ sources:
           - name: status
             data_type: STRING
             description: ""
+          - name: use_cost_price
+            data_type: BOOLEAN
+            description: Use cost price for bonus calculation
