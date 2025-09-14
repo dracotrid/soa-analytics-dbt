@@ -24,3 +24,6 @@ models:
       - name: accrual_type
         data_type: STRING
         description: Accrual type
+      - name: use_cost_price
+        data_type: BOOLEAN
+        description: Use cost price for bonus calculation

@@ -17,7 +17,8 @@ bonus_employee AS (
     SELECT
         uid AS bonus_employee_code,
         bonus_value AS bonus_employee_value,
-        accrual_type AS bonus_employee_type
+        accrual_type AS bonus_employee_type,
+        use_cost_price AS bonus_employee_use_cost_price
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
 ),
 
@@ -85,8 +86,7 @@ intermediate_step_2_source AS (
             WHEN discount_usage_id IS NULL THEN ''
             WHEN discount_usage_discount_name IS NULL OR discount_usage_discount_name = '' THEN 'АБОНЕМЕНТ'
             ELSE discount_usage_discount_name
-        END AS discount_name_source,
-        COALESCE(year = '2024' OR expert_position IN ('Манікюр', 'Подолог'), FALSE) AS is_bonus_without_cost_price
+        END AS discount_name_source
     FROM intermediate_step_1_source
     LEFT JOIN discount_usage
         ON intermediate_step_1_source.eid = discount_usage.discount_usage_id
@@ -109,7 +109,8 @@ intermediate_step_3_source AS (
         CASE
             WHEN expert_name = 'Могалова Надія' AND date < '2025-08-16' THEN 0.3 -- FIXEME SOA-77
             ELSE COALESCE(bonus_discount_value, bonus_employee_value)
-        END AS bonus_value
+        END AS bonus_value,
+        year = '2024' OR bonus_employee_use_cost_price AS is_bonus_without_cost_price
     FROM intermediate_step_2_source
     LEFT JOIN bonus_employee
         ON intermediate_step_2_source.expert_bonus_code = bonus_employee.bonus_employee_code
