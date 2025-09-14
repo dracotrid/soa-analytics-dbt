@@ -19,35 +19,38 @@ models:
       - name: name
         data_type: STRING
         description: Service name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: code
         data_type: STRING
         description: Service code
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
+          - relationships:
+              to: ref('ds_cleverbox__parsed__services')
+              field: CAST(suid AS STRING)
       - name: date
         data_type: DATE
         description: Service date of sale
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: branch
         data_type: STRING
         description: Branch of service sale
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: value
         data_type: NUMERIC.COST
         description: Cost of service
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -72,21 +75,21 @@ models:
       - name: client_code
         data_type: STRING
         description: Client code
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: client_name
         data_type: STRING
         description: Client name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: expert_name
         data_type: STRING
         description: The employee who sold the service
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn

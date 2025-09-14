@@ -19,42 +19,42 @@ models:
       - name: date
         data_type: DATE
         description: Goods date of sale
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: branch
         data_type: STRING
         description: Branch of goods sale
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: receipt
         data_type: STRING
         description: Receipt
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: employee
         data_type: STRING
         description: The employee who sold the goods
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: client_name
         data_type: STRING
         description: Client name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: goods_name
         data_type: STRING
         description: Goods name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -64,7 +64,7 @@ models:
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of goods sold
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -77,7 +77,7 @@ models:
       - name: cost
         data_type: NUMERIC.COST
         description: Total cost of goods
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn

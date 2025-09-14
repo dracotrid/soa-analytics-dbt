@@ -20,7 +20,7 @@ models:
         meta:
           tf_config:
             field: uid
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -30,14 +30,14 @@ models:
       - name: client
         data_type: STRING
         description: Client name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: employee
         data_type: STRING
         description: The employee who sold the certificate
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -47,14 +47,14 @@ models:
         meta:
           tf_config:
             expression: PARSE_DATE('%d.%m.%y', date)
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: branch
         data_type: STRING
         description: Branch where certificate was sold
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -82,7 +82,7 @@ models:
         meta:
           tf_config:
             field: cost
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
