@@ -18,14 +18,14 @@ models:
       - name: eid
         data_type: STRING
         description: Record identifier
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: date
         data_type: DATE
         description: Balance date of replenish
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -41,14 +41,14 @@ models:
       - name: specialist
         data_type: STRING
         description: The employee who served of client
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: client
         data_type: STRING
         description: Client name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -73,14 +73,14 @@ models:
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of replenished balances
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: price
         data_type: NUMERIC.COST
         description: Sum of replenish
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn

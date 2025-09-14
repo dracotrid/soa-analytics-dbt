@@ -20,7 +20,7 @@ models:
         meta:
           tf_config:
             field: uid
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -30,7 +30,7 @@ models:
         meta:
           tf_config:
             expression: PARSE_DATE('%d.%m.%Y', date_of_sale)
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -43,21 +43,21 @@ models:
       - name: client
         data_type: STRING
         description: Client name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: branch
         data_type: STRING
         description: Branch of subscription sale
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: employee
         data_type: STRING
         description: The employee who sold the subscription
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -100,7 +100,7 @@ models:
       - name: cost
         data_type: NUMERIC.COST
         description: Cost of subscriptions
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn

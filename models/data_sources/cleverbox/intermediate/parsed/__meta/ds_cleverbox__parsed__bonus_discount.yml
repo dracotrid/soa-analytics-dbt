@@ -12,7 +12,7 @@ models:
       - name: name
         data_type: STRING
         description: Bonus name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn

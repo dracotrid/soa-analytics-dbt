@@ -19,7 +19,7 @@ models:
           tf_config:
             macro: cmf__normalise__pad_left_signs
             params: [guid, 6, '0']
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -29,21 +29,21 @@ models:
       - name: name
         data_type: STRING
         description: Service name
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: direction
         data_type: STRING
         description: Service direction
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
       - name: category
         data_type: STRING
         description: Service category
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
