@@ -104,4 +104,4 @@ models:
         description: Service direction
         meta:
           tf_config:
-            field: field_15
+            field: field_18
