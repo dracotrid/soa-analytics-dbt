@@ -110,7 +110,7 @@ intermediate_step_3_source AS (
             WHEN expert_name = 'Могалова Надія' AND date < '2025-08-16' THEN 0.3 -- FIXEME SOA-77
             ELSE COALESCE(bonus_discount_value, bonus_employee_value)
         END AS bonus_value,
-        year = '2024' OR bonus_employee_use_cost_price AS is_bonus_without_cost_price
+        year = '2024' OR NOT bonus_employee_use_cost_price AS is_bonus_without_cost_price
     FROM intermediate_step_2_source
     LEFT JOIN bonus_employee
         ON intermediate_step_2_source.expert_bonus_code = bonus_employee.bonus_employee_code
