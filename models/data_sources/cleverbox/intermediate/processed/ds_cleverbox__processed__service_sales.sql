@@ -8,7 +8,7 @@ WITH employees_position AS (
 
 services AS (
     SELECT
-        guid,
+        code AS services_code,
         cost_price AS service_cost_price
     FROM {{ tf_ref('ds_cleverbox__parsed__services') }}
 ),
@@ -75,7 +75,7 @@ final AS (
     LEFT JOIN employees_position
         ON service_sales.expert_name = employees_position.employees_position_name
     LEFT JOIN services
-        ON LPAD(service_sales.code, 6, '0') = services.guid
+        ON service_sales.code = services.services_code
 )
 
 {{ tf_transform_model('final') }}
