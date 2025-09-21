@@ -24,15 +24,19 @@ models:
               config:
                 severity: warn
       - name: code
-        data_type: STRING
+        data_type: STRING.CODE
         description: Service code
+        meta:
+          tf_config:
+            macro: cmf__normalise__pad_left_signs
+            params: [code, 6, '0']
         data_tests:
           - not_null:
               config:
                 severity: warn
           - relationships:
               to: ref('ds_cleverbox__parsed__services')
-              field: CAST(suid AS STRING)
+              field: code
       - name: date
         data_type: DATE
         description: Service date of sale
@@ -73,8 +77,12 @@ models:
           tf_config:
             expression: COALESCE(subscription, 0)
       - name: client_code
-        data_type: STRING
+        data_type: STRING.CODE
         description: Client code
+        meta:
+          tf_config:
+            macro: cmf__normalise__pad_left_signs
+            params: [ client_code, 6, '0' ]
         data_tests:
           - not_null:
               config:

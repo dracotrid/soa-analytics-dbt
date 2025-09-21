@@ -23,9 +23,13 @@ models:
           - not_null:
               config:
                 severity: warn
-      - name: suid
-        data_type: NUMERIC
+      - name: code
+        data_type: STRING.CODE
         description: Record identifier
+        meta:
+          tf_config:
+            macro: cmf__normalise__pad_left_signs
+            params: [CAST(suid AS STRING), 6, '0']
       - name: name
         data_type: STRING
         description: Service name
