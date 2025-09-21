@@ -17,6 +17,20 @@
         {%- set _ = _target_type.update({"value": base_type_extractor(_target_type.value)}) -%}
     {% endif %}
 
+
+    _tf_source_expression = tf_source_expression
+    target_type_value_resolver = _mtf_load_macro("mtf__extension__config__target_type_value_resolver", raise_error=false)
+    if target_type_value_resolver:
+        _tf_source_expression = target_type_value_resolver(_target_type.value, tf_source_expression)
+
+    -- mtf__extension__config__target_type_value_resolver
+    if _target_type.value = "STRING.CODE" then
+       _tf_source_expression = macro_lpa("CAST(CAST("+tf_source_expression+" AS) STRING)")
+    else
+        _tf_source_expression = tf_source_expression
+
+
+
     {%- set target_type = _target_type.value -%}
     {#- "TODO: Add flexible casting configuration options " -#}
     {%- if target_type == "DATE" -%}

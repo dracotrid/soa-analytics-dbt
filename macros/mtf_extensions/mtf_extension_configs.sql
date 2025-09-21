@@ -21,7 +21,7 @@
             "NUMERIC.COST": "NUMERIC(12,2)",
             "NUMERIC.PRICE": "NUMERIC(15,5)",
             "NUMERIC.AMOUNT": "NUMERIC(10,2)",
-            "STRING.CODE": "STRING(10)"
+            "STRING.CODE": "STRING"
         }
     %}
     {{ return(custom_data_types) }}
