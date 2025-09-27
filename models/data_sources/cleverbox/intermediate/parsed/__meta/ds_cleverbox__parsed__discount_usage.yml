@@ -21,20 +21,12 @@ models:
       - name: product_id
         data_type: STRING.CODE
         description: ""
-        meta:
-          tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [ product_id, 6, '0' ]
       - name: product_name
         data_type: STRING
         description: ""
       - name: client_code
         data_type: STRING.CODE
         description: ""
-        meta:
-          tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [ client_code, 6, '0' ]
       - name: client_name
         data_type: STRING
         description: ""

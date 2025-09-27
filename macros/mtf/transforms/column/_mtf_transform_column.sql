@@ -12,31 +12,23 @@
 
     {%- set _target_type = { "value": tf_column_target_config.type.split("(")[0] } -%}
 
+    {% set _tf_source_expression = tf_source_expression -%}
+    {% set target_type_value_resolver = _mtf_load_macro("mtf__extension__config__target_type_value_resolver", raise_error=false) -%}
+    {% if target_type_value_resolver: -%}
+        {% set _tf_source_expression = target_type_value_resolver(tf_column_target_config.base_type, tf_source_expression) -%}
+    {% endif %}
+
     {% set base_type_extractor = _mtf_load_macro("mtf__extension__config__base_type_extractor", raise_error=false) %}
     {% if base_type_extractor %}
         {%- set _ = _target_type.update({"value": base_type_extractor(_target_type.value)}) -%}
     {% endif %}
 
-
-    _tf_source_expression = tf_source_expression
-    target_type_value_resolver = _mtf_load_macro("mtf__extension__config__target_type_value_resolver", raise_error=false)
-    if target_type_value_resolver:
-        _tf_source_expression = target_type_value_resolver(_target_type.value, tf_source_expression)
-
-    -- mtf__extension__config__target_type_value_resolver
-    if _target_type.value = "STRING.CODE" then
-       _tf_source_expression = macro_lpa("CAST(CAST("+tf_source_expression+" AS) STRING)")
-    else
-        _tf_source_expression = tf_source_expression
-
-
-
     {%- set target_type = _target_type.value -%}
     {#- "TODO: Add flexible casting configuration options " -#}
     {%- if target_type == "DATE" -%}
-        {%- set src_expression = {"value": "SAFE_CAST(" ~ tf_source_expression ~ " AS " ~ target_type ~ ")"} -%}
+        {%- set src_expression = {"value": "SAFE_CAST(" ~ _tf_source_expression ~ " AS " ~ target_type ~ ")"} -%}
     {%- else -%}
-        {%- set src_expression = {"value": "CAST(" ~ tf_source_expression ~ " AS " ~ target_type ~ ")"} -%}
+        {%- set src_expression = {"value": "CAST(" ~ _tf_source_expression ~ " AS " ~ target_type ~ ")"} -%}
     {%- endif -%}
     {%- if target_type == "STRING" -%}
         {%- set _ = src_expression.update({"value": "TRIM(" ~ src_expression.value ~ ")"}) -%}

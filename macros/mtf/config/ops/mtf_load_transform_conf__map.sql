@@ -80,7 +80,7 @@
         {% endif %}
         {{ tf_config_columns.append({
             "source": tf_source_col_config,
-            "target": {"field": tf_model_column.name, "type": rel_col_type}
+            "target": {"field": tf_model_column.name, "type": rel_col_type, "base_type": tf_model_column.data_type}
            })
         }}
     {% endfor %}
