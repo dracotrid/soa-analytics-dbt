@@ -24,12 +24,9 @@ models:
               config:
                 severity: warn
       - name: code
-        data_type: STRING.CODE
+        data_type: STRING
+        logic_type: STRING.CODE
         description: Service code
-        meta:
-          tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [code, 6, '0']
         data_tests:
           - not_null:
               config:
@@ -77,12 +74,9 @@ models:
           tf_config:
             expression: COALESCE(subscription, 0)
       - name: client_code
-        data_type: STRING.CODE
+        data_type: STRING
+        logic_type: STRING.CODE
         description: Client code
-        meta:
-          tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [ client_code, 6, '0' ]
         data_tests:
           - not_null:
               config:

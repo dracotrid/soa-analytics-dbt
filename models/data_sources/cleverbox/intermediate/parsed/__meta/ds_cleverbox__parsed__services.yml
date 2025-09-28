@@ -14,22 +14,19 @@ models:
     columns:
       - name: guid
         data_type: STRING
+        logic_type: STRING.CODE
         description: Record identifier
-        meta:
-          tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [guid, 6, '0']
         data_tests:
           - not_null:
               config:
                 severity: warn
       - name: code
-        data_type: STRING.CODE
+        data_type: STRING
+        logic_type: STRING.CODE
         description: Record identifier
         meta:
           tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [CAST(suid AS STRING), 6, '0']
+            field: suid
       - name: name
         data_type: STRING
         description: Service name

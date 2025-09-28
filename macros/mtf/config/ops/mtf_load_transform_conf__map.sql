@@ -48,9 +48,9 @@
                         "default": tf_model_column.meta.tf_config.default
                     }
                 %}
-             {% else %}
+            {% else %}
                 {% set raw_tf_source_col_config = tf_model_column.meta.tf_config %}
-             {% endif %}
+            {% endif %}
         {% else %}
             {% set raw_tf_source_col_config = {"field": tf_model_column.name } %}
         {% endif %}
@@ -80,9 +80,13 @@
         {% endif %}
         {{ tf_config_columns.append({
             "source": tf_source_col_config,
-            "target": {"field": tf_model_column.name, "type": rel_col_type}
+            "target": {
+                "field": tf_model_column.name,
+                "type": rel_col_type,
+                "logic_type": tf_model_column.logic_type if tf_model_column.logic_type else tf_model_column.data_type}
            })
         }}
     {% endfor %}
+    {%- set _ = log(_macro_ ~ " :: tf_config::output: " ~ tf_config, info=true) if debug else "" -%}
     {{ return(tf_config) }}
 {% endmacro %}
