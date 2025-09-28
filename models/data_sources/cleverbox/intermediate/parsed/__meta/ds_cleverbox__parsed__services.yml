@@ -14,20 +14,18 @@ models:
     columns:
       - name: guid
         data_type: STRING
+        logic_type: STRING.CODE
         description: Record identifier
-        meta:
-          tf_config:
-            data_type: STRING.CODE
         data_tests:
           - not_null:
               config:
                 severity: warn
       - name: code
         data_type: STRING
+        logic_type: STRING.CODE
         description: Record identifier
         meta:
           tf_config:
-            data_type: STRING.CODE
             field: suid
       - name: name
         data_type: STRING

@@ -15,7 +15,7 @@
     {%- set _tf_source_expression = tf_source_expression -%}
     {%- set target_type_value_resolver = _mtf_load_macro("mtf__extension__config__target_type_value_resolver", raise_error=false) -%}
     {%- if target_type_value_resolver: -%}
-        {%- set _tf_source_expression = target_type_value_resolver(tf_column_target_config.base_type, tf_source_expression) -%}
+        {%- set _tf_source_expression = target_type_value_resolver(tf_column_target_config.logic_type, tf_source_expression) -%}
     {%- endif -%}
 
     {%- set base_type_extractor = _mtf_load_macro("mtf__extension__config__base_type_extractor", raise_error=false) -%}

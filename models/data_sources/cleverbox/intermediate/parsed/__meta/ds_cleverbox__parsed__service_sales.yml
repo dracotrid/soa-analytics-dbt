@@ -25,10 +25,8 @@ models:
                 severity: warn
       - name: code
         data_type: STRING
+        logic_type: STRING.CODE
         description: Service code
-        meta:
-          tf_config:
-            data_type: STRING.CODE
         data_tests:
           - not_null:
               config:
@@ -77,10 +75,8 @@ models:
             expression: COALESCE(subscription, 0)
       - name: client_code
         data_type: STRING
+        logic_type: STRING.CODE
         description: Client code
-        meta:
-          tf_config:
-            data_type: STRING.CODE
         data_tests:
           - not_null:
               config:

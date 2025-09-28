@@ -51,14 +51,6 @@
             {% else %}
                 {% set raw_tf_source_col_config = tf_model_column.meta.tf_config %}
             {% endif %}
-            {% if tf_model_column.meta.tf_config|length == 1 and "data_type" in tf_model_column.meta.tf_config %}
-                {% set raw_tf_source_col_config =
-                    {
-                        "field": tf_model_column.name,
-                        "data_type": tf_model_column.meta.tf_config.data_type
-                    }
-                %}
-            {% endif %}
         {% else %}
             {% set raw_tf_source_col_config = {"field": tf_model_column.name } %}
         {% endif %}
@@ -91,9 +83,10 @@
             "target": {
                 "field": tf_model_column.name,
                 "type": rel_col_type,
-                "base_type": raw_tf_source_col_config.data_type if raw_tf_source_col_config.data_type else tf_model_column.data_type}
+                "logic_type": tf_model_column.logic_type if tf_model_column.logic_type else tf_model_column.data_type}
            })
         }}
     {% endfor %}
+    {%- set _ = log(_macro_ ~ " :: tf_config::output: " ~ tf_config, info=true) if debug else "" -%}
     {{ return(tf_config) }}
 {% endmacro %}

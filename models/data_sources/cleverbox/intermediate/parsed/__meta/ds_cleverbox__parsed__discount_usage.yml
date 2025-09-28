@@ -20,19 +20,15 @@ models:
         description: ""
       - name: product_id
         data_type: STRING
+        logic_type: STRING.CODE
         description: ""
-        meta:
-          tf_config:
-            data_type: STRING.CODE
       - name: product_name
         data_type: STRING
         description: ""
       - name: client_code
         data_type: STRING
+        logic_type: STRING.CODE
         description: ""
-        meta:
-          tf_config:
-            data_type: STRING.CODE
       - name: client_name
         data_type: STRING
         description: ""
