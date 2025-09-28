@@ -17,17 +17,17 @@ models:
         description: Record identifier
         meta:
           tf_config:
-            macro: cmf__normalise__pad_left_signs
-            params: [guid, 6, '0']
+            data_type: STRING.CODE
         data_tests:
           - not_null:
               config:
                 severity: warn
       - name: code
-        data_type: STRING.CODE
+        data_type: STRING
         description: Record identifier
         meta:
           tf_config:
+            data_type: STRING.CODE
             field: suid
       - name: name
         data_type: STRING

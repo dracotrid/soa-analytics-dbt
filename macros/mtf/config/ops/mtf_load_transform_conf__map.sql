@@ -48,9 +48,17 @@
                         "default": tf_model_column.meta.tf_config.default
                     }
                 %}
-             {% else %}
+            {% else %}
                 {% set raw_tf_source_col_config = tf_model_column.meta.tf_config %}
-             {% endif %}
+            {% endif %}
+            {% if tf_model_column.meta.tf_config|length == 1 and "data_type" in tf_model_column.meta.tf_config %}
+                {% set raw_tf_source_col_config =
+                    {
+                        "field": tf_model_column.name,
+                        "data_type": tf_model_column.meta.tf_config.data_type
+                    }
+                %}
+            {% endif %}
         {% else %}
             {% set raw_tf_source_col_config = {"field": tf_model_column.name } %}
         {% endif %}
@@ -80,7 +88,10 @@
         {% endif %}
         {{ tf_config_columns.append({
             "source": tf_source_col_config,
-            "target": {"field": tf_model_column.name, "type": rel_col_type, "base_type": tf_model_column.data_type}
+            "target": {
+                "field": tf_model_column.name,
+                "type": rel_col_type,
+                "base_type": raw_tf_source_col_config.data_type if raw_tf_source_col_config.data_type else tf_model_column.data_type}
            })
         }}
     {% endfor %}
