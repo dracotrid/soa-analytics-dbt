@@ -18,9 +18,12 @@ models:
       - name: receipt
         data_type: STRING
         description: Receipt
-      - name: employee
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the goods
+        meta:
+          tf_config:
+            field: employee
       - name: client_id
         data_type: STRING
         description: Client id

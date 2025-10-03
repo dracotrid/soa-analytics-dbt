@@ -1,7 +1,7 @@
-WITH employees_speciality AS (
+WITH employees_position AS (
     SELECT
-        name AS employees_speciality_name,
-        job_title AS speciality
+        name AS employees_position_expert_name,
+        job_title AS expert_position
     FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
     GROUP BY name, job_title
 ),
@@ -30,8 +30,8 @@ report_goods_step_1 AS (
         round(paid / amount, 5) AS price,
         round(cost_price_total / amount, 5) AS cost_price_unit
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
-    LEFT JOIN employees_speciality
-        ON goods_sales.employee = employees_speciality.employees_speciality_name
+    LEFT JOIN employees_position
+        ON goods_sales.expert_name = employees_position.employees_position_expert_name
     LEFT JOIN bonus_report_goods
         ON goods_sales.eid = bonus_report_goods.bonus_id
     LEFT JOIN certificates_balance
