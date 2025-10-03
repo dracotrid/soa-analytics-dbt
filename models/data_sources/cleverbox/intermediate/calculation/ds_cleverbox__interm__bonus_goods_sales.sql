@@ -47,7 +47,7 @@ bonus_report_goods_step_1 AS (
                 '__',
                 client_name,
                 '__',
-                employee
+                expert_name
             ),
             ' ',
             '_'
@@ -58,7 +58,7 @@ bonus_report_goods_step_1 AS (
     LEFT JOIN employees
         ON goods_sales.client_name = employees.name_for_goods
     LEFT JOIN bonus_employee
-        ON CONCAT(goods_sales.employee, '-Товар-ВСЕ') = bonus_employee.bonus_employee_code
+        ON CONCAT(goods_sales.expert_name, '-Товар-ВСЕ') = bonus_employee.bonus_employee_code
 ),
 
 bonus_report_goods_step_2 AS (

@@ -33,13 +33,10 @@ models:
       - name: branch
         data_type: STRING
         description: Branch of certificate sale
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the certificate
-        meta:
-          tf_config:
-            field: employee
-      - name: speciality
+      - name: expert_position
         data_type: STRING
         description: Speciality of employee
       - name: client

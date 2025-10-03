@@ -34,9 +34,12 @@ models:
           - not_null:
               config:
                 severity: warn
-      - name: employee
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the certificate
+        meta:
+          tf_config:
+            field: employee
         data_tests:
           - not_null:
               config:

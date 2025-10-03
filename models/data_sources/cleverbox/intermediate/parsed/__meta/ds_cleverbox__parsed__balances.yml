@@ -13,7 +13,7 @@ models:
                   AND client IS NOT NULL
                   AND amount IS NOT NULL
                   AND price IS NOT NULL
-                  AND specialist IS NOT NULL
+                  AND expert_name IS NOT NULL
     columns:
       - name: eid
         data_type: STRING
@@ -38,7 +38,7 @@ models:
         meta:
           tf_config:
             constant: 'Рахунок клієнта'
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The employee who served of client
         data_tests:

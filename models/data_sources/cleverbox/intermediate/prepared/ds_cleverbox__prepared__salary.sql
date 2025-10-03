@@ -18,7 +18,7 @@ WITH source AS (
         'Товар' AS product_type,
         date,
         branch,
-        specialist AS expert_name,
+        expert_name,
         goods_name AS product_name,
         bonus_total AS bonus,
         amount,

@@ -18,7 +18,7 @@ models:
       - name: branch
         data_type: STRING
         description: Branch where product was sold
-      - name: employee_name
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the product
       - name: client_name

@@ -24,12 +24,12 @@ models:
       - name: branch
         data_type: STRING
         description: Branch of goods sale
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the goods
-      - name: speciality
+      - name: expert_position
         data_type: STRING
-        description: Speciality of employee
+        description: Position of employee
       - name: client_name
         data_type: STRING
         description: Client name

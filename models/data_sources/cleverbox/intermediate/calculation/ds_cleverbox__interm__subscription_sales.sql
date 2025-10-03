@@ -1,7 +1,7 @@
-WITH employees_speciality AS (
+WITH employees_position AS (
     SELECT
-        name AS employees_speciality_name,
-        job_title AS speciality
+        name AS employees_position_expert_name,
+        job_title AS expert_position
     FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
     GROUP BY name, job_title
 ),
@@ -42,8 +42,8 @@ report_subscriptions_step_1 AS (
         amount * cost_price_unit AS cost_price_total,
         COALESCE(discount, 0) AS discount_total
     FROM {{ tf_ref('ds_cleverbox__parsed__subscriptions_sales') }} AS subscriptions_sales
-    LEFT JOIN employees_speciality
-        ON subscriptions_sales.employee = employees_speciality.employees_speciality_name
+    LEFT JOIN employees_position
+        ON subscriptions_sales.expert_name = employees_position.employees_position_expert_name
     LEFT JOIN subscriptions_sales_discount
         ON subscriptions_sales.id = subscriptions_sales_discount.discount_id
     LEFT JOIN certificates_and_balance

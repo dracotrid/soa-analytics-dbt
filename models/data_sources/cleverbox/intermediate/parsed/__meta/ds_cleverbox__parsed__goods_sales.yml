@@ -10,7 +10,7 @@ models:
           filter: date IS NOT NULL
                   AND branch IS NOT NULL
                   AND receipt IS NOT NULL
-                  AND employee IS NOT NULL
+                  AND expert_name IS NOT NULL
                   AND client_name IS NOT NULL
                   AND goods_name IS NOT NULL
                   AND amount IS NOT NULL
@@ -37,7 +37,7 @@ models:
           - not_null:
               config:
                 severity: warn
-      - name: employee
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the goods
         data_tests:

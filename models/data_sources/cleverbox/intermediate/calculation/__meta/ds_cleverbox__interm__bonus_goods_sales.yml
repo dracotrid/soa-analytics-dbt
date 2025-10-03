@@ -15,7 +15,7 @@ models:
       - name: date
         data_type: DATE
         description: Goods date of sale
-      - name: employee
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the goods
       - name: goods_name

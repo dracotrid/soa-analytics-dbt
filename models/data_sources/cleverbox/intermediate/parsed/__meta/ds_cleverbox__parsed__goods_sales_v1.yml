@@ -27,7 +27,7 @@ models:
         meta:
           tf_config:
             field: field_0
-      - name: employee
+      - name: expert_name
         data_type: STRING
         description: The employee who sold the goods
         meta:

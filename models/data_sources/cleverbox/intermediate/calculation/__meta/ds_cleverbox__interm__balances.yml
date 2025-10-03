@@ -33,10 +33,10 @@ models:
       - name: branch
         data_type: STRING
         description: Branch of balance replenish
-      - name: specialist
+      - name: expert_name
         data_type: STRING
         description: The employee who served of client
-      - name: speciality
+      - name: expert_position
         data_type: STRING
         description: Speciality of employee
       - name: client
