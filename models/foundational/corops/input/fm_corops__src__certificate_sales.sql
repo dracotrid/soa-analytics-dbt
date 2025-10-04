@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT * FROM {{ tf_ref('ds_cleverbox__output__certificate_sales') }}
+    SELECT * FROM {{ tf_ref('ds_cleverbox__certificate_sales') }}
 )
 
 {{ tf_transform_model('source') }}

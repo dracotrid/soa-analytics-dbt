@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__output__salary
+  - name: ds_cleverbox__salary
     description: "CleverBox Salary"
     config:
-      alias: output__salary
+      alias: salary
     columns:
       - name: eid
         data_type: STRING

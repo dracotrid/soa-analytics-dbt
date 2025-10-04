@@ -1,36 +1,36 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__output__service_sales
-    description: "CleverBox Output Service Sales"
+  - name: ds_cleverbox__subscription_sales
+    description: "CleverBox Subscription Sales"
     config:
-      alias: output__service_sales
+      alias: subscription_sales
     columns:
-      - name: eid
+      - name: id
         data_type: STRING
         description: Record identifier
       - name: date
         data_type: DATE
-        description: Service date of sale
+        description: Subscription date of sale
       - name: year
         data_type: STRING
-        description: Service year of sale
+        description: Subscription year of sale
       - name: month
         data_type: STRING
-        description: Service month of sale
+        description: Subscription month of sale
       - name: day
         data_type: STRING
-        description: Service day of sale
+        description: Subscription day of sale
       - name: branch
         data_type: STRING
-        description: Branch of service sale
+        description: Branch of subscription sale
       - name: expert_name
         data_type: STRING
-        description: The employee who sold the service
+        description: The employee who sold the subscription
       - name: expert_position
         data_type: STRING
         description: Speciality of employee
-      - name: client_name
+      - name: client
         data_type: STRING
         description: Client name
       - name: is_vip
@@ -39,51 +39,48 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: Client is employee
-      - name: service_name
+      - name: subscription_name
         data_type: STRING
-        description: Service name
+        description: Subscription name
       - name: direction
         data_type: STRING
-        description: Service direction
+        description: Direction of the product
       - name: category
         data_type: STRING
-        description: Service category
+        description: Category of the product
       - name: amount
         data_type: NUMERIC.AMOUNT
-        description: Amount of services sold
+        description: Amount of subscriptions sold
       - name: price
         data_type: NUMERIC.PRICE
-        description: Price of service
+        description: Price of subscription
       - name: cost_price_unit
-        data_type: NUMERIC.PRICE
-        description: Cost price of one service
-      - name: subscription
         data_type: NUMERIC.COST
-        description: Subscription
+        description: Cost price of one subscription
       - name: payback
         data_type: NUMERIC.COST
-        description: Payback of the service
+        description: Payback of the subscription
       - name: cost_total
         data_type: NUMERIC.COST
-        description: Total cost of services
+        description: Total cost of subscriptions
       - name: income_total
         data_type: NUMERIC.COST
-        description: Income from services sales
+        description: Income from subscriptions sales
       - name: cost_price_total
         data_type: NUMERIC.COST
-        description: Cost price of services
+        description: Cost price of subscriptions
       - name: discount_total
         data_type: NUMERIC.COST
-        description: Services discount
+        description: Subscriptions discount
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: Employee bonus for selling a services
+        description: Employee bonus for selling a subscriptions
       - name: profit_total
         data_type: NUMERIC.COST
-        description: Profit from services sales
+        description: Profit from subscriptions sales
       - name: margin
-        data_type: NUMERIC.COST
-        description: Margin from services sales
-      - name: bonus_cleverbox_total
-        data_type: NUMERIC.COST
-        description: Employee bonus for selling a services according Cleverbox
+        data_type: NUMERIC.PRICE
+        description: Margin from subscriptions sales
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: Employee bonus for selling a subscriptions according Cleverbox

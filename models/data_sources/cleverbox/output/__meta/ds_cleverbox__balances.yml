@@ -1,32 +1,32 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__output__certificate_sales
-    description: "CleverBox Output Certificate Sales"
+  - name: ds_cleverbox__balances
+    description: "CleverBox Balances"
     config:
-      alias: output__certificate_sales
+      alias: balances
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date
         data_type: DATE
-        description: Certificate date of sale
+        description: Balance date of replenish
       - name: year
         data_type: STRING
-        description: Certificate year of sale
+        description: Balance year of replenish
       - name: month
         data_type: STRING
-        description: Certificate month of sale
+        description: Balance month of replenish
       - name: day
         data_type: STRING
-        description: Certificate day of sale
+        description: Balance day of replenish
       - name: branch
         data_type: STRING
-        description: Branch where certificate was sold
+        description: Branch of balance replenish
       - name: expert_name
         data_type: STRING
-        description: The employee who sold the certificate
+        description: The employee who served of client
       - name: expert_position
         data_type: STRING
         description: Speciality of employee
@@ -39,48 +39,51 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: Client is employee
-      - name: certificate_name
+      - name: name
         data_type: STRING
-        description: Certificate name
+        description: Balance name
       - name: direction
         data_type: STRING
         description: Direction of the product
       - name: category
         data_type: STRING
         description: Category of the product
+      - name: device
+        data_type: STRING
+        description: ""
       - name: amount
         data_type: NUMERIC.AMOUNT
-        description: Amount of certificates sold
+        description: Amount of replenished balances
       - name: price
         data_type: NUMERIC.COST
-        description: Price of certificate
+        description: Sum of replenish
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
-        description: Cost price of one certificate
+        description: Cost price of replenish one balance
       - name: payback
         data_type: NUMERIC.COST
-        description: Payback of the certificate
+        description: ""
       - name: cost_total
         data_type: NUMERIC.COST
-        description: Total cost of certificates
+        description: Total sum of replenish
       - name: income_total
         data_type: NUMERIC.COST
-        description: Income from certificates sales
+        description: Income from balances replenishment
       - name: cost_price_total
         data_type: NUMERIC.COST
-        description: Cost price of certificates
+        description: Cost price of replenish all balances
       - name: discount
         data_type: NUMERIC.COST
-        description: Certificates discount
+        description: Discount on balance replenishment
       - name: bonus_total
         data_type: NUMERIC.COST
-        description: Employee bonus for selling a certificates
+        description: Employee bonus for balance replenishment
       - name: profit_total
         data_type: NUMERIC.COST
-        description: Profit from certificates sales
+        description: Profit from balances replenishment
       - name: margin
         data_type: NUMERIC.PRICE
-        description: Margin from certificates sales
+        description: Margin from balances replenishment
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
-        description: Employee bonus for selling a certificates according Cleverbox
+        description: Employee bonus for balance replenishment according Cleverbox
