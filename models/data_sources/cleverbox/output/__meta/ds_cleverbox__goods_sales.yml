@@ -1,10 +1,10 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__output__goods_sales
-    description: "CleverBox Output Goods Sales"
+  - name: ds_cleverbox__goods_sales
+    description: "CleverBox Goods Sales"
     config:
-      alias: output__goods_sales
+      alias: goods_sales
     columns:
       - name: eid
         data_type: STRING

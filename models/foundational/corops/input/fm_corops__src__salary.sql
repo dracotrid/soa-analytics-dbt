@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT * FROM {{ tf_ref('ds_cleverbox__output__salary') }}
+    SELECT * FROM {{ tf_ref('ds_cleverbox__salary') }}
 )
 
 {{ tf_transform_model('source') }}
