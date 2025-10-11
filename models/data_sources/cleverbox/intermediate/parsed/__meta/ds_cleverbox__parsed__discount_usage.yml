@@ -35,3 +35,6 @@ models:
       - name: expert_name
         data_type: STRING
         description: ""
+      - name: branch
+        data_type: STRING
+        description: ""

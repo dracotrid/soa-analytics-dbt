@@ -7,7 +7,10 @@ models:
       alias: parsed__service_sales_v1
       meta:
         tf_config:
-          filter: field_0 IS NOT NULL AND field_0 NOT IN ('NO DATA', 'Total:', 'Разом') AND file_name LIKE '%_pv_1%'
+          filter: field_0 IS NOT NULL AND field_0 NOT IN ('NO DATA', 'Total:', 'Разом')
+          op: file_name_parse
+          parse_version: 1
+          parse_source_field: file_name
     columns:
       - name: date
         data_type: DATE
@@ -21,6 +24,7 @@ models:
         meta:
           tf_config:
             field: field_1
+            required: false
       - name: code
         data_type: STRING
         description: Service code

@@ -9,7 +9,6 @@ WITH discount_usage_step_1 AS (
 
 ),
 
---TODO Add type STRING.CODE (numeric code with leading 0, length 6)
 --TODO Add check and filter null values in id
 discount_usage_step_2 AS (
     SELECT
@@ -17,7 +16,7 @@ discount_usage_step_2 AS (
             CONCAT(
                 FORMAT_DATE('%Y-%m-%d', date),
                 '__',
-                'SoloMia Поділ',
+                branch,
                 '__',
                 COALESCE(product_id, ''),
                 '__',
@@ -36,7 +35,7 @@ discount_usage_step_2 AS (
             CONCAT(
                 FORMAT_DATE('%Y-%m-%d', date),
                 '__',
-                'SoloMia Поділ',
+                branch,
                 '__',
                 COALESCE(product_name, ''),
                 '__',
