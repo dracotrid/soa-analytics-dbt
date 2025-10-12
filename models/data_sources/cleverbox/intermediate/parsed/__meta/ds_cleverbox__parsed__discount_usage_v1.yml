@@ -7,7 +7,10 @@ models:
       alias: parsed__discount_usage_v1
       meta:
         tf_config:
-          filter: field_0 is not null and file_name like '%_pv_1%'
+          filter: field_0 is not null
+          op: file_name_parse
+          parse_version: 1
+          parse_source_field: file_name
     columns:
       - name: date
         data_type: DATE
@@ -63,3 +66,10 @@ models:
         meta:
           tf_config:
             field: field_10
+      - name: branch
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: branch
+            required: false

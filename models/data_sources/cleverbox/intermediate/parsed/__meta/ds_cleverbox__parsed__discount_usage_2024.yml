@@ -45,3 +45,9 @@ models:
         meta:
           tf_config:
             field: specialist
+      - name: branch
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            constant: 'KONTRAKTOVA'

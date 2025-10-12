@@ -15,6 +15,9 @@ models:
       - name: branch
         data_type: STRING
         description: Branch of service sale
+        meta:
+          tf_config:
+            constant: 'KONTRAKTOVA'
       - name: code
         data_type: STRING
         description: Service code
