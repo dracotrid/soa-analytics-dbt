@@ -1,25 +1,22 @@
 version: 2
 
 models:
-  - name: ds_cleverbox__parsed__certificates_sales
+  - name: ds_cleverbox__parsed__certificate_sales
     description: "CleverBox Parsed Certificates Sales"
     config:
-      alias: parsed__certificates_sales
+      alias: parsed__certificate_sales
       meta:
         tf_config:
-          filter: uid IS NOT NULL
+          filter: eid IS NOT NULL
                   AND client IS NOT NULL
-                  AND employee IS NOT NULL
+                  AND expert_name IS NOT NULL
                   AND date IS NOT NULL
                   AND branch IS NOT NULL
-                  AND cost IS NOT NULL
+                  AND price IS NOT NULL
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
-        meta:
-          tf_config:
-            field: uid
         data_tests:
           - not_null:
               config:
@@ -37,9 +34,6 @@ models:
       - name: expert_name
         data_type: STRING
         description: The employee who sold the certificate
-        meta:
-          tf_config:
-            field: employee
         data_tests:
           - not_null:
               config:
@@ -47,9 +41,6 @@ models:
       - name: date
         data_type: DATE
         description: Certificate date of sale
-        meta:
-          tf_config:
-            expression: PARSE_DATE('%d.%m.%y', date)
         data_tests:
           - not_null:
               config:
@@ -64,46 +55,28 @@ models:
       - name: category
         data_type: STRING
         description: Category of the product
-        meta:
-          tf_config:
-            constant: 'Сертифікат'
       - name: direction
         data_type: STRING
         description: Direction of the product
-        meta:
-          tf_config:
-            constant: 'Сертифікат'
       - name: amount
         data_type: NUMERIC.AMOUNT
         description: Amount of certificates sold
-        meta:
-          tf_config:
-            constant: 1
       - name: price
         data_type: NUMERIC.COST
         description: Price of certificate
-        meta:
-          tf_config:
-            field: cost
         data_tests:
           - not_null:
               config:
                 severity: warn
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Certificates discount
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of one certificate
-        meta:
-          tf_config:
-            constant: 0
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Employee bonus for selling a certificates
-        meta:
-          tf_config:
-            constant: 0
       - name: cleverbox_bonus_total
         data_type: NUMERIC.COST
         description: Employee bonus for selling a certificates according Cleverbox
-        meta:
-          tf_config:
-            constant: 0
