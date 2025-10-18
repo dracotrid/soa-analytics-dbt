@@ -1,0 +1,98 @@
+ersion: 2
+
+models:
+  - name: ds_cleverbox__parsed__certificate_sales_v1
+    description: "CleverBox Parsed Certificate Sales v1"
+    config:
+      alias: parsed__certificate_sales_v1
+      meta:
+        tf_config:
+          op: file_name_parse
+          parse_version: 1
+          parse_source_field: file_name
+    columns:
+      - name: eid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            expression: CONCAT("CERTIFICATE++", field_0)
+      - name: certificate_name
+        data_type: STRING
+        description: Certificate name
+        meta:
+          tf_config:
+            field: field_2
+      - name: client
+        data_type: STRING
+        description: Client name
+        meta:
+          tf_config:
+            field: field_3
+      - name: expert_name
+        data_type: STRING
+        description: The employee who sold the certificate
+        meta:
+          tf_config:
+            field: field_4
+      - name: date
+        data_type: DATE
+        description: Certificate date of sale
+        meta:
+          tf_config:
+            expression: PARSE_DATETIME('%d.%m.%Y %H:%M', field_5)
+      - name: branch
+        data_type: STRING
+        description: Branch where certificate was sold
+        meta:
+          tf_config:
+            field: field_6
+            required: false
+      - name: category
+        data_type: STRING
+        description: Category of the product
+        meta:
+          tf_config:
+            constant: 'Сертифікат'
+      - name: direction
+        data_type: STRING
+        description: Direction of the product
+        meta:
+          tf_config:
+            constant: 'Сертифікат'
+      - name: amount
+        data_type: NUMERIC.AMOUNT
+        description: Amount of certificates sold
+        meta:
+          tf_config:
+            constant: 1
+      - name: price
+        data_type: NUMERIC.COST
+        description: Price of certificate
+        meta:
+          tf_config:
+            field: field_7
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Certificates discount
+        meta:
+          tf_config:
+            expression: COALESCE(field_8, '0')
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: Cost price of one certificate
+        meta:
+          tf_config:
+            constant: 0
+      - name: bonus_total
+        data_type: NUMERIC.COST
+        description: Employee bonus for selling a certificates
+        meta:
+          tf_config:
+            constant: 0
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.COST
+        description: Employee bonus for selling a certificates according Cleverbox
+        meta:
+          tf_config:
+            constant: 0

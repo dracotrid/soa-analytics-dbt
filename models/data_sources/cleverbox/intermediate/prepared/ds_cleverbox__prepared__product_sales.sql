@@ -75,7 +75,7 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id AS eid,
+        eid,
         'Сертифікат' AS product_type,
         date,
         branch,

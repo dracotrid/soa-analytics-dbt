@@ -6,7 +6,7 @@ models:
     config:
       alias: report_certificate_sales
     columns:
-      - name: id
+      - name: eid
         data_type: STRING
         description: Record identifier
       - name: date
