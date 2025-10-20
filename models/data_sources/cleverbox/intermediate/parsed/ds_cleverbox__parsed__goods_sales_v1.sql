@@ -1,5 +1,8 @@
 WITH source AS (
-    SELECT * FROM {{ tf_ref('ds_cleverbox__parsed__goods_sales_enriched_raw') }}
+    SELECT
+        *,
+        _FILE_NAME AS file_name
+    FROM {{ tf_source('ds_cleverbox__raw__goods_sales') }}
 )
 
 {{ tf_transform_model('source') }}
