@@ -60,8 +60,8 @@
     {%- if "required" in tf_src_col_conf and not tf_src_col_conf.required  -%}
         {#- "TODO: Support JSON fields - map/array" -#}
          {%- set internal_json_fields = "JSON_VALUE(__mtf_internal_json_fields, '$." ~ tf_src_col_conf.field ~ "')" -%}
-         {%- set file_name_parsed_fields = "JSON_VALUE(__mtf_internal_json_fields, '$.__mtf_internal_meta_json_fields." ~ tf_src_col_conf.field ~ "')" -%}
-        {%- set tf_source_field = "COALESCE(" ~ file_name_parsed_fields ~ ", " ~ internal_json_fields ~ ")" -%}
+         {%- set internal_meta_json_fields = "JSON_VALUE(__mtf_internal_json_fields, '$.__mtf_internal_meta_json_fields." ~ tf_column_config.target.field ~ "')" -%}
+        {%- set tf_source_field = "COALESCE(" ~ internal_meta_json_fields ~ ", " ~ internal_json_fields ~ ")" -%}
     {%- else -%}
         {% if tf_src_col_conf.field.startswith('`') and tf_src_col_conf.field.endswith('`') %}
             {%- set tf_source_field = tf_src_col_conf.field -%}

@@ -26,7 +26,7 @@ __mrf_parser__raw_meta_data AS (
 ,__mrf_parser__parsed AS (
   SELECT
     __mtf_parser__meta_data[0] AS __mtf_parser_file_name,
-    REGEXP_EXTRACT(__mtf_parser__meta_data[1], r'^pv(\d+)$') AS __mtf_parser_verion,
+    REGEXP_EXTRACT(__mtf_parser__meta_data[1], r'^pv(\d+)$') AS __mtf_parser_version,
     (
       SELECT PARSE_JSON('{' || STRING_AGG(pair) || '}')
       FROM (
@@ -43,9 +43,9 @@ __mrf_parser__raw_meta_data AS (
   FROM __mrf_parser__meta_data
 )
 ,__mrf_parser__filtered AS (
-    SELECT * EXCEPT(__mtf_parser__meta_data, __mtf_parser_file_name, __mtf_parser_verion)
+    SELECT * EXCEPT(__mtf_parser__meta_data, __mtf_parser_file_name, __mtf_parser_version)
     FROM __mrf_parser__parsed
-    WHERE __mrf_parser__parsed.__mtf_parser_verion = '{{ tf_config.parse_version }}'
+    WHERE __mrf_parser__parsed.__mtf_parser_version = '{{ tf_config.parse_version }}'
 )
 
 {{ tf_transform_model('__mrf_parser__filtered', mtf_resolve_transform_model_conf(model, "map")) }}
