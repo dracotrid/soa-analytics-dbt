@@ -1,0 +1,76 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+
+    tables:
+      - name: raw__subscription_sales
+        identifier: raw__subscription_sales
+        description: "CleverBox raw Subscription Sales"
+        columns:
+          - name: field_0
+            data_type: STRING
+            description: ""
+          - name: field_1
+            data_type: STRING
+            description: ""
+          - name: field_2
+            data_type: STRING
+            description: ""
+          - name: field_3
+            data_type: STRING
+            description: ""
+          - name: field_4
+            data_type: STRING
+            description: ""
+          - name: field_5
+            data_type: STRING
+            description: ""
+          - name: field_6
+            data_type: STRING
+            description: ""
+          - name: field_7
+            data_type: STRING
+            description: ""
+          - name: field_8
+            data_type: STRING
+            description: ""
+          - name: field_9
+            data_type: STRING
+            description: ""
+          - name: field_10
+            data_type: STRING
+            description: ""
+          - name: field_11
+            data_type: STRING
+            description: ""
+          - name: field_12
+            data_type: STRING
+            description: ""
+          - name: field_13
+            data_type: STRING
+            description: ""
+          - name: field_14
+            data_type: STRING
+            description: ""
+          - name: field_15
+            data_type: STRING
+            description: ""
+          - name: field_16
+            data_type: STRING
+            description: ""
+          - name: field_17
+            data_type: STRING
+            description: ""
+          - name: field_18
+            data_type: STRING
+            description: ""
+          - name: field_19
+            data_type: STRING
+            description: ""
+          - name: field_20
+            data_type: STRING
+            description: ""

@@ -50,7 +50,7 @@ WITH source AS (
     UNION ALL
 
     SELECT
-        id AS eid,
+        eid,
         'Абонемент' AS product_type,
         date,
         branch,

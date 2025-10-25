@@ -1,0 +1,110 @@
+ersion: 2
+
+models:
+  - name: ds_cleverbox__parsed__subscription_sales_v1
+    description: "CleverBox Parsed Subscriptions Sales"
+    config:
+      alias: parsed__subscription_sales_v1
+      meta:
+        tf_config:
+          op: file_name_parse
+          parse_version: 1
+          parse_source_field: file_name
+    columns:
+      - name: eid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            expression: CONCAT("SUBSCRIPTION++", field_0)
+      - name: date
+        data_type: DATE
+        description: Subscription date of sale
+        meta:
+          tf_config:
+            expression: PARSE_DATE('%d.%m.%Y', field_6)
+      - name: subscription_type
+        data_type: STRING
+        description: Subscription type
+        meta:
+          tf_config:
+            field: field_2
+      - name: client
+        data_type: STRING
+        description: Client name
+        meta:
+          tf_config:
+            field: field_4
+      - name: branch
+        data_type: STRING
+        description: Client name
+        meta:
+          tf_config:
+            field: field_7
+            required: false
+      - name: expert_name
+        data_type: STRING
+        description: The employee who sold the subscription
+        meta:
+          tf_config:
+            field: field_9
+      - name: category
+        data_type: STRING
+        description: Category of the product
+        meta:
+          tf_config:
+            constant: 'Абонемент'
+      - name: direction
+        data_type: STRING
+        description: Direction of the product
+        meta:
+          tf_config:
+            constant: 'Абонемент'
+      - name: amount
+        data_type: NUMERIC.AMOUNT
+        description: Amount of subscriptions sold
+        meta:
+          tf_config:
+            constant: 1
+      - name: cost_price_unit
+        data_type: NUMERIC.PRICE
+        description: Cost price of one subscription
+        meta:
+          tf_config:
+            constant: 0
+      - name: bonus_total
+        data_type: NUMERIC.PRICE
+        description: Employee bonus for selling a subscriptions
+        meta:
+          tf_config:
+            constant: 0
+      - name: cleverbox_bonus_total
+        data_type: NUMERIC.PRICE
+        description: Employee bonus for selling a subscriptions according Cleverbox
+        meta:
+          tf_config:
+            constant: 0
+      - name: cost
+        data_type: NUMERIC.COST
+        description: Cost of subscriptions
+        meta:
+          tf_config:
+            field: field_10
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Discount
+        meta:
+          tf_config:
+            field: field_11
+      - name: valid_date
+        data_type: DATE
+        description: Subscriptions valid date
+        meta:
+          tf_config:
+            expression: PARSE_DATE('%d.%m.%Y', field_13)
+      - name: status
+        data_type: STRING
+        description: Subscriptions status
+        meta:
+          tf_config:
+            field: field_15
