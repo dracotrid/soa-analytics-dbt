@@ -16,13 +16,6 @@ employees AS (
     FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
 ),
 
-subscriptions_sales_discount AS (
-    SELECT
-        uid AS discount_id,
-        discount
-    FROM {{ tf_source('ds_cleverbox__raw__subscriptions_sales_discount') }}
-),
-
 certificates_and_balance AS (
     SELECT
         uid AS certificates_balance_id,
@@ -41,13 +34,11 @@ report_subscriptions_step_1 AS (
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
         amount * cost_price_unit AS cost_price_total,
         COALESCE(discount, 0) AS discount_total
-    FROM {{ tf_ref('ds_cleverbox__parsed__subscriptions_sales') }} AS subscriptions_sales
+    FROM {{ tf_ref('ds_cleverbox__parsed__subscription_sales') }} AS subscriptions_sales
     LEFT JOIN employees_position
         ON subscriptions_sales.expert_name = employees_position.employees_position_expert_name
-    LEFT JOIN subscriptions_sales_discount
-        ON subscriptions_sales.id = subscriptions_sales_discount.discount_id
     LEFT JOIN certificates_and_balance
-        ON subscriptions_sales.id = certificates_and_balance.certificates_balance_id
+        ON subscriptions_sales.eid = certificates_and_balance.certificates_balance_id
     LEFT JOIN vip_clients_table
         ON subscriptions_sales.client = vip_clients_table.vip_clients
     LEFT JOIN employees
