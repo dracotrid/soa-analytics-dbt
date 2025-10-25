@@ -7,9 +7,7 @@ models:
       alias: parsed__certificate_sales_v1
       meta:
         tf_config:
-          op: file_name_parse
           parse_version: 1
-          parse_source_field: file_name
     columns:
       - name: eid
         data_type: STRING

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__enriched__discount_usage
+    description: "CleverBox enriched discount usage"
+    config:
+      alias: enriched__discount_usage
+      contract:
+        enforced: false
+      meta:
+        tf_config:
+          op: file_name_parse

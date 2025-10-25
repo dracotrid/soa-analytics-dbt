@@ -8,9 +8,7 @@ models:
       meta:
         tf_config:
           filter: field_0 is not null
-          op: file_name_parse
           parse_version: 1
-          parse_source_field: file_name
     columns:
       - name: date
         data_type: DATE
