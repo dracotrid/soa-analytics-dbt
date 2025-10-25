@@ -21,6 +21,9 @@
     {% endif %}
     {# "Add filter" #}
     {{ tf_config.update({"filter": tf_model_config.filter}) }}
+    {# "Add parse version" #}
+    {{ tf_config.update({"parse_version": tf_model_config.parse_version}) }}
+
 
     {# "Create columns mapping based on defined columns in target model (loaded from yaml)" #}
     {# "Extend predefined BigQuery types mapping" #}

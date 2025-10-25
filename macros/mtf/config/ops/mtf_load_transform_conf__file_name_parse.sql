@@ -15,17 +15,6 @@
 
     {%- set _ = log(_macro_ ~ " :: tf_model_config: " ~ tf_model_config, info=true) if debug else "" -%}
 
-    {% if tf_model_config.parse_source_field %}
-        {{ tf_config.update({'parse_source_field': tf_model_config.parse_source_field}) }}
-    {% else %}
-        {% set _ =  _mtf_exception("parse_source_field must be specified", _macro_) %}
-    {% endif %}
-
-    {% if tf_model_config.parse_version %}
-        {{ tf_config.update({'parse_version': tf_model_config.parse_version}) }}
-    {% else %}
-        {% set _ = _mtf_exception("parse_version must be specified", _macro_) %}
-    {% endif %}
 
     {%- set _ = log(_macro_ ~ " :: tf_config :: " ~ tf_config, info=true) if debug else "" -%}
 

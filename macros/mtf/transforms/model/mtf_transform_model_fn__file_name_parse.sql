@@ -5,10 +5,10 @@
 {%- set _macro_ = "mtf_transform_model_fn__parse" -%}
 {{- _mtf_log(tf_source, _macro_, "tf_source", debug) -}}
 {{- _mtf_log(tf_config, _macro_, "tf_config", debug) -}}
-{% if "with" in model.raw_code.lower() or tf_source.startswith("__mtf_internal_") -%}, {% else %}WITH {% endif -%}
+{% if "with" in model.raw_code.lower() or (tf_source.startswith is defined and (tf_source.startswith("__mtf_internal_") or tf_source.startswith("__mtf_parser_"))) -%}, {% else %}WITH {% endif -%}
 __mrf_parser__raw_meta_data AS (
   SELECT
-    SPLIT(LEFT({{ tf_config.parse_source_field }}, STRPOS({{ tf_config.parse_source_field }}, '.') - 1), '___') AS __mtf_parser_raw_meta_data,
+    SPLIT(LEFT(_FILE_NAME, STRPOS(_FILE_NAME, '.') - 1), '___') AS __mtf_parser_raw_meta_data,
     *
   FROM {{ tf_source }}
 )
@@ -42,11 +42,10 @@ __mrf_parser__raw_meta_data AS (
     *
   FROM __mrf_parser__meta_data
 )
-,__mrf_parser__filtered AS (
-    SELECT * EXCEPT(__mtf_parser__meta_data, __mtf_parser_file_name, __mtf_parser_version)
+,__mtf_parser__filtered AS (
+    SELECT * EXCEPT(__mtf_parser__meta_data, __mtf_parser_file_name)
     FROM __mrf_parser__parsed
-    WHERE __mrf_parser__parsed.__mtf_parser_version = '{{ tf_config.parse_version }}'
 )
 
-{{ tf_transform_model('__mrf_parser__filtered', mtf_resolve_transform_model_conf(model, "map")) }}
+{{ tf_transform_model('__mtf_parser__filtered', mtf_resolve_transform_model_conf(model, "map")) }}
 {%- endmacro -%}

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__enriched__service_sales
+    description: "CleverBox enriched service sales"
+    config:
+      alias: enriched__service_sales
+      contract:
+        enforced: false
+      meta:
+        tf_config:
+          op: file_name_parse

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__enriched__certificate_sales
+    description: "CleverBox enriched certificate sales"
+    config:
+      alias: enriched__certificate_sales
+      contract:
+        enforced: false
+      meta:
+        tf_config:
+          op: file_name_parse
