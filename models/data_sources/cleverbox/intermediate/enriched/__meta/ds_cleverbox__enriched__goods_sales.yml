@@ -9,4 +9,4 @@ models:
         enforced: false
       meta:
         tf_config:
-          op: file_name_parse
+          op: meta_enrich
