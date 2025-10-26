@@ -6,7 +6,7 @@
 {{- _mtf_log(tf_source, _macro_, "tf_source", debug) -}}
 {{- _mtf_log(tf_config, _macro_, "tf_config", debug) -}}
 {#- "FIXME: Find out a better way to identify if there is any CTE already defined in the model" #}
-{% if "with" in model.raw_code.lower() or (tf_source.startswith is defined and (tf_source.startswith("__mtf_internal_") or tf_source.startswith("__mtf_parser__"))) -%}, {% else %}WITH {% endif -%}
+{% if "with" in model.raw_code.lower() or (tf_source.startswith is defined and tf_source.startswith("__mtf_internal_")) -%}, {% else %}WITH {% endif -%}
 __mtf_internal_mapped_ AS (
     SELECT t.*, TO_JSON_STRING(t) AS __mtf_internal_json_fields
     FROM {{ tf_source }} AS t
@@ -33,9 +33,9 @@ SELECT * EXCEPT (__mtf_internal_json_fields) FROM (
             *
         {%- endif %}
     FROM __mtf_internal_mapped_
-    {%- if tf_config.filter or tf_config.parse_version %}
+    {%- if tf_config.filter %}
     WHERE
-        {{ _mtf_get_where_clause(tf_config) }}
+        {{ _mtf_get_where_clause(tf_config.filter) }}
     {%- endif %}
 )
 {%- endmacro -%}
