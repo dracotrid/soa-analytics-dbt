@@ -42,3 +42,15 @@ sources:
           - name: use_cost_price
             data_type: BOOLEAN
             description: Use cost price for bonus calculation
+          - name: validity_from
+            data_type: STRING
+            description: Validity from
+          - name: validity_to
+            data_type: STRING
+            description: Validity to
+          - name: min_bonus_first_visit
+            data_type: STRING
+            description: Min bonus first visit
+          - name: expected_sum_first_visit
+            data_type: STRING
+            description: Min bonus first visit
