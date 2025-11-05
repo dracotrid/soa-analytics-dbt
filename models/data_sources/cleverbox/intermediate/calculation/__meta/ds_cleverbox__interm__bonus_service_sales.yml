@@ -51,15 +51,27 @@ models:
       - name: subscription
         data_type: NUMERIC.COST
         description: Subscription
-      - name: bonus_employee_code
+      - name: bonus_employee__code
         data_type: STRING
         description: Bonus code from bonus_employee table
-      - name: bonus_employee_type
+      - name: bonus_employee__type
         data_type: STRING
         description: Bonus type from bonus_employee table
-      - name: bonus_employee_value
+      - name: bonus_employee__value
         data_type: NUMERIC.COST
         description: Bonus value from bonus_employee table
+      - name: is_first_visit
+        data_type: BOOLEAN
+        description: Is first visit
+      - name: bonus_employee__min_bonus_first_visit
+        data_type: NUMERIC.COST
+        description: Bonus value for first visit if paid less min expected sum from bonus_employee table
+      - name: bonus_employee__expected_sum_first_visit
+        data_type: NUMERIC.COST
+        description: Min expected sum for first visit from bonus_employee table
+      - name: visit_sum
+        data_type: NUMERIC.COST
+        description: Sum which client spent
       - name: bonus_discount_name
         data_type: STRING
         description: Bonus name from bonus_discount table
@@ -81,6 +93,9 @@ models:
       - name: is_employee
         data_type: BOOLEAN
         description: Client is employee
+      - name: is_first_visit
+        data_type: BOOLEAN
+        description: Is first clients visit
       - name: discount_rate
         data_type: NUMERIC.PRICE
         description: Discount rate

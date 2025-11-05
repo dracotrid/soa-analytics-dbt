@@ -42,6 +42,9 @@ models:
       - name: expert_position
         data_type: STRING
         description: Speciality of employee
+      - name: client_code
+        data_type: STRING
+        description: Client code
       - name: client_name
         data_type: STRING
         description: Client name
