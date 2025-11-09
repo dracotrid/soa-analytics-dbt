@@ -38,6 +38,7 @@ models:
             field: field_3
       - name: client_id
         data_type: STRING
+        logic_type: STRING.CODE
         description: Client id
         meta:
           tf_config:

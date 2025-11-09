@@ -39,7 +39,7 @@ discount_usage_step_2 AS (
                 '__',
                 COALESCE(product_name, ''),
                 '__',
-                COALESCE(client_name, ''),
+                COALESCE(client_code, ''),
                 '__',
                 COALESCE(expert_name, '')
             ),

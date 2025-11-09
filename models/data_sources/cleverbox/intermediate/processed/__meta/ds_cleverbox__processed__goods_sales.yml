@@ -21,6 +21,9 @@ models:
       - name: expert_name
         data_type: STRING
         description: The employee who sold the goods
+      - name: client_code
+        data_type: STRING
+        description: Client code
       - name: client_name
         data_type: STRING
         description: Client name

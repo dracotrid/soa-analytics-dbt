@@ -125,8 +125,8 @@ bonus_adjustment AS (
 ),
 
 vip_clients_table AS (
-    SELECT vip_clients
-    FROM {{ tf_source('ds_cleverbox__raw__clients') }}
+    SELECT client_name AS vip_client_name
+    FROM {{ tf_source('ds_cleverbox__raw__vip_clients') }}
 ),
 
 employees AS (
@@ -137,14 +137,14 @@ employees AS (
 intermediate_step_1_source AS (
     SELECT
         *,
-        NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
+        NOT COALESCE(vip_client_name IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
         CASE WHEN cost_total = 0 OR discount = 0 THEN 0 ELSE discount / cost_total END AS discount_rate
     FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
     LEFT JOIN bonus_employee_values
         ON service_sales.eid = bonus_employee_values.bonus_employee_values__eid
     LEFT JOIN vip_clients_table
-        ON service_sales.client_name = vip_clients_table.vip_clients
+        ON service_sales.client_name = vip_clients_table.vip_client_name
     LEFT JOIN employees
         ON service_sales.client_name = employees.name_for_service
 ),

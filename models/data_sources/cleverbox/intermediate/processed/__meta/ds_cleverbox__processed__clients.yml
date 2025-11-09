@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__processed__clients
+    description: "CleverBox Processed Discount Usage"
+    config:
+      alias: processed__clients
+    columns:
+      - name: client_code
+        data_type: STRING
+        description: Client_id
+      - name: client_name
+        data_type: STRING
+        description: Client name

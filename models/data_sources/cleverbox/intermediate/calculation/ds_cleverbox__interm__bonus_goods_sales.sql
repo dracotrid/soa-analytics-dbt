@@ -1,6 +1,6 @@
 WITH vip_clients_table AS (
-    SELECT vip_clients
-    FROM {{ tf_source('ds_cleverbox__raw__clients') }}
+    SELECT client_name AS vip_client_name
+    FROM {{ tf_source('ds_cleverbox__raw__vip_clients') }}
 ),
 
 employees AS (
@@ -35,7 +35,7 @@ bonus_discount AS (
 bonus_report_goods_step_1 AS (
     SELECT
         *,
-        NOT COALESCE(vip_clients IS NULL, FALSE) AS is_vip,
+        NOT COALESCE(vip_client_name IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_goods IS NULL, FALSE) AS is_employee,
         REPLACE(
             CONCAT(
@@ -54,7 +54,7 @@ bonus_report_goods_step_1 AS (
         ) AS du_id
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
     LEFT JOIN vip_clients_table
-        ON goods_sales.client_name = vip_clients_table.vip_clients
+        ON goods_sales.client_name = vip_clients_table.vip_client_name
     LEFT JOIN employees
         ON goods_sales.client_name = employees.name_for_goods
     LEFT JOIN bonus_employee
