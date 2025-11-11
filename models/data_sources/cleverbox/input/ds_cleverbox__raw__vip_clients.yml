@@ -16,7 +16,7 @@ sources:
             data_type: STRING
             description: Client name
           - name: discount
-            data_type: NUMERIC.PRICE
+            data_type: STRING
             description: Discount
           - name: note
             data_type: STRING
