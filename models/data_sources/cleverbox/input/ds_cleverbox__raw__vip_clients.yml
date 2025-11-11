@@ -8,11 +8,11 @@ sources:
     loader: google_sheet
 
     tables:
-      - name: raw__clients
-        identifier: raw__clients
+      - name: raw__vip_clients
+        identifier: raw__vip_clients
         description: "CleverBox raw Clients records"
         columns:
-          - name: vip_clients
+          - name: client_name
             data_type: STRING
             description: Client name
           - name: discount
