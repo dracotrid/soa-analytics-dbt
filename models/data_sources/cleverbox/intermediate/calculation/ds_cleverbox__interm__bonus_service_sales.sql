@@ -117,13 +117,6 @@ discount_usage AS (
     FROM {{ tf_ref('ds_cleverbox__processed__discount_usage') }}
 ),
 
-bonus_adjustment AS (
-    SELECT
-        yuid AS bonus_adjustment_id,
-        bonus_type AS bonus_adjustment_type
-    FROM {{ tf_ref('ds_cleverbox__parsed__bonus_adjustments') }}
-),
-
 vip_clients_table AS (
     SELECT client_name AS vip_client_name
     FROM {{ tf_source('ds_cleverbox__raw__vip_clients') }}
@@ -167,7 +160,6 @@ intermediate_step_3_source AS (
     SELECT
         *,
         CASE
-            WHEN bonus_adjustment_type IS NOT NULL THEN bonus_adjustment_type
             WHEN bonus_employee__type IS NULL THEN 'БезПремії'
             WHEN bonus_employee__type = 'Фіксована' THEN bonus_employee__type
             WHEN is_employee = TRUE THEN '%ВідОплати'
@@ -182,8 +174,6 @@ intermediate_step_3_source AS (
     FROM intermediate_step_2_source
     LEFT JOIN bonus_discount
         ON intermediate_step_2_source.discount_name_source = bonus_discount.bonus_discount_name
-    LEFT JOIN bonus_adjustment
-        ON intermediate_step_2_source.eid = bonus_adjustment.bonus_adjustment_id
 ),
 
 intermediate_step_4_source AS (

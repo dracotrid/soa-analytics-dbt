@@ -84,9 +84,6 @@ models:
       - name: discount_usage_discount_name
         data_type: STRING
         description: Discount name from discount_usage table
-      - name: bonus_adjustment_type
-        data_type: STRING
-        description: Bonus adjustment type
       - name: is_vip
         data_type: BOOLEAN
         description: Client is VIP
