@@ -1,6 +1,6 @@
 WITH source AS (
     SELECT
-        REPLACE(CONCAT(date, '__', branch, '__', receipt, '__', goods_name, '__', expert_name, '__', client_name), ' ', '_') AS eid,
+        REPLACE(CONCAT(date, '__', branch, '__', goods_name, '__', expert_name, '__', client_name), ' ', '_') AS eid,
         date,
         branch,
         receipt,
