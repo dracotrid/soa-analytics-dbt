@@ -165,7 +165,7 @@ intermediate_step_3_source AS (
             WHEN is_employee = TRUE THEN '%ВідОплати'
             WHEN subscription IS NOT NULL AND subscription > 0 THEN bonus_employee__type
             -- '%ВідВартості' is used for VIPs and all the 100% discounts before 2025
-            WHEN is_vip = TRUE OR (date < '2025-01-01' AND discount_rate = 1) THEN '%ВідВартості'
+            WHEN date < '2025-01-01' AND (is_vip = TRUE OR discount_rate = 1) THEN '%ВідВартості'
             WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee__type
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
