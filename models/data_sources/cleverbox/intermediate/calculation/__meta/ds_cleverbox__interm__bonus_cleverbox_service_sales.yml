@@ -12,6 +12,12 @@ models:
       - name: eid
         data_type: STRING
         description: Record identifier
+      - name: bonus_cleverbox_base_for_bonus
+        data_type: NUMERIC.COST
+        description: Bonus Cleverbox base for bonus calculation
+      - name: cleverbox_bonus_type
+        data_type: STRING
+        description: Bonus Cleverbox ype
       - name: bonus_cleverbox_unit
         data_type: NUMERIC.COST
         description: Bonus Cleverbox unit
