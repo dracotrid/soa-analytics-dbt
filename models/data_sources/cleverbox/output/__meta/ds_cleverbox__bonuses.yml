@@ -45,6 +45,9 @@ models:
       - name: bonus_discount
         data_type: STRING
         description: Bonus discount name
+      - name: bonus_discount__bonus_type
+        data_type: STRING
+        description: Bonus discount bonus type
       - name: bonus_employee
         data_type: STRING
         description: Bonus employee name
