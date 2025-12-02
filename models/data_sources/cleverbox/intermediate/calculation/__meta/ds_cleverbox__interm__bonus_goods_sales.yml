@@ -60,9 +60,15 @@ models:
       - name: bonus_type_for_calculation
         data_type: STRING
         description: Bonus type for calculation employee bonus
+      - name: cleverbox_bonus_type
+        data_type: STRING
+        description: Bonus type for calculation employee cleverbox bonus
       - name: base_for_bonus
         data_type: NUMERIC.PRICE
         description: Base for bonus calculation
+      - name: cleverbox_base_for_bonus
+        data_type: NUMERIC.PRICE
+        description: Base for cleverbox bonus calculation
       - name: bonus_value
         data_type: NUMERIC.PRICE
         description: Bonus value

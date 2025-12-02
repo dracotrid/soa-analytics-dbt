@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: fm_corops__src__bonuses
+    description: "Corops Source bonuses"
+    config:
+      alias: src__bonuses
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Goods date of sale
+      - name: product_type
+        data_type: STRING
+        description: Product type
+      - name: product_name
+        data_type: STRING
+        description: Product name
+      - name: expert_name
+        data_type: STRING
+        description: Expert name
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: direction
+        data_type: STRING
+        description: Direction
+      - name: amount
+        data_type: NUMERIC.PRICE
+        description: Amount of product
+      - name: cost
+        data_type: NUMERIC.COST
+        description: Cost of product
+      - name: discount
+        data_type: NUMERIC.COST
+        description: Discount
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Sum which client paid
+      - name: cost_price
+        data_type: NUMERIC.COST
+        description: Cost price of product
+      - name: bonus_discount
+        data_type: STRING
+        description: Bonus discount name
+      - name: bonus_discount__bonus_type
+        data_type: STRING
+        description: Bonus discount bonus type
+      - name: bonus_employee
+        data_type: STRING
+        description: Bonus employee name
+      - name: internal_bonus
+        data_type: NUMERIC.COST
+        description: Internal bonus
+      - name: cleverbox_bonus
+        data_type: NUMERIC.COST
+        description: Cleverbox bonus
+      - name: internal_bonus_type
+        data_type: STRING
+        description: Internal bonus type
+      - name: cleverbox_bonus_type
+        data_type: STRING
+        description: Cleverbox bonus type
+      - name: bonus_value
+        data_type: NUMERIC.COST
+        description: Persent of the bonus
+      - name: base_for_internal_bonus
+        data_type: NUMERIC.COST
+        description: Base for internal bonus
+      - name: base_for_cleverbox_bonus
+        data_type: NUMERIC.COST
+        description: Base for cleverbox bonus
+      - name: is_bonus_without_cost_price
+        data_type: BOOLEAN
+        description: Is bonus without cost price
+      - name: delta
+        data_type: NUMERIC.PRICE
+        description: Delta between internal and cleverbox bonuses

@@ -74,8 +74,10 @@ bonus_report_goods_step_3 AS (
         CASE
             WHEN is_employee = TRUE THEN 'БезПремії'
             WHEN is_vip = TRUE AND cost_total < 0 THEN '%ВідВартості'
-            ELSE NULLIF(bonus_employee_type, '<<НЕВІДОМО>>')
-        END AS bonus_type_for_calculation
+            ELSE (bonus_employee_type, '<<НЕВІДОМО>>')
+        END AS bonus_type_for_calculation,
+        '%ВідОплати' AS cleverbox_bonus_type,
+        paid AS cleverbox_base_for_bonus
     FROM bonus_report_goods_step_2
     LEFT JOIN bonus_discount
         ON bonus_report_goods_step_2.discount_usage_discount_name = bonus_discount.bonus_discount_name
