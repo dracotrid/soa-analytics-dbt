@@ -39,7 +39,7 @@ models:
         description: Certificate date of sale
         meta:
           tf_config:
-            expression: PARSE_DATETIME('%d.%m.%Y %H:%M', field_5)
+            expression: PARSE_DATETIME('%d.%m.%y %H:%M', field_5)
       - name: branch
         data_type: STRING
         description: Branch where certificate was sold
