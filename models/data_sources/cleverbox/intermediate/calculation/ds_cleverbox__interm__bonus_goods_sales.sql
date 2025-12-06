@@ -12,7 +12,9 @@ bonus_employee AS (
     SELECT
         uid AS bonus_employee_code,
         bonus_value AS bonus_employee_value,
-        accrual_type AS bonus_employee_type
+        accrual_type AS bonus_employee_type,
+        validity_from,
+        validity_to
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
     WHERE sale_type = 'Товар'
 ),
@@ -58,7 +60,10 @@ bonus_report_goods_step_1 AS (
     LEFT JOIN employees
         ON goods_sales.client_name = employees.name_for_goods
     LEFT JOIN bonus_employee
-        ON CONCAT(goods_sales.expert_name, '-Товар-ВСЕ') = bonus_employee.bonus_employee_code
+        ON
+            CONCAT(goods_sales.expert_name, '-Товар-ВСЕ') = bonus_employee.bonus_employee_code
+            AND (bonus_employee.validity_from IS NULL OR bonus_employee.validity_from <= date)
+            AND (bonus_employee.validity_to IS NULL OR bonus_employee.validity_to >= date)
 ),
 
 bonus_report_goods_step_2 AS (
