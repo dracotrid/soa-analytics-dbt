@@ -84,6 +84,9 @@ models:
       - name: cost_price_total
         data_type: NUMERIC.COST
         description: Cost price of services
+      - name: cleverbox_cost_price_total
+        data_type: NUMERIC.COST
+        description: Cost price of services from Cleverbox
       - name: discount_persent
         data_type: NUMERIC.COST
         description: Persent of discount

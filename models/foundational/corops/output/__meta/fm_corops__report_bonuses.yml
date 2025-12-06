@@ -42,6 +42,9 @@ models:
       - name: cost_price
         data_type: NUMERIC.COST
         description: Cost price of product
+      - name: cleverbox_cost_price
+        data_type: NUMERIC.COST
+        description: Cost price of product from Cleverbox
       - name: bonus_discount
         data_type: STRING
         description: Bonus discount name
