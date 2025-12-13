@@ -1,0 +1,17 @@
+ersion: 2
+
+models:
+  - name: fm_corops__scr__cleverbox_income_check
+    description: "CleverBox cleverbox income check"
+    config:
+      alias: scr__cleverbox_income_check
+    columns:
+      - name: date
+        data_type: DATE
+        description: Certificate date of sale
+      - name: product_type
+        data_type: STRING
+        description: Product type
+      - name: income
+        data_type: NUMERIC.COST
+        description: Certificate month of sale
