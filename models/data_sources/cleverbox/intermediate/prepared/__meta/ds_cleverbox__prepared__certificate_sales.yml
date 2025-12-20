@@ -84,3 +84,6 @@ models:
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
         description: Employee bonus for selling a certificates according Cleverbox
+      - name: denomination
+        data_type: NUMERIC.COST
+        description: denomination
