@@ -44,6 +44,9 @@ models:
           - not_null:
               config:
                 severity: warn
+      - name: client_id
+        data_type: STRING
+        description: Client id
       - name: client_name
         data_type: STRING
         description: Client name
