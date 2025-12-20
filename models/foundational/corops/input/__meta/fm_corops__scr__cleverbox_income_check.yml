@@ -6,6 +6,9 @@ models:
     config:
       alias: scr__cleverbox_income_check
     columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
       - name: date
         data_type: DATE
         description: Certificate date of sale
