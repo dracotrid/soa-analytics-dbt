@@ -1,12 +1,4 @@
-WITH certificates_balance AS (
-    SELECT
-        yuid AS certificates_balance_id,
-        sum(sum) AS certificates_balance_sum
-    FROM {{ tf_source('ds_cleverbox__raw__certificates_and_balance') }}
-    GROUP BY yuid
-),
-
-bonus_cleverbox AS (
+WITH bonus_cleverbox AS (
     SELECT
         eid AS bonus_cleverbox_id,
         bonus_cleverbox_total
@@ -30,12 +22,10 @@ intermediate_step_1_source AS (
         CASE WHEN cost_total = 0 THEN 0 ELSE discount / cost_total * 100 END AS discount_persent,
         CASE
             WHEN subscription > 0 THEN 0
-            WHEN paid - coalesce(certificates_balance_sum, 0) < 1 THEN 0
-            ELSE paid - coalesce(certificates_balance_sum, 0)
+            WHEN paid < 1 THEN 0
+            ELSE paid
         END AS income_total
     FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
-    LEFT JOIN certificates_balance
-        ON service_sales.eid = certificates_balance.certificates_balance_id
     LEFT JOIN bonus
         ON service_sales.eid = bonus.bonus_id
 

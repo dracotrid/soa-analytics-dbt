@@ -14,19 +14,11 @@ bonus_report_goods AS (
     FROM {{ tf_ref('ds_cleverbox__interm__bonus_goods_sales') }}
 ),
 
-certificates_balance AS (
-    SELECT
-        yuid AS certificates_balance_id,
-        sum(sum) AS certificates_balance_sum
-    FROM {{ tf_source('ds_cleverbox__raw__certificates_and_balance_goods') }}
-    GROUP BY yuid
-),
-
 report_goods_step_1 AS (
     SELECT
         *,
         cost_total - paid AS discount_total,
-        paid - coalesce(certificates_balance_sum, 0) AS income_total,
+        paid AS income_total,
         round(paid / amount, 5) AS price,
         round(cost_price_total / amount, 5) AS cost_price_unit
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
@@ -34,8 +26,6 @@ report_goods_step_1 AS (
         ON goods_sales.expert_name = employees_position.employees_position_expert_name
     LEFT JOIN bonus_report_goods
         ON goods_sales.eid = bonus_report_goods.bonus_id
-    LEFT JOIN certificates_balance
-        ON goods_sales.eid = certificates_balance.certificates_balance_id
 ),
 
 report_goods_step_2 AS (
