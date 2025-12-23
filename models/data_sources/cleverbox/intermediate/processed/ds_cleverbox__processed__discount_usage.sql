@@ -46,7 +46,9 @@ discount_usage_step_2 AS (
             ' ',
             '_'
         ) AS goods_id,
-        discount_name -- TODO if discount_name is empty set 'АБОНЕМЕНТ'
+        discount_name, -- TODO if discount_name is empty set 'АБОНЕМЕНТ'
+        product_id,
+        client_code
     FROM discount_usage_step_1
 ),
 
