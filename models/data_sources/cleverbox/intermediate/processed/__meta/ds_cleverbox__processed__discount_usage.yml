@@ -18,3 +18,9 @@ models:
       - name: discount_name
         data_type: STRING
         description: Discount name
+      - name: product_id
+        data_type: STRING
+        description: ""
+      - name: client_code
+        data_type: STRING
+        description: ""
