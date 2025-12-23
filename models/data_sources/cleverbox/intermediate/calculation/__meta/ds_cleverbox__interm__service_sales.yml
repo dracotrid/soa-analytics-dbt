@@ -69,12 +69,6 @@ models:
       - name: subscription
         data_type: NUMERIC.COST
         description: Subscription
-      - name: certificate
-        data_type: NUMERIC.COST
-        description: Certificate
-        meta:
-          tf_config:
-            field: certificates_balance_sum
       - name: cost_total
         data_type: NUMERIC.COST
         description: Total cost of services
