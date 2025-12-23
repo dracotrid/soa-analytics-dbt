@@ -30,6 +30,9 @@ models:
       - name: expert_position
         data_type: STRING
         description: Speciality of employee
+      - name: client_id
+        data_type: STRING
+        description: Client id
       - name: client_name
         data_type: STRING
         description: Client name
