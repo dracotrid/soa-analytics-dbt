@@ -39,7 +39,7 @@ WITH source AS (
         eid,
         'Сертифікат' AS product_type,
         date,
-        denomination AS income
+        price AS income
     FROM {{ tf_ref('ds_cleverbox__prepared__certificate_sales') }}
 
 )
