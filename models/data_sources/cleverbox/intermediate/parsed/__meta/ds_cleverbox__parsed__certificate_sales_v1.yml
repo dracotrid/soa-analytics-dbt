@@ -95,3 +95,9 @@ models:
         meta:
           tf_config:
             constant: 0
+      - name: denomination
+        data_type: NUMERIC.COST
+        description: denomination
+        meta:
+          tf_config:
+            field: field_10
