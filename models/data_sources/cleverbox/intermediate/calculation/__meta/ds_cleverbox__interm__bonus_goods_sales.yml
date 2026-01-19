@@ -12,36 +12,6 @@ models:
       - name: eid
         data_type: STRING
         description: Record identifier
-      - name: date
-        data_type: DATE
-        description: Goods date of sale
-      - name: expert_name
-        data_type: STRING
-        description: The employee who sold the goods
-      - name: goods_name
-        data_type: STRING
-        description: Goods name
-      - name: client_id
-        data_type: STRING
-        description: Client id
-      - name: client_name
-        data_type: STRING
-        description: Client name
-      - name: amount
-        data_type: NUMERIC.AMOUNT
-        description: Amount of goods sold
-      - name: paid
-        data_type: NUMERIC.COST
-        description: Price of goods
-      - name: cost_total
-        data_type: NUMERIC.COST
-        description: Cost of goods
-      - name: is_vip
-        data_type: BOOLEAN
-        description: Client is VIP
-      - name: is_employee
-        data_type: BOOLEAN
-        description: Client is employee
       - name: bonus_employee_code
         data_type: STRING
         description: Bonus code from bonus_employee table
@@ -66,18 +36,15 @@ models:
       - name: cleverbox_bonus_type
         data_type: STRING
         description: Bonus type for calculation employee cleverbox bonus
-      - name: base_for_bonus
-        data_type: NUMERIC.PRICE
-        description: Base for bonus calculation
       - name: cleverbox_base_for_bonus
         data_type: NUMERIC.PRICE
         description: Base for cleverbox bonus calculation
-      - name: bonus_value
+      - name: bonus_percent
         data_type: NUMERIC.PRICE
-        description: Bonus value
-      - name: bonus_total
-        data_type: NUMERIC.COST
-        description: Total employee bonus for selling goods
+        description: Bonus percent
+      - name: fixed_bonus_sum
+        data_type: NUMERIC.PRICE
+        description: Fixed bonus sum
       - name: cleverbox_bonus_total
         data_type: NUMERIC.COST
         description: Employee bonus for selling a goods according Cleverbox

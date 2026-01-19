@@ -1,0 +1,5 @@
+groups:
+  - name: dm_reports
+    owner:
+      # 'name' or 'email' is required; additional properties allowed
+      name: SoloMia Team

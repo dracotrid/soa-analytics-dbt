@@ -69,6 +69,16 @@ seeds:
             +tags: ["asset-type:mapping"]
     data_marts:
       +tags: "scope:data-mart"
+      reports:
+        +schema: "dm_reports"
+        +group: "dm_reports"
+        +tags: ["dm-name:reports"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+          _configs:
+            +tags: ["asset-type:config"]
+          _mappings:
+            +tags: ["asset-type:mapping"]
       hr:
         +schema: "dm_hr"
         +group: "dm_hr"
@@ -160,6 +170,19 @@ models:
       +docs:
         node_color: "#00d5dd"
       +materialized: table
+      reports:
+        +schema: "dm_reports"
+        +group: "dm_reports"
+        +tags: ["dm-name:reports"]
+        +docs:
+          node_color: "#1e1326"
+        input:
+          +materialized: view
+          +tags: ["asset-type:input"]
+        intermediate:
+          +tags: ["asset-type:intermediate"]
+        output:
+          +tags: ["asset-type:output"]
       hr:
         +schema: "dm_hr"
         +group: "dm_hr"

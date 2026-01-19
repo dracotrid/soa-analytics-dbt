@@ -1,0 +1,14 @@
+ersion: 2
+
+models:
+  - name: dm_reports__src__cleverbox_service_sales
+    description: "Reports Source Cleverbox Service Sales"
+    config:
+      alias: src__cleverbox_service_sales
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: cleverbox_cost_price_total
+        data_type: NUMERIC.COST
+        description: Cost price of services from Cleverbox

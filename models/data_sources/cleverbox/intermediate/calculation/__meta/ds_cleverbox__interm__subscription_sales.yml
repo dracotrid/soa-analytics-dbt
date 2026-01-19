@@ -15,24 +15,6 @@ models:
       - name: date
         data_type: DATE
         description: Subscription date of sale
-      - name: year
-        data_type: STRING
-        description: Subscription year of sale
-        meta:
-          tf_config:
-            expression: EXTRACT(YEAR FROM date)
-      - name: month
-        data_type: STRING
-        description: Subscription month of sale
-        meta:
-          tf_config:
-            expression: EXTRACT(MONTH FROM date)
-      - name: day
-        data_type: STRING
-        description: Subscription day of sale
-        meta:
-          tf_config:
-            expression: EXTRACT(DAY FROM date)
       - name: branch
         data_type: STRING
         description: Branch of subscription sale
@@ -72,9 +54,6 @@ models:
       - name: cost_price_unit
         data_type: NUMERIC.COST
         description: Cost price of one subscription
-      - name: payback
-        data_type: NUMERIC.COST
-        description: Payback of the subscription
       - name: cost_total
         data_type: NUMERIC.COST
         description: Total cost of subscriptions
@@ -90,12 +69,6 @@ models:
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Employee bonus for selling a subscriptions
-      - name: profit_total
-        data_type: NUMERIC.COST
-        description: Profit from subscriptions sales
-      - name: margin
-        data_type: NUMERIC.PRICE
-        description: Margin from subscriptions sales
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
         description: Employee bonus for selling a subscriptions according Cleverbox

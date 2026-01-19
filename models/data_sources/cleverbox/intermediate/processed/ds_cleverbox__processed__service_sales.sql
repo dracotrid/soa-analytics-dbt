@@ -13,6 +13,16 @@ services AS (
     FROM {{ tf_ref('ds_cleverbox__parsed__services') }}
 ),
 
+vip_clients_table AS (
+    SELECT client_name AS vip_client_name
+    FROM {{ tf_source('ds_cleverbox__raw__vip_clients') }}
+),
+
+employees AS (
+    SELECT name_for_service
+    FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
+),
+
 intermediate_step_1 AS (
     SELECT
         REPLACE(
@@ -70,12 +80,18 @@ final AS (
             WHEN EXTRACT(YEAR FROM date) = 2024 THEN cost_price
             WHEN COALESCE(service_cost_price, 0) = 0 THEN cost_price
             ELSE service_cost_price * amount
-        END AS cost_price_total
+        END AS cost_price_total,
+        NOT COALESCE(vip_client_name IS NULL, FALSE) AS is_vip,
+        NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee
     FROM intermediate_step_1 AS service_sales
     LEFT JOIN employees_position
         ON service_sales.expert_name = employees_position.employees_position_name
     LEFT JOIN services
         ON service_sales.code = services.services_code
+    LEFT JOIN vip_clients_table
+        ON service_sales.client_name = vip_clients_table.vip_client_name
+    LEFT JOIN employees
+        ON service_sales.client_name = employees.name_for_service
 )
 
 {{ tf_transform_model('final') }}

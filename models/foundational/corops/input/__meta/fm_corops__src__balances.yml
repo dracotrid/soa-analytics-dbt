@@ -12,15 +12,6 @@ models:
       - name: date
         data_type: DATE
         description: Balance date of replenish
-      - name: year
-        data_type: STRING
-        description: Balance year of replenish
-      - name: month
-        data_type: STRING
-        description: Balance month of replenish
-      - name: day
-        data_type: STRING
-        description: Balance day of replenish
       - name: branch
         data_type: STRING
         description: Branch of balance replenish
@@ -60,9 +51,6 @@ models:
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of replenish one balance
-      - name: payback
-        data_type: NUMERIC.COST
-        description: ""
       - name: cost_total
         data_type: NUMERIC.COST
         description: Total sum of replenish
@@ -78,12 +66,6 @@ models:
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Employee bonus for balance replenishment
-      - name: profit_total
-        data_type: NUMERIC.COST
-        description: Profit from balances replenishment
-      - name: margin
-        data_type: NUMERIC.PRICE
-        description: Margin from balances replenishment
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
         description: Employee bonus for balance replenishment according Cleverbox

@@ -48,6 +48,12 @@ models:
       - name: client_name
         data_type: STRING
         description: Client name
+      - name: is_vip
+        data_type: BOOLEAN
+        description: Client is VIP
+      - name: is_employee
+        data_type: BOOLEAN
+        description: Client is employee
       - name: service_name
         data_type: STRING
         description: Service name

@@ -117,29 +117,13 @@ discount_usage AS (
     FROM {{ tf_ref('ds_cleverbox__processed__discount_usage') }}
 ),
 
-vip_clients_table AS (
-    SELECT client_name AS vip_client_name
-    FROM {{ tf_source('ds_cleverbox__raw__vip_clients') }}
-),
-
-employees AS (
-    SELECT name_for_service
-    FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
-),
-
 intermediate_step_1_source AS (
     SELECT
         *,
-        NOT COALESCE(vip_client_name IS NULL, FALSE) AS is_vip,
-        NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
         CASE WHEN cost_total = 0 OR discount = 0 THEN 0 ELSE discount / cost_total END AS discount_rate
     FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
     LEFT JOIN bonus_employee_values
         ON service_sales.eid = bonus_employee_values.bonus_employee_values__eid
-    LEFT JOIN vip_clients_table
-        ON service_sales.client_name = vip_clients_table.vip_client_name
-    LEFT JOIN employees
-        ON service_sales.client_name = employees.name_for_service
 ),
 
 intermediate_step_2_source AS (
@@ -179,12 +163,14 @@ intermediate_step_3_source AS (
 intermediate_step_4_source AS (
     SELECT
         *,
-        ROUND(CASE
-            WHEN bonus_type_for_calculation = '%ВідОплати' THEN paid
-            WHEN bonus_type_for_calculation = '%ВідВартості' THEN cost_total
+        CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
             ELSE 0
-        END, 2) AS cost_for_bonus
+        END AS fixed_bonus_sum,
+        CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
+            ELSE bonus_value
+        END AS bonus_percent
     FROM intermediate_step_3_source
 ),
 
@@ -192,10 +178,15 @@ intermediate_step_5_source AS (
     SELECT
         *,
         CASE
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
-            WHEN is_bonus_without_cost_price THEN cost_for_bonus
-            ELSE cost_for_bonus - cost_price_total
-        END AS base_for_bonus
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
+            WHEN paid = 0 THEN 0
+            WHEN is_bonus_without_cost_price = TRUE THEN paid
+            ELSE paid - cleverbox_cost_price_total
+        END AS bonus_cleverbox_base_for_bonus,
+        CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN 'Фіксована'
+            ELSE '%ВідОплати'
+        END AS cleverbox_bonus_type
     FROM intermediate_step_4_source
 ),
 
@@ -203,19 +194,16 @@ intermediate_step_6_source AS (
     SELECT
         *,
         CASE
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
-            ELSE base_for_bonus * bonus_value
-        END AS bonus_calculated
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
+            ELSE bonus_cleverbox_base_for_bonus * bonus_percent
+        END AS bonus_cleverbox_total
     FROM intermediate_step_5_source
 ),
 
 intermediate_step_7_source AS (
     SELECT
         *,
-        CASE
-            WHEN bonus_calculated < 0 THEN 0
-            ELSE bonus_calculated
-        END AS bonus_total
+        bonus_cleverbox_total / amount AS bonus_cleverbox_unit
     FROM intermediate_step_6_source
 ),
 
