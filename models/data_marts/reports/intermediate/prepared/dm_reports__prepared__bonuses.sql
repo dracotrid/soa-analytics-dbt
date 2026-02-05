@@ -13,24 +13,26 @@ WITH source AS (
         service_sales.price AS paid,
         service_sales.cost_price_total AS cost_price,
         cleverbox_service_sales.cleverbox_cost_price_total AS cleverbox_cost_price,
-        internal_bonus.bonus_discount_name AS bonus_discount,
-        internal_bonus.bonus_discount_type AS bonus_discount__bonus_type,
-        internal_bonus.bonus_employee__code AS bonus_employee,
+        cleverbox_internal_bonus.bonus_discount_name AS bonus_discount,
+        cleverbox_internal_bonus.bonus_discount_type AS bonus_discount__bonus_type,
+        cleverbox_internal_bonus.bonus_employee__code AS bonus_employee,
         service_sales.bonus_total AS internal_bonus,
-        internal_bonus.bonus_cleverbox_total AS cleverbox_bonus,
-        internal_bonus.bonus_type_for_calculation AS internal_bonus_type,
-        internal_bonus.cleverbox_bonus_type,
-        internal_bonus.bonus_percent,
-        internal_bonus.fixed_bonus_sum,
+        cleverbox_internal_bonus.bonus_cleverbox_total AS cleverbox_bonus,
+        cleverbox_internal_bonus.bonus_type_for_calculation AS internal_bonus_type,
+        cleverbox_internal_bonus.cleverbox_bonus_type,
+        cleverbox_internal_bonus.bonus_percent,
+        cleverbox_internal_bonus.fixed_bonus_sum,
         internal_bonus.base_for_bonus AS base_for_internal_bonus,
-        internal_bonus.bonus_cleverbox_base_for_bonus AS base_for_cleverbox_bonus,
-        internal_bonus.is_bonus_without_cost_price,
-        service_sales.bonus_total - internal_bonus.bonus_cleverbox_total AS delta
+        cleverbox_internal_bonus.bonus_cleverbox_base_for_bonus AS base_for_cleverbox_bonus,
+        cleverbox_internal_bonus.is_bonus_without_cost_price,
+        service_sales.bonus_total - cleverbox_internal_bonus.bonus_cleverbox_total AS delta
     FROM {{ tf_ref('dm_reports__prepared__service_sales') }} AS service_sales
     LEFT JOIN {{ tf_ref('dm_reports__src__bonus_service_sales') }} AS internal_bonus
         ON service_sales.eid = internal_bonus.eid
     LEFT JOIN {{ tf_ref('dm_reports__src__cleverbox_service_sales') }} AS cleverbox_service_sales
         ON service_sales.eid = cleverbox_service_sales.eid
+    LEFT JOIN {{ tf_ref('dm_reports__src__cleverbox_bonus_service_sales') }} AS cleverbox_internal_bonus
+        ON service_sales.eid = cleverbox_internal_bonus.eid
 
     UNION ALL
 
@@ -48,20 +50,22 @@ WITH source AS (
         goods_sales.paid,
         goods_sales.cost_price_total AS cost_price,
         goods_sales.cost_price_total AS cleverbox_cost_price,
-        bonus.bonus_discount_name AS bonus_discount,
-        bonus.bonus_discount_type AS bonus_discount__bonus_type,
-        bonus.bonus_employee_code AS bonus_employee,
+        bonus_cleverbox.bonus_discount_name AS bonus_discount,
+        bonus_cleverbox.bonus_discount_type AS bonus_discount__bonus_type,
+        bonus_cleverbox.bonus_employee_code AS bonus_employee,
         goods_sales.bonus_total AS internal_bonus,
         goods_sales.cleverbox_bonus_total AS cleverbox_bonus,
-        bonus.bonus_type_for_calculation AS internal_bonus_type,
-        bonus.cleverbox_bonus_type,
-        bonus.bonus_percent,
-        bonus.fixed_bonus_sum,
+        bonus_cleverbox.bonus_type_for_calculation AS internal_bonus_type,
+        bonus_cleverbox.cleverbox_bonus_type,
+        bonus_cleverbox.bonus_percent,
+        bonus_cleverbox.fixed_bonus_sum,
         bonus.base_for_bonus AS base_for_internal_bonus,
-        bonus.cleverbox_base_for_bonus AS base_for_cleverbox_bonus,
+        bonus_cleverbox.cleverbox_base_for_bonus AS base_for_cleverbox_bonus,
         false AS is_bonus_without_cost_price,
-        goods_sales.bonus_total - bonus.cleverbox_bonus_total AS delta
+        goods_sales.bonus_total - bonus_cleverbox.cleverbox_bonus_total AS delta
     FROM {{ tf_ref('dm_reports__prepared__goods_sales') }} AS goods_sales
+    LEFT JOIN {{ tf_ref('dm_reports__src__cleverbox_bonus_goods_sales') }} AS bonus_cleverbox
+        ON goods_sales.eid = bonus_cleverbox.eid
     LEFT JOIN {{ tf_ref('dm_reports__src__bonus_goods_sales') }} AS bonus
         ON goods_sales.eid = bonus.eid
 )

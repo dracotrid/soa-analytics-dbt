@@ -2,7 +2,7 @@ WITH bonus_cleverbox_goods_sales AS (
     SELECT
         eid AS bonus_cleverbox_goods_sales__id,
         cleverbox_bonus_total
-    FROM {{ tf_ref('dm_reports__src__bonus_goods_sales') }}
+    FROM {{ tf_ref('dm_reports__src__cleverbox_bonus_goods_sales') }}
 ),
 
 final AS (
