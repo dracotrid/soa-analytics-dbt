@@ -20,7 +20,6 @@ report_subscriptions_step_1 AS (
     SELECT
         *,
         cost - COALESCE(discount, 0) AS price,
-        CASE WHEN cost = 0 THEN 0 ELSE 1 END AS payback,
         amount * cost AS cost_total,
         NOT COALESCE(vip_client_name IS NULL, FALSE) AS is_vip,
         NOT COALESCE(name_for_service IS NULL, FALSE) AS is_employee,
@@ -35,25 +34,11 @@ report_subscriptions_step_1 AS (
         ON subscriptions_sales.client = employees.name_for_service
 ),
 
-report_subscriptions_step_2 AS (
+final AS (
     SELECT
         *,
         amount * price AS income_total
     FROM report_subscriptions_step_1
-),
-
-report_subscriptions_step_3 AS (
-    SELECT
-        *,
-        income_total - cost_price_total - bonus_total AS profit_total
-    FROM report_subscriptions_step_2
-),
-
-final AS (
-    SELECT
-        *,
-        CASE WHEN income_total = 0 THEN 0 ELSE profit_total / income_total END AS margin
-    FROM report_subscriptions_step_3
 )
 
 {{ tf_transform_model('final') }}

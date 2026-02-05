@@ -1,14 +1,4 @@
-WITH vip_clients_table AS (
-    SELECT client_name AS vip_client_name
-    FROM {{ tf_source('ds_cleverbox__raw__vip_clients') }}
-),
-
-employees AS (
-    SELECT name_for_goods
-    FROM {{ tf_ref('ds_cleverbox__parsed__employees') }}
-),
-
-bonus_employee AS (
+WITH bonus_employee AS (
     SELECT
         uid AS bonus_employee_code,
         bonus_value AS bonus_employee_value,
@@ -37,8 +27,6 @@ bonus_discount AS (
 bonus_report_goods_step_1 AS (
     SELECT
         *,
-        NOT COALESCE(vip_client_name IS NULL, FALSE) AS is_vip,
-        NOT COALESCE(name_for_goods IS NULL, FALSE) AS is_employee,
         REPLACE(
             CONCAT(
                 FORMAT_DATE('%Y-%m-%d', date),
@@ -55,10 +43,6 @@ bonus_report_goods_step_1 AS (
             '_'
         ) AS du_id
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
-    LEFT JOIN vip_clients_table
-        ON goods_sales.client_name = vip_clients_table.vip_client_name
-    LEFT JOIN employees
-        ON goods_sales.client_name = employees.name_for_goods
     LEFT JOIN bonus_employee
         ON
             CONCAT(goods_sales.expert_name, '-Товар-ВСЕ') = bonus_employee.bonus_employee_code
@@ -92,23 +76,20 @@ bonus_report_goods_step_4 AS (
     SELECT
         *,
         CASE
-            WHEN bonus_type_for_calculation = '%ВідОплати' THEN paid
-            WHEN bonus_type_for_calculation = '%ВідВартості' THEN cost_total
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_employee_value
             ELSE 0
-        END AS base_for_bonus,
+        END AS fixed_bonus_sum,
         CASE
             WHEN COALESCE(bonus_discount_value, 0) = 0 THEN bonus_employee_value
             ELSE bonus_discount_value
-        END AS bonus_value
+        END AS bonus_percent
     FROM bonus_report_goods_step_3
 ),
 
 final AS (
     SELECT
         *,
-        base_for_bonus * bonus_value AS bonus_total,
-        ROUND(paid * bonus_value, 2) AS cleverbox_bonus_total
+        ROUND(cleverbox_base_for_bonus * bonus_percent, 2) AS cleverbox_bonus_total
     FROM bonus_report_goods_step_4
 )
 

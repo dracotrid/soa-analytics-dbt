@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: fm_corops__src__bonus_service_sales
+    description: "Corops bonus Service Sales"
+    config:
+      alias: src__bonus_service_sales
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: bonus_type_for_calculation
+        data_type: STRING
+        description: Bonus type for calculation
+      - name: bonus_percent
+        data_type: NUMERIC.PRICE
+        description: Bonus percent
+      - name: is_bonus_without_cost_price
+        data_type: BOOLEAN
+        description: Use cost price for bonus calculation
+      - name: fixed_bonus_sum
+        data_type: NUMERIC.COST
+        description: Fixed bonus sum

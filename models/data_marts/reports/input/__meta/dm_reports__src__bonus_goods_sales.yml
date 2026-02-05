@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: dm_reports__src__bonus_goods_sales
+    description: "Reports Source Bonus Goods Sales"
+    config:
+      alias: src__bonus_goods_sales
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: base_for_bonus
+        data_type: NUMERIC.COST
+        description: Base for bonus calculation

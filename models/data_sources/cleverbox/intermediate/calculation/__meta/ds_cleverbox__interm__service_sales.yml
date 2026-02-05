@@ -15,15 +15,6 @@ models:
       - name: date
         data_type: DATE
         description: Service date of sale
-      - name: year
-        data_type: STRING
-        description: Service year of sale
-      - name: month
-        data_type: STRING
-        description: Service month of sale
-      - name: day
-        data_type: STRING
-        description: Service day of sale
       - name: branch
         data_type: STRING
         description: Branch of service sale
@@ -87,27 +78,9 @@ models:
       - name: cleverbox_cost_price_total
         data_type: NUMERIC.COST
         description: Cost price of services from Cleverbox
-      - name: discount_persent
+      - name: discount_percent
         data_type: NUMERIC.COST
-        description: Persent of discount
+        description: Percent of discount
       - name: income_total
         data_type: NUMERIC.COST
         description: Income from services sales
-      - name: bonus_total
-        data_type: NUMERIC.COST
-        description: Employee bonus for selling a services
-      - name: profit_total
-        data_type: NUMERIC.COST
-        description: Profit from services sales
-      - name: bonus_margin
-        data_type: NUMERIC.COST
-        description: Margin of employee bonus
-      - name: margin
-        data_type: NUMERIC.COST
-        description: Margin from services sales
-      - name: bonus_cleverbox_total
-        data_type: NUMERIC.COST
-        description: Employee bonus for selling a services according Cleverbox
-      - name: payback
-        data_type: NUMERIC.COST
-        description: Payback of the service
