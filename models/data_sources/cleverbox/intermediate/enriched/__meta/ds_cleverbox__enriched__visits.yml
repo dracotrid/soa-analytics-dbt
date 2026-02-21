@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__enriched__visits
+    description: "CleverBox enriched visits"
+    config:
+      alias: enriched__visits
+      contract:
+        enforced: false
+      meta:
+        tf_config:
+          op: meta_enrich

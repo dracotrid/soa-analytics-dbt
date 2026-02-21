@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__visits
+    description: "CleverBox Visits"
+    config:
+      alias: visits
+    columns:
+      - name: eid
+        data_type: STRING
+        description: ""
+      - name: date
+        data_type: DATE
+        description: Subscription date of sale
+      - name: branch
+        data_type: STRING
+        description: Branch
+      - name: client_id
+        data_type: STRING
+        description: Client id
+      - name: client
+        data_type: STRING
+        description: Client
+      - name: expert_name
+        data_type: STRING
+        description: The employee who sold the subscription
+      - name: product
+        data_type: STRING
+        description: Product
+      - name: visit_status
+        data_type: STRING
+        description: Status of the visit
