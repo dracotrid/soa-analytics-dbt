@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__parsed__visits_v1
+    description: "CleverBox Parsed Visits v1"
+    config:
+      alias: parsed__visits_v1
+      meta:
+        tf_config:
+          op: schema_version
+          schema_version: 1
+    columns:
+      - name: eid
+        data_type: STRING
+        description: ""
+        meta:
+          tf_config:
+            field: field_0
+      - name: date
+        data_type: DATE
+        description: Subscription date of sale
+        meta:
+          tf_config:
+            expression: PARSE_DATE('%d.%m.%Y', field_2)
+      - name: branch
+        data_type: STRING
+        description: Branch
+        meta:
+          tf_config:
+            field: field_4
+            required: false
+      - name: client_id
+        data_type: STRING
+        description: Client id
+        meta:
+          tf_config:
+            field: field_5
+      - name: client
+        data_type: STRING
+        description: Client
+        meta:
+          tf_config:
+            field: field_6
+      - name: expert_name
+        data_type: STRING
+        description: The employee who sold the subscription
+        meta:
+          tf_config:
+            field: field_12
+      - name: product
+        data_type: STRING
+        description: Product
+        meta:
+          tf_config:
+            field: field_13
+      - name: visit_status
+        data_type: STRING
+        description: Status of the visit
+        meta:
+          tf_config:
+            field: field_15
