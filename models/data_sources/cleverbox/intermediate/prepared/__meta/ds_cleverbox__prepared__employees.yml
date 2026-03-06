@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__prepared__employees
+    description: "CleverBox Prepared Employees"
+    config:
+      alias: prepared__employees
+    columns:
+      - name: name
+        data_type: STRING
+        description: Employee name
+      - name: job_title
+        data_type: STRING
+        description: Employee job title
+      - name: status
+        data_type: STRING
+        description: Employee status
+      - name: name_for_service
+        data_type: STRING
+        description: Name as client for service sale
+      - name: name_for_goods
+        data_type: STRING
+        description: Name as client for goods sale
+      - name: direction
+        data_type: STRING
+        description: Direction

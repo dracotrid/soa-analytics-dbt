@@ -27,3 +27,6 @@ sources:
           - name: string_field_4
             data_type: STRING
             description: Name as client for goods sale
+          - name: string_field_5
+            data_type: STRING
+            description: Direction
