@@ -39,3 +39,9 @@ models:
         meta:
           tf_config:
             field: string_field_4
+      - name: direction
+        data_type: STRING
+        description: Direction
+        meta:
+          tf_config:
+            field: string_field_5
