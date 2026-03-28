@@ -81,6 +81,9 @@ models:
       - name: profit_total
         data_type: NUMERIC.COST
         description: Profit from services sales
+      - name: profit_total_test
+        data_type: NUMERIC.COST
+        description: Profit from services sales
       - name: margin
         data_type: NUMERIC.COST
         description: Margin from services sales

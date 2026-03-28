@@ -33,9 +33,26 @@ bonus_employee_values AS (
     SELECT
         eid AS bonus_employee_values__eid,
         CASE
-            WHEN is_first_visit AND visit_sum < bonus_employee__expected_sum_first_visit THEN bonus_employee__min_bonus_first_visit
+            WHEN bonus_employee__direction_visit_number = 1 THEN bonus_employee__value
+            WHEN bonus_employee__direction_visit_number >= 7 THEN bonus_employee__value
             ELSE bonus_employee__value
         END AS bonus_employee__bonus_value,
+        CASE
+            WHEN direction = 'Подологія'
+                THEN
+                    CASE
+                        WHEN bonus_employee__direction_visit_number = 1
+                            THEN
+                                CASE
+                                    WHEN expert_name = 'Коновалова Сніжана' THEN 0.35
+                                    ELSE 0.25
+                                END
+                        WHEN bonus_employee__direction_visit_number >= 7 THEN 0.45
+                        ELSE bonus_employee__value
+                    END
+            ELSE bonus_employee__value
+        END AS bonus_employee__bonus_value_test,
+
         bonus_employee__type,
         bonus_employee__use_cost_price,
         bonus_employee__code,
@@ -43,11 +60,15 @@ bonus_employee_values AS (
         bonus_employee__min_bonus_first_visit,
         bonus_employee__expected_sum_first_visit,
         is_first_visit,
-        visit_sum
+        visit_sum,
+        bonus_employee__direction_visit_number
     FROM (
         SELECT
             eid,
-            COALESCE(ROW_NUMBER() OVER (PARTITION BY client_code, direction ORDER BY date) = 1, FALSE) AS is_first_visit,
+            expert_name,
+            direction,
+            COALESCE(DENSE_RANK() OVER (PARTITION BY client_code, direction ORDER BY date) = 1, FALSE) AS is_first_visit,
+            DENSE_RANK() OVER (PARTITION BY client_code, direction ORDER BY date) AS bonus_employee__direction_visit_number,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__value
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__value
@@ -154,6 +175,7 @@ intermediate_step_3_source AS (
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
         COALESCE(bonus_discount_value, bonus_employee__bonus_value) AS bonus_value,
+        COALESCE(bonus_discount_value, bonus_employee__bonus_value_test) AS bonus_value_test,
         year = '2024' OR NOT bonus_employee__use_cost_price AS is_bonus_without_cost_price
     FROM intermediate_step_2_source
     LEFT JOIN bonus_discount
@@ -170,7 +192,11 @@ intermediate_step_4_source AS (
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
             ELSE bonus_value
-        END AS bonus_percent
+        END AS bonus_percent,
+        CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
+            ELSE bonus_value_test
+        END AS bonus_percent_test
     FROM intermediate_step_3_source
 ),
 

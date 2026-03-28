@@ -33,3 +33,18 @@ models:
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Total employee bonus for selling service
+      - name: bonus_total_test
+        data_type: NUMERIC.COST
+        description: Total employee bonus for selling service
+      - name: paid
+        data_type: NUMERIC.COST
+        description: ""
+      - name: income_total
+        data_type: NUMERIC.COST
+        description: ""
+      - name: profit_total
+        data_type: NUMERIC.COST
+        description: Total employee bonus for selling service
+      - name: profit_total_test
+        data_type: NUMERIC.COST
+        description: Total employee bonus for selling service

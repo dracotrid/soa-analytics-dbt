@@ -1,14 +1,16 @@
 WITH bonus_service_sales AS (
     SELECT
         eid AS bonus_eid,
-        bonus_total
+        bonus_total,
+        bonus_total_test
     FROM {{ tf_ref('fm_corops__processed__bonus_service_sales') }}
 ),
 
 processed_step_1_source AS (
     SELECT
         *,
-        income_total - cost_price_total - coalesce(bonus_total, 0) AS profit_total
+        income_total - cost_price_total - coalesce(bonus_total, 0) AS profit_total,
+        income_total - cost_price_total - coalesce(bonus_total_test, 0) AS profit_total_test
     FROM {{ tf_ref('fm_corops__src__service_sales') }} AS scr_service_sales
     LEFT JOIN bonus_service_sales
         ON scr_service_sales.eid = bonus_service_sales.bonus_eid

@@ -2,6 +2,7 @@ WITH service_sales AS (
     SELECT
         eid AS service_sales__eid,
         paid,
+        income_total,
         cost_total AS cost,
         cost_price_total AS cost_price
     FROM {{ tf_ref('fm_corops__src__service_sales') }}
@@ -38,7 +39,11 @@ processed_step_3_source AS (
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
             ELSE base_for_bonus * bonus_percent
-        END AS bonus_calculated
+        END AS bonus_calculated,
+        CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
+            ELSE base_for_bonus * bonus_percent_test
+        END AS bonus_calculated_test
     FROM processed_step_2_source
 ),
 
@@ -48,7 +53,11 @@ processed_step_4_source AS (
         CASE
             WHEN bonus_calculated < 0 THEN 0
             ELSE bonus_calculated
-        END AS bonus_total
+        END AS bonus_total,
+        CASE
+            WHEN bonus_calculated_test < 0 THEN 0
+            ELSE bonus_calculated_test
+        END AS bonus_total_test
     FROM processed_step_3_source
 ),
 

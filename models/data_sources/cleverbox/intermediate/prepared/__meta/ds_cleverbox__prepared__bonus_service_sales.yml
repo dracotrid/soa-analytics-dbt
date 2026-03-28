@@ -60,6 +60,9 @@ models:
       - name: bonus_percent
         data_type: NUMERIC.PRICE
         description: Bonus percent
+      - name: bonus_percent_test
+        data_type: NUMERIC.PRICE
+        description: Bonus percent
       - name: fixed_bonus_sum
         data_type: NUMERIC.COST
         description: Fixed bonus sum

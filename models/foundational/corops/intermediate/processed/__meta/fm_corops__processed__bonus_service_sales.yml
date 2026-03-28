@@ -15,6 +15,9 @@ models:
       - name: bonus_percent
         data_type: NUMERIC.PRICE
         description: Bonus percent
+      - name: bonus_percent_test
+        data_type: NUMERIC.PRICE
+        description: Bonus percent
       - name: is_bonus_without_cost_price
         data_type: BOOLEAN
         description: Use cost price for bonus calculation
@@ -33,3 +36,12 @@ models:
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Total employee bonus for selling service
+      - name: bonus_total_test
+        data_type: NUMERIC.COST
+        description: Total employee bonus for selling service
+      - name: paid
+        data_type: NUMERIC.COST
+        description: ""
+      - name: income_total
+        data_type: NUMERIC.COST
+        description: ""

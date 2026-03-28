@@ -15,6 +15,9 @@ models:
       - name: bonus_percent
         data_type: NUMERIC.PRICE
         description: Bonus percent
+      - name: bonus_percent_test
+        data_type: NUMERIC.PRICE
+        description: Bonus percent
       - name: is_bonus_without_cost_price
         data_type: BOOLEAN
         description: Use cost price for bonus calculation

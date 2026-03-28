@@ -30,6 +30,15 @@ models:
       - name: bonus_employee__expected_sum_first_visit
         data_type: NUMERIC.COST
         description: Min expected sum for first visit from bonus_employee table
+      - name: direction_visit_number
+        data_type: INTEGER
+        description: Min expected sum for first visit from bonus_employee table
+        meta:
+          tf_config:
+            field: bonus_employee__direction_visit_number
+      - name: bonus_employee__bonus_value_test
+        data_type: NUMERIC.COST
+        description: Min expected sum for first visit from bonus_employee table
       - name: visit_sum
         data_type: NUMERIC.COST
         description: Sum which client spent
@@ -61,6 +70,9 @@ models:
         data_type: STRING
         description: Bonus type for calculation employee bonus
       - name: bonus_percent
+        data_type: NUMERIC.PRICE
+        description: Bonus percent
+      - name: bonus_percent_test
         data_type: NUMERIC.PRICE
         description: Bonus percent
       - name: fixed_bonus_sum
