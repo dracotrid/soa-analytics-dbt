@@ -18,9 +18,6 @@ models:
       - name: bonus_employee__value
         data_type: NUMERIC.COST
         description: Bonus value from bonus_employee table
-      - name: is_first_visit
-        data_type: BOOLEAN
-        description: Is first visit
       - name: bonus_employee__min_bonus_first_visit
         data_type: NUMERIC.COST
         description: Bonus value for first visit if paid less min expected sum from bonus_employee table

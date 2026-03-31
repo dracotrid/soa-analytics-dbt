@@ -43,14 +43,20 @@ sources:
             data_type: BOOLEAN
             description: Use cost price for bonus calculation
           - name: validity_from
-            data_type: STRING
+            data_type: DATE
             description: Validity from
           - name: validity_to
-            data_type: STRING
+            data_type: DATE
             description: Validity to
           - name: min_bonus_first_visit
-            data_type: STRING
+            data_type: NUMERIC.PRICE
             description: Min bonus first visit
           - name: expected_sum_first_visit
-            data_type: STRING
-            description: Min bonus first visit
+            data_type: NUMERIC.COST
+            description: Expected sum first visit
+          - name: extra_bonus_from_visit
+            data_type: NUMERIC
+            description: Extra bonus from visit number
+          - name: extra_bonus
+            data_type: NUMERIC.COST
+            description: Extra bonus value

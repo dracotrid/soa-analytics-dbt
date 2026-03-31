@@ -30,18 +30,18 @@ models:
       - name: validity_from
         data_type: DATE
         description: Validity from
-        meta:
-          tf_config:
-            expression: PARSE_DATE('%Y-%m-%d', validity_from)
       - name: validity_to
         data_type: DATE
         description: Validity to
-        meta:
-          tf_config:
-            expression: PARSE_DATE('%Y-%m-%d', validity_to)
       - name: min_bonus_first_visit
         data_type: NUMERIC.PRICE
         description: Min bonus first visit
       - name: expected_sum_first_visit
         data_type: NUMERIC.COST
         description: Min bonus first visit
+      - name: extra_bonus_from_visit
+        data_type: NUMERIC
+        description: Extra bonus from visit number
+      - name: extra_bonus
+        data_type: NUMERIC.COST
+        description: Extra bonus value
