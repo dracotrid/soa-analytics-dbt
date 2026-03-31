@@ -6,6 +6,8 @@ WITH bonus_employee AS (
         use_cost_price AS bonus_employee__use_cost_price,
         min_bonus_first_visit AS bonus_employee__min_bonus_first_visit,
         expected_sum_first_visit AS bonus_employee__expected_sum_first_visit,
+        extra_bonus_from_visit AS bonus_employee__extra_bonus_from_visit,
+        extra_bonus AS bonus_employee__extra_bonus,
         validity_from,
         validity_to
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
@@ -32,22 +34,27 @@ service_sum AS (
 bonus_employee_values AS (
     SELECT
         eid AS bonus_employee_values__eid,
+        COALESCE(visit_number = 1, FALSE) AS is_first_visit,
         CASE
-            WHEN is_first_visit AND visit_sum < bonus_employee__expected_sum_first_visit THEN bonus_employee__min_bonus_first_visit
+            WHEN visit_number = 1 AND visit_sum < bonus_employee__expected_sum_first_visit THEN bonus_employee__min_bonus_first_visit
+            WHEN
+                bonus_employee__extra_bonus_from_visit IS NOT NULL
+                AND bonus_employee__extra_bonus IS NOT NULL
+                AND visit_number >= bonus_employee__extra_bonus_from_visit THEN bonus_employee__extra_bonus
             ELSE bonus_employee__value
         END AS bonus_employee__bonus_value,
+        visit_number,
         bonus_employee__type,
         bonus_employee__use_cost_price,
         bonus_employee__code,
         bonus_employee__value,
         bonus_employee__min_bonus_first_visit,
         bonus_employee__expected_sum_first_visit,
-        is_first_visit,
         visit_sum
     FROM (
         SELECT
             eid,
-            COALESCE(ROW_NUMBER() OVER (PARTITION BY client_code, direction ORDER BY date) = 1, FALSE) AS is_first_visit,
+            DENSE_RANK() OVER (PARTITION BY client_code, direction ORDER BY date) AS visit_number,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__value
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__value
@@ -73,6 +80,16 @@ bonus_employee_values AS (
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__expected_sum_first_visit
                 WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__expected_sum_first_visit
             END AS bonus_employee__expected_sum_first_visit,
+            CASE
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__extra_bonus_from_visit
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__extra_bonus_from_visit
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__extra_bonus_from_visit
+            END AS bonus_employee__extra_bonus_from_visit,
+            CASE
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__extra_bonus
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__extra_bonus
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__extra_bonus
+            END AS bonus_employee__extra_bonus,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.code
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.code
