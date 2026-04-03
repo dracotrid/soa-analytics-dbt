@@ -42,7 +42,6 @@ expert_own_clients AS (
 bonus_employee_values AS (
     SELECT
         eid AS bonus_employee_values__eid,
-        COALESCE(visit_number = 1, FALSE) AS is_first_visit,
         CASE
             WHEN
                 bonus_employee__expert_client_bonus IS NOT NULL
