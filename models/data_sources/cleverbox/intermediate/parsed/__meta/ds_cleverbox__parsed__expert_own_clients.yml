@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__parsed__expert_own_clients
+    description: "CleverBox Parsed expert own clients"
+    config:
+      alias: parsed__expert_own_clients
+      meta:
+        tf_config:
+          filter: expert_name IS NOT NULL
+                  AND client_code IS NOT NULL
+    columns:
+      - name: expert_name
+        data_type: STRING
+        description: Expert name
+      - name: client_code
+        data_type: STRING
+        logic_type: STRING.CODE
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client name

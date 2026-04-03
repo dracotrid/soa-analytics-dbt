@@ -8,6 +8,7 @@ WITH bonus_employee AS (
         expected_sum_first_visit AS bonus_employee__expected_sum_first_visit,
         extra_bonus_from_visit AS bonus_employee__extra_bonus_from_visit,
         extra_bonus AS bonus_employee__extra_bonus,
+        expert_client_bonus AS bonus_employee__expert_client_bonus,
         validity_from,
         validity_to
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
@@ -31,11 +32,22 @@ service_sum AS (
         service_join_code
 ),
 
+expert_own_clients AS (
+    SELECT CONCAT(expert_name, client_code) AS expert_own_clients__join_code
+    FROM {{ tf_ref('ds_cleverbox__parsed__expert_own_clients') }}
+    GROUP BY
+        expert_own_clients__join_code
+),
+
 bonus_employee_values AS (
     SELECT
         eid AS bonus_employee_values__eid,
         COALESCE(visit_number = 1, FALSE) AS is_first_visit,
         CASE
+            WHEN
+                bonus_employee__expert_client_bonus IS NOT NULL
+                AND expert_own_clients_join_code IN (SELECT expert_own_clients__join_code FROM expert_own_clients)
+                THEN bonus_employee__expert_client_bonus
             WHEN visit_number = 1 AND visit_sum < bonus_employee__expected_sum_first_visit THEN bonus_employee__min_bonus_first_visit
             WHEN
                 bonus_employee__extra_bonus_from_visit IS NOT NULL
@@ -55,6 +67,7 @@ bonus_employee_values AS (
         SELECT
             eid,
             DENSE_RANK() OVER (PARTITION BY client_code, direction ORDER BY date) AS visit_number,
+            CONCAT(expert_name, client_code) AS expert_own_clients_join_code,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__value
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__value
@@ -95,6 +108,11 @@ bonus_employee_values AS (
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.code
                 WHEN be__service_all.code IS NOT NULL THEN be__service_all.code
             END AS bonus_employee__code,
+            CASE
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__expert_client_bonus
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__expert_client_bonus
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__expert_client_bonus
+            END AS bonus_employee__expert_client_bonus,
             COALESCE(goods_sum.paid, 0) + COALESCE(service_sum.paid, 0) AS visit_sum
         FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
         LEFT JOIN bonus_employee AS be__service_code

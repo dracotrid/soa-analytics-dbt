@@ -60,3 +60,6 @@ sources:
           - name: extra_bonus
             data_type: NUMERIC.COST
             description: Extra bonus value
+          - name: expert_client_bonus
+            data_type: NUMERIC.COST
+            description: Expert client bonus value
