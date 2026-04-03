@@ -72,3 +72,6 @@ models:
       - name: bonus_cleverbox_total
         data_type: NUMERIC.COST
         description: Bonus Cleverbox total
+      - name: direction
+        data_type: STRING
+        description: Direction
