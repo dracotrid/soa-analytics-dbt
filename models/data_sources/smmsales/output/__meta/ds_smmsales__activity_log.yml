@@ -1,0 +1,88 @@
+version: 2
+models:
+  - name: ds_smmsales__activity_log
+    description: "SMM sales activity log"
+    config:
+      alias: activity_log
+    columns:
+        - name: ruid
+          description: 'RUID'
+          data_type: STRING
+        - name: cuid
+          description: 'CUID'
+          data_type: STRING
+        - name: date
+          description: 'Дата'
+          data_type: DATE
+        - name: lead_name
+          description: 'Клієнт'
+          meta:
+            tf_config:
+              field: client
+          data_type: STRING
+        - name: communication_channel
+          description: 'Канал комунікації'
+          data_type: STRING
+        - name: note
+          description: 'Примітка'
+          data_type: STRING
+        - name: status
+          description: 'Статус звернення'
+          data_type: STRING
+        - name: booked
+          description: 'ЄЗапис'
+          data_type: INT
+        - name: source
+          description: 'Джерело ініціації'
+          data_type: STRING
+        - name: source_type
+          data_type: STRING
+          meta:
+            tf_config:
+              macro: smmsales__extract__source_type
+              params: [source]
+        - name: ad_name
+          data_type: STRING
+          meta:
+            tf_config:
+              macro: smmsales__extract__ad_name
+              params: [source]
+        - name: ad_audience
+          data_type: STRING
+          meta:
+            tf_config:
+              macro: smmsales__extract__ad_audience
+              params: [source, date]
+        - name: ad_name__canonical
+          data_type: STRING
+          meta:
+            tf_config:
+              macro: smmsales__extract__canonical_ad_name
+              params: [source]
+        - name: first_message
+          description: ''
+          data_type: STRING
+        - name: interest
+          description: 'Цікавий Напрямок'
+          data_type: STRING
+        - name: time_frame
+          description: 'Час Звернення'
+          data_type: STRING
+        - name: ad_count
+          description: 'Кількість звернень по рекламі за день'
+          data_type: INT
+        - name: visit_id
+          description: 'Номер Візиту в CRM'
+          data_type: STRING
+        - name: client_id
+          description: 'ID Клієнта в CRM'
+          data_type: STRING
+        - name: gender
+          description: 'Стать'
+          data_type: STRING
+        - name: lead_type
+          description: 'Лід Первинний чи Повторний'
+          data_type: STRING
+        - name: reminder
+          description: 'Нагадати'
+          data_type: STRING
