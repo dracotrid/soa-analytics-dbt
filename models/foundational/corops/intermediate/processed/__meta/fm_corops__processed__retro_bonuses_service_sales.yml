@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: fm_corops__processed__retro_bonuses_service_sales
+    description: "Corops Processed Retro Bonuses Service Sales"
+    config:
+      alias: processed__retro_bonuses_service_sales
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Goods date of sale
+        meta:
+          tf_config:
+            field: lv_date
+      - name: branch
+        data_type: STRING
+        description: Branch of goods sale
+        meta:
+          tf_config:
+            field: fv_branch
+      - name: expert_name
+        data_type: STRING
+        description: The employee who sold the goods
+        meta:
+          tf_config:
+            field: fv_expert_name
+      - name: client_code
+        data_type: STRING
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: service_code
+        data_type: STRING
+        description: Service code
+      - name: service_name
+        data_type: STRING
+        description: Service name
+      - name: retro_bonus_total
+        data_type: NUMERIC.COST
+        description: Total employee retro bonus for selling service
+      - name: fv_date
+        data_type: DATE
+        description: ''
+      - name: lv_expert_name
+        data_type: STRING
+        description: ''
+      - name: lv_branch
+        data_type: STRING
+        description: ''
+      - name: lv_visit_number
+        data_type: NUMERIC
+        description: ''
