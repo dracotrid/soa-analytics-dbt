@@ -79,10 +79,7 @@ bonus_report_goods_step_4 AS (
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_employee_value
             ELSE 0
         END AS fixed_bonus_sum,
-        CASE
-            WHEN COALESCE(bonus_discount_value, 0) = 0 THEN bonus_employee_value
-            ELSE bonus_discount_value
-        END AS bonus_percent
+        bonus_employee_value AS bonus_percent
     FROM bonus_report_goods_step_3
 ),
 

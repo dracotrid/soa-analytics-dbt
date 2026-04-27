@@ -33,3 +33,12 @@ models:
       - name: bonus_total
         data_type: NUMERIC.COST
         description: Total employee bonus for selling service
+      - name: retro_bonus_total
+        data_type: NUMERIC.COST
+        description: Total employee retro bonus for selling service
+      - name: retro_bonus_visit
+        data_type: NUMERIC
+        description: Visit number for retro bonus payment
+      - name: visit_number
+        data_type: INTEGER
+        description: Number of clients visit

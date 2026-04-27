@@ -48,12 +48,9 @@ sources:
           - name: validity_to
             data_type: DATE
             description: Validity to
-          - name: min_bonus_first_visit
+          - name: bonus_first_visit
             data_type: NUMERIC.PRICE
             description: Min bonus first visit
-          - name: expected_sum_first_visit
-            data_type: NUMERIC.COST
-            description: Expected sum first visit
           - name: extra_bonus_from_visit
             data_type: NUMERIC
             description: Extra bonus from visit number
@@ -63,3 +60,9 @@ sources:
           - name: expert_client_bonus
             data_type: NUMERIC.COST
             description: Expert client bonus value
+          - name: retro_bonus
+            data_type: NUMERIC.COST
+            description: Retro bonus
+          - name: retro_bonus_visit
+            data_type: NUMERIC
+            description: Visit number for retro bonus payment

@@ -38,7 +38,11 @@ processed_step_3_source AS (
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
             ELSE base_for_bonus * bonus_percent
-        END AS bonus_calculated
+        END AS bonus_calculated,
+        CASE
+            WHEN is_calc_retro_bonus AND retro_bonus IS NOT NULL THEN base_for_bonus * retro_bonus
+            ELSE 0
+        END AS retro_bonus_total
     FROM processed_step_2_source
 ),
 

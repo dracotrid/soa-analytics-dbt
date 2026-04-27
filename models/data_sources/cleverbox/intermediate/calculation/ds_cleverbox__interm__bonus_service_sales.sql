@@ -4,11 +4,12 @@ WITH bonus_employee AS (
         bonus_value AS bonus_employee__value,
         accrual_type AS bonus_employee__type,
         use_cost_price AS bonus_employee__use_cost_price,
-        min_bonus_first_visit AS bonus_employee__min_bonus_first_visit,
-        expected_sum_first_visit AS bonus_employee__expected_sum_first_visit,
+        bonus_first_visit AS bonus_employee__bonus_first_visit,
         extra_bonus_from_visit AS bonus_employee__extra_bonus_from_visit,
         extra_bonus AS bonus_employee__extra_bonus,
         expert_client_bonus AS bonus_employee__expert_client_bonus,
+        retro_bonus AS bonus_employee__retro_bonus,
+        retro_bonus_visit AS bonus_employee__retro_bonus_visit,
         validity_from,
         validity_to
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
@@ -43,30 +44,33 @@ bonus_employee_values AS (
     SELECT
         eid AS bonus_employee_values__eid,
         CASE
+            WHEN is_employee THEN bonus_employee__value
             WHEN
                 bonus_employee__expert_client_bonus IS NOT NULL
                 AND expert_own_clients_join_code IN (SELECT expert_own_clients__join_code FROM expert_own_clients)
                 THEN bonus_employee__expert_client_bonus
-            WHEN visit_number = 1 AND visit_sum < bonus_employee__expected_sum_first_visit THEN bonus_employee__min_bonus_first_visit
             WHEN
                 bonus_employee__extra_bonus_from_visit IS NOT NULL
                 AND bonus_employee__extra_bonus IS NOT NULL
                 AND visit_number >= bonus_employee__extra_bonus_from_visit THEN bonus_employee__extra_bonus
+            WHEN visit_number = 1 THEN bonus_employee__bonus_first_visit
             ELSE bonus_employee__value
         END AS bonus_employee__bonus_value,
         visit_number,
         bonus_employee__type,
         bonus_employee__use_cost_price,
         bonus_employee__code,
-        bonus_employee__value,
-        bonus_employee__min_bonus_first_visit,
-        bonus_employee__expected_sum_first_visit,
-        visit_sum
+        bonus_employee__retro_bonus,
+        bonus_employee__retro_bonus_visit,
+        bonus_employee__bonus_first_visit,
+        visit_sum,
+        COALESCE(visit_number = 1 AND is_employee = FALSE, FALSE) AS is_calc_retro_bonus
     FROM (
         SELECT
             eid,
             DENSE_RANK() OVER (PARTITION BY client_code, direction ORDER BY date) AS visit_number,
             CONCAT(expert_name, client_code) AS expert_own_clients_join_code,
+            is_employee,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__value
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__value
@@ -83,15 +87,10 @@ bonus_employee_values AS (
                 WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__use_cost_price
             END AS bonus_employee__use_cost_price,
             CASE
-                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__min_bonus_first_visit
-                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__min_bonus_first_visit
-                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__min_bonus_first_visit
-            END AS bonus_employee__min_bonus_first_visit,
-            CASE
-                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__expected_sum_first_visit
-                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__expected_sum_first_visit
-                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__expected_sum_first_visit
-            END AS bonus_employee__expected_sum_first_visit,
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__bonus_first_visit
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__bonus_first_visit
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__bonus_first_visit
+            END AS bonus_employee__bonus_first_visit,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__extra_bonus_from_visit
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__extra_bonus_from_visit
@@ -112,6 +111,16 @@ bonus_employee_values AS (
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__expert_client_bonus
                 WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__expert_client_bonus
             END AS bonus_employee__expert_client_bonus,
+            CASE
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__retro_bonus
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__retro_bonus
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__retro_bonus
+            END AS bonus_employee__retro_bonus,
+            CASE
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__retro_bonus_visit
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__retro_bonus_visit
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__retro_bonus_visit
+            END AS bonus_employee__retro_bonus_visit,
             COALESCE(goods_sum.paid, 0) + COALESCE(service_sum.paid, 0) AS visit_sum
         FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
         LEFT JOIN bonus_employee AS be__service_code
@@ -187,7 +196,6 @@ intermediate_step_3_source AS (
             WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee__type
             ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
-        COALESCE(bonus_discount_value, bonus_employee__bonus_value) AS bonus_value,
         year = '2024' OR NOT bonus_employee__use_cost_price AS is_bonus_without_cost_price
     FROM intermediate_step_2_source
     LEFT JOIN bonus_discount
@@ -198,12 +206,12 @@ intermediate_step_4_source AS (
     SELECT
         *,
         CASE
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_value
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_employee__bonus_value
             ELSE 0
         END AS fixed_bonus_sum,
         CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
-            ELSE bonus_value
+            ELSE bonus_employee__bonus_value
         END AS bonus_percent
     FROM intermediate_step_3_source
 ),
