@@ -16,6 +16,14 @@ discount_usage AS (
     FROM {{ tf_ref('ds_cleverbox__processed__discount_usage') }}
 ),
 
+bonus_discount AS (
+    SELECT
+        name AS bonus_discount_name,
+        accrual_type_goods AS bonus_discount_type,
+        bonus_goods AS bonus_discount_value
+    FROM {{ tf_ref('ds_cleverbox__parsed__bonus_discount') }}
+),
+
 bonus_report_goods_step_1 AS (
     SELECT
         *,
@@ -60,6 +68,8 @@ bonus_report_goods_step_3 AS (
         '%ВідОплати' AS cleverbox_bonus_type,
         paid AS cleverbox_base_for_bonus
     FROM bonus_report_goods_step_2
+    LEFT JOIN bonus_discount
+        ON bonus_report_goods_step_2.discount_usage_discount_name = bonus_discount.bonus_discount_name
 ),
 
 bonus_report_goods_step_4 AS (

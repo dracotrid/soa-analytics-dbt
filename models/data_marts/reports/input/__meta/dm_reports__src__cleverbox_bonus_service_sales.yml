@@ -21,6 +21,15 @@ models:
       - name: visit_sum
         data_type: NUMERIC.COST
         description: Sum which client spent
+      - name: bonus_discount_name
+        data_type: STRING
+        description: Bonus name from bonus_discount table
+      - name: bonus_discount_type
+        data_type: STRING
+        description: Bonus type from bonus_discount table
+      - name: bonus_discount_value
+        data_type: NUMERIC.COST
+        description: Bonus value from bonus_discount table
       - name: discount_usage_discount_name
         data_type: STRING
         description: Discount name from discount_usage table

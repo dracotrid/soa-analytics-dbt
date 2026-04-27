@@ -145,6 +145,14 @@ bonus_employee_values AS (
     )
 ),
 
+bonus_discount AS (
+    SELECT
+        name AS bonus_discount_name,
+        accrual_type_service AS bonus_discount_type,
+        bonus_service AS bonus_discount_value
+    FROM {{ tf_ref('ds_cleverbox__parsed__bonus_discount') }}
+),
+
 discount_usage AS (
     SELECT
         eid AS discount_usage_id,
@@ -185,10 +193,13 @@ intermediate_step_3_source AS (
             WHEN subscription IS NOT NULL AND subscription > 0 THEN bonus_employee__type
             -- '%ВідВартості' is used for VIPs and all the 100% discounts before 2025
             WHEN date < '2025-01-01' AND (is_vip = TRUE OR discount_rate = 1) THEN '%ВідВартості'
-            ELSE bonus_employee__type
+            WHEN bonus_discount_type IS NULL OR bonus_discount_type = '' THEN bonus_employee__type
+            ELSE bonus_discount_type
         END AS bonus_type_for_calculation,
         year = '2024' OR NOT bonus_employee__use_cost_price AS is_bonus_without_cost_price
     FROM intermediate_step_2_source
+    LEFT JOIN bonus_discount
+        ON intermediate_step_2_source.discount_name_source = bonus_discount.bonus_discount_name
 ),
 
 intermediate_step_4_source AS (
