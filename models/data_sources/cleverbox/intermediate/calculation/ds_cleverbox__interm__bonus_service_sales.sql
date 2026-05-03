@@ -63,6 +63,7 @@ bonus_employee_values AS (
         bonus_employee__retro_bonus,
         bonus_employee__retro_bonus_visit,
         bonus_employee__bonus_first_visit,
+        bonus_employee__value AS cleverbox_bonus_value,
         visit_sum,
         COALESCE(visit_number = 1 AND is_employee = FALSE, FALSE) AS is_calc_retro_bonus
     FROM (
@@ -236,8 +237,8 @@ intermediate_step_6_source AS (
     SELECT
         *,
         CASE
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
-            ELSE bonus_cleverbox_base_for_bonus * bonus_percent
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN cleverbox_bonus_value
+            ELSE bonus_cleverbox_base_for_bonus * cleverbox_bonus_value
         END AS bonus_cleverbox_total
     FROM intermediate_step_5_source
 ),
