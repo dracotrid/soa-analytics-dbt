@@ -24,6 +24,7 @@ processed_bonus_goods_sales_step_2 AS (
     SELECT
         *,
         CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' AND fixed_bonus_upon_payment = true AND paid = 0 THEN 0
             WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
             ELSE base_for_bonus * bonus_percent
         END AS bonus_total
