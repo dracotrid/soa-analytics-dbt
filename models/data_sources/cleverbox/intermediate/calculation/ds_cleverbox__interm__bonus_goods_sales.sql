@@ -95,7 +95,6 @@ bonus_report_goods_step_3 AS (
             WHEN is_vip = TRUE AND cost_total < 0 THEN '%ВідВартості'
             ELSE COALESCE(bonus_employee_type, '<<НЕВІДОМО>>')
         END AS bonus_type_for_calculation,
-        '%ВідОплати' AS cleverbox_bonus_type,
         paid AS cleverbox_base_for_bonus
     FROM bonus_report_goods_step_2
     LEFT JOIN bonus_discount
@@ -106,18 +105,35 @@ bonus_report_goods_step_4 AS (
     SELECT
         *,
         CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN 'Фіксована'
+            ELSE '%ВідОплати'
+        END AS cleverbox_bonus_type
+
+    FROM bonus_report_goods_step_3
+),
+
+bonus_report_goods_step_5 AS (
+    SELECT
+        *,
+        CASE
             WHEN bonus_type_for_calculation = 'Фіксована' THEN bonus_employee_value
             ELSE 0
         END AS fixed_bonus_sum,
-        bonus_employee_value AS bonus_percent
-    FROM bonus_report_goods_step_3
+        CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
+            ELSE bonus_employee_value
+        END AS bonus_percent
+    FROM bonus_report_goods_step_4
 ),
 
 final AS (
     SELECT
         *,
-        ROUND(cleverbox_base_for_bonus * bonus_percent, 2) AS cleverbox_bonus_total
-    FROM bonus_report_goods_step_4
+        CASE
+            WHEN cleverbox_bonus_type = 'Фіксована' THEN fixed_bonus_sum
+            ELSE ROUND(cleverbox_base_for_bonus * bonus_percent, 2)
+        END AS cleverbox_bonus_total
+    FROM bonus_report_goods_step_5
 )
 
 {{ tf_transform_model('final') }}

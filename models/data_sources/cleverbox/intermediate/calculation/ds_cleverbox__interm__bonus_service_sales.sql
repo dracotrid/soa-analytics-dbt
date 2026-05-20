@@ -36,7 +36,7 @@ bonus_employee_values AS (
                 bonus_employee__extra_bonus_from_visit IS NOT NULL
                 AND bonus_employee__extra_bonus IS NOT NULL
                 AND visit_number >= bonus_employee__extra_bonus_from_visit THEN bonus_employee__extra_bonus
-            WHEN visit_number = 1 THEN bonus_employee__bonus_first_visit
+            WHEN visit_number = 1 THEN COALESCE(bonus_employee__bonus_first_visit, bonus_employee__value)
             ELSE bonus_employee__value
         END AS bonus_employee__bonus_value,
         visit_number,
