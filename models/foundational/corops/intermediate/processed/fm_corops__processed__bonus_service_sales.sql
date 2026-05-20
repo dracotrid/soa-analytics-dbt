@@ -18,7 +18,7 @@ processed_step_1_source AS (
         END, 2) AS cost_for_bonus
     FROM {{ tf_ref('fm_corops__src__bonus_service_sales') }} AS bonus_service_sales
     LEFT JOIN service_sales
-        ON service_sales.service_sales__eid = bonus_service_sales.eid
+        ON bonus_service_sales.eid = service_sales.service_sales__eid
 ),
 
 processed_step_2_source AS (
@@ -36,11 +36,12 @@ processed_step_3_source AS (
     SELECT
         *,
         CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' AND fixed_bonus_upon_payment = true AND paid = 0 THEN 0
             WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
             ELSE base_for_bonus * bonus_percent
         END AS bonus_calculated,
         CASE
-            WHEN is_calc_retro_bonus AND retro_bonus IS NOT NULL THEN base_for_bonus * retro_bonus
+            WHEN is_calc_retro_bonus AND retro_bonus IS NOT null THEN base_for_bonus * retro_bonus
             ELSE 0
         END AS retro_bonus_total
     FROM processed_step_2_source
