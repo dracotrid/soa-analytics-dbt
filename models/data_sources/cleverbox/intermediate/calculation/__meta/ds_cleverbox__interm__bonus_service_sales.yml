@@ -12,6 +12,9 @@ models:
       - name: eid
         data_type: STRING
         description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Service date of sale
       - name: bonus_employee__code
         data_type: STRING
         description: Bonus code from bonus_employee table
@@ -21,9 +24,6 @@ models:
       - name: bonus_employee__bonus_first_visit
         data_type: NUMERIC.COST
         description: Bonus value for first visit if paid less min expected sum from bonus_employee table
-      - name: visit_sum
-        data_type: NUMERIC.COST
-        description: Sum which client spent
       - name: bonus_discount_name
         data_type: STRING
         description: Bonus name from bonus_discount table
@@ -72,6 +72,15 @@ models:
       - name: direction
         data_type: STRING
         description: Direction
+      - name: branch
+        data_type: STRING
+        description: Branch
+      - name: client_code
+        data_type: STRING
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client name
       - name: retro_bonus
         data_type: NUMERIC.COST
         description: Retro bonus

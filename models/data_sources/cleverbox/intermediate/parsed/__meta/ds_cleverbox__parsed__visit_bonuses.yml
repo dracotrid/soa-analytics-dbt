@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: ds_cleverbox__parsed__visit_bonuses
+    description: "CleverBox Parsed visit bonuses"
+    config:
+      alias: parsed__visit_bonuses
+    columns:
+      - name: min_visit_sum
+        data_type: NUMERIC.COST
+        description: Min sum first visit
+      - name: max_visit_sum
+        data_type: NUMERIC.COST
+        description: Max sum first visit
+      - name: visit_bonus
+        data_type: NUMERIC.COST
+        description: visit bonus
+      - name: visit_bonus_start_date
+        data_type: DATE
+        description: visit bonus start date
+      - name: is_calculate
+        data_type: BOOLEAN
+        description: is bonus calculate

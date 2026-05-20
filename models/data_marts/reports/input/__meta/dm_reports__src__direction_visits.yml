@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dm_reports__src__direction_visits
+    description: "Reports direction visits"
+    config:
+      alias: src__direction_visits
+    columns:
+      - name: eid
+        data_type: STRING
+        description: Record identifier
+      - name: date
+        data_type: DATE
+        description: Service date of sale
+      - name: branch
+        data_type: STRING
+        description: Branch
+      - name: direction
+        data_type: STRING
+        description: Direction
+      - name: expert_name
+        data_type: STRING
+        description: Expert name
+      - name: client_code
+        data_type: STRING
+        description: Client code
+      - name: client_name
+        data_type: STRING
+        description: Client code
+      - name: visit_sum
+        data_type: NUMERIC.COST
+        description: Sum which client spent
+      - name: goods_sum
+        data_type: NUMERIC.COST
+        description: Sum which client spent
+      - name: service_sum
+        data_type: NUMERIC.COST
+        description: Sum which client spent
+      - name: visit_number
+        data_type: INTEGER
+        description: Number of clients visit
+      - name: visit_bonus
+        data_type: NUMERIC.COST
+        description: Fixed bonus for first visit

@@ -27,6 +27,9 @@ models:
       - name: use_cost_price
         data_type: BOOLEAN
         description: Use cost price for bonus calculation
+      - name: fixed_bonus_upon_payment
+        data_type: BOOLEAN
+        description: Calculate fixed bonus only upon payment
       - name: validity_from
         data_type: DATE
         description: Validity from

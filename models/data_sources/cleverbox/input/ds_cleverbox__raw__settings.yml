@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: ds_cleverbox
+    database: "{{ var('primary_bigquery_database_name') }}"
+    schema: "soa_{{ var('source_env', 'stage' if target.name == 'stage' else 'prod') }}_ds_cleverbox"
+    tags: ["scope:data-source", "ds-name:cleverbox", "asset-type:raw"]
+    loader: google_sheet
+
+    tables:
+      - name: raw__settings
+        identifier: raw__settings
+        description: "CleverBox raw Settings"
+        columns:
+          - name: name
+            data_type: STRING
+            description: Setting name
+          - name: value
+            data_type: STRING
+            description: Setting value

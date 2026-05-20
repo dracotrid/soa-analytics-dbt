@@ -29,7 +29,7 @@ WITH source AS (
 
     SELECT
         eid,
-        'Ретро бонус' AS product_type,
+        'Бонус Ретро' AS product_type,
         date,
         branch,
         expert_name,
@@ -38,6 +38,22 @@ WITH source AS (
         1 AS amount,
         0 AS bonus_cleverbox
     FROM {{ tf_ref('dm_reports__src__retro_bonuses_service_sales') }}
+
+    UNION ALL
+
+    SELECT
+        eid,
+        'Бонус вiзит' AS product_type,
+        date,
+        branch,
+        expert_name,
+        CONCAT(date, '__', client_name, '_(', client_code, ')__', visit_sum, '__', service_sum, '__', goods_sum) AS service_name,
+        visit_bonus AS bonus,
+        1 AS amount,
+        0 AS bonus_cleverbox
+    FROM {{ tf_ref('dm_reports__src__direction_visits') }}
+    WHERE visit_bonus IS NOT NULL
+
 )
 
 {{ tf_transform_model('source') }}
