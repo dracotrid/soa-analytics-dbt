@@ -15,24 +15,6 @@ WITH bonus_employee AS (
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
 ),
 
-goods_sum AS (
-    SELECT
-        CONCAT(expert_name, branch, client_name, date) AS goods_join_code,
-        SUM(paid) AS paid
-    FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }}
-    GROUP BY
-        goods_join_code
-),
-
-service_sum AS (
-    SELECT
-        CONCAT(expert_name, branch, client_name, date) AS service_join_code,
-        SUM(paid) AS paid
-    FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }}
-    GROUP BY
-        service_join_code
-),
-
 expert_own_clients AS (
     SELECT CONCAT(expert_name, client_code) AS expert_own_clients__join_code
     FROM {{ tf_ref('ds_cleverbox__parsed__expert_own_clients') }}
@@ -64,7 +46,6 @@ bonus_employee_values AS (
         bonus_employee__retro_bonus_visit,
         bonus_employee__bonus_first_visit,
         bonus_employee__value AS cleverbox_bonus_value,
-        visit_sum,
         COALESCE(visit_number = 1 AND is_employee = FALSE, FALSE) AS is_calc_retro_bonus
     FROM (
         SELECT
@@ -121,8 +102,7 @@ bonus_employee_values AS (
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__retro_bonus_visit
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__retro_bonus_visit
                 WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__retro_bonus_visit
-            END AS bonus_employee__retro_bonus_visit,
-            COALESCE(goods_sum.paid, 0) + COALESCE(service_sum.paid, 0) AS visit_sum
+            END AS bonus_employee__retro_bonus_visit
         FROM {{ tf_ref('ds_cleverbox__processed__service_sales') }} AS service_sales
         LEFT JOIN bonus_employee AS be__service_code
             ON
@@ -139,10 +119,6 @@ bonus_employee_values AS (
                 CONCAT(service_sales.expert_name, '-Послуга-ВСЕ') = be__service_all.code
                 AND (be__service_all.validity_from IS NULL OR be__service_all.validity_from <= date)
                 AND (be__service_all.validity_to IS NULL OR be__service_all.validity_to >= date)
-        LEFT JOIN service_sum
-            ON CONCAT(expert_name, branch, client_name, date) = service_sum.service_join_code
-        LEFT JOIN goods_sum
-            ON CONCAT(expert_name, branch, client_name, date) = goods_sum.goods_join_code
     )
 ),
 

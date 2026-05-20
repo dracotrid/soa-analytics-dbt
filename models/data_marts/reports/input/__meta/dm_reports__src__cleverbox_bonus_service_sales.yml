@@ -18,9 +18,6 @@ models:
       - name: bonus_employee__bonus_first_visit
         data_type: NUMERIC.COST
         description: Bonus value for first visit if paid less min expected sum from bonus_employee table
-      - name: visit_sum
-        data_type: NUMERIC.COST
-        description: Sum which client spent
       - name: bonus_discount_name
         data_type: STRING
         description: Bonus name from bonus_discount table
