@@ -10,6 +10,7 @@ WITH bonus_employee AS (
         expert_client_bonus AS bonus_employee__expert_client_bonus,
         retro_bonus AS bonus_employee__retro_bonus,
         retro_bonus_visit AS bonus_employee__retro_bonus_visit,
+        fixed_bonus_upon_payment AS bonus_employee__fixed_bonus_upon_payment,
         validity_from,
         validity_to
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
@@ -46,7 +47,8 @@ bonus_employee_values AS (
         bonus_employee__retro_bonus_visit,
         bonus_employee__bonus_first_visit,
         bonus_employee__value AS cleverbox_bonus_value,
-        COALESCE(visit_number = 1 AND is_employee = FALSE, FALSE) AS is_calc_retro_bonus
+        COALESCE(visit_number = 1 AND is_employee = FALSE, FALSE) AS is_calc_retro_bonus,
+        bonus_employee__fixed_bonus_upon_payment
     FROM (
         SELECT
             eid,
@@ -83,6 +85,11 @@ bonus_employee_values AS (
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__extra_bonus
                 WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__extra_bonus
             END AS bonus_employee__extra_bonus,
+            CASE
+                WHEN be__service_code.code IS NOT NULL THEN be__service_code.bonus_employee__fixed_bonus_upon_payment
+                WHEN be__service_category.code IS NOT NULL THEN be__service_category.bonus_employee__fixed_bonus_upon_payment
+                WHEN be__service_all.code IS NOT NULL THEN be__service_all.bonus_employee__fixed_bonus_upon_payment
+            END AS bonus_employee__fixed_bonus_upon_payment,
             CASE
                 WHEN be__service_code.code IS NOT NULL THEN be__service_code.code
                 WHEN be__service_category.code IS NOT NULL THEN be__service_category.code

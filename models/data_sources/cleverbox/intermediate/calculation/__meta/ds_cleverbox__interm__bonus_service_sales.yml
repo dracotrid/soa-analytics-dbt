@@ -24,6 +24,12 @@ models:
       - name: bonus_employee__bonus_first_visit
         data_type: NUMERIC.COST
         description: Bonus value for first visit if paid less min expected sum from bonus_employee table
+      - name: fixed_bonus_upon_payment
+        data_type: BOOLEAN
+        description: Calculate fixed bonus only upon payment
+        meta:
+          tf_config:
+            field: bonus_employee__fixed_bonus_upon_payment
       - name: bonus_discount_name
         data_type: STRING
         description: Bonus name from bonus_discount table
