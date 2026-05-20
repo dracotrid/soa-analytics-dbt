@@ -3,6 +3,7 @@ WITH bonus_employee AS (
         uid AS bonus_employee_code,
         bonus_value AS bonus_employee_value,
         accrual_type AS bonus_employee_type,
+        fixed_bonus_upon_payment AS bonus_employee__fixed_bonus_upon_payment,
         validity_from,
         validity_to
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_employee') }}
@@ -35,6 +36,10 @@ bonus_employee_values AS (
             WHEN bonus_employee_name.bonus_employee_code IS NOT NULL THEN bonus_employee_name.bonus_employee_type
             WHEN bonus_employee_all.bonus_employee_code IS NOT NULL THEN bonus_employee_all.bonus_employee_type
         END AS bonus_employee_type,
+        CASE
+            WHEN bonus_employee_name.bonus_employee_code IS NOT NULL THEN bonus_employee_name.bonus_employee__fixed_bonus_upon_payment
+            WHEN bonus_employee_all.bonus_employee_code IS NOT NULL THEN bonus_employee_all.bonus_employee__fixed_bonus_upon_payment
+        END AS bonus_employee__fixed_bonus_upon_payment,
         CASE
             WHEN bonus_employee_name.bonus_employee_code IS NOT NULL THEN bonus_employee_name.bonus_employee_code
             WHEN bonus_employee_all.bonus_employee_code IS NOT NULL THEN bonus_employee_all.bonus_employee_code

@@ -18,3 +18,6 @@ models:
       - name: fixed_bonus_sum
         data_type: NUMERIC.COST
         description: Fixed bonus sum
+      - name: fixed_bonus_upon_payment
+        data_type: BOOLEAN
+        description: Calculate fixed bonus only upon payment
