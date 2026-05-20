@@ -24,6 +24,34 @@ bonus_discount AS (
     FROM {{ tf_ref('ds_cleverbox__parsed__bonus_discount') }}
 ),
 
+bonus_employee_values AS (
+    SELECT
+        eid AS bonus_employee_values__eid,
+        CASE
+            WHEN bonus_employee_name.bonus_employee_code IS NOT NULL THEN bonus_employee_name.bonus_employee_value
+            WHEN bonus_employee_all.bonus_employee_code IS NOT NULL THEN bonus_employee_all.bonus_employee_value
+        END AS bonus_employee_value,
+        CASE
+            WHEN bonus_employee_name.bonus_employee_code IS NOT NULL THEN bonus_employee_name.bonus_employee_type
+            WHEN bonus_employee_all.bonus_employee_code IS NOT NULL THEN bonus_employee_all.bonus_employee_type
+        END AS bonus_employee_type,
+        CASE
+            WHEN bonus_employee_name.bonus_employee_code IS NOT NULL THEN bonus_employee_name.bonus_employee_code
+            WHEN bonus_employee_all.bonus_employee_code IS NOT NULL THEN bonus_employee_all.bonus_employee_code
+        END AS bonus_employee_code
+    FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
+    LEFT JOIN bonus_employee AS bonus_employee_all
+        ON
+            CONCAT(goods_sales.expert_name, '-Товар-ВСЕ') = bonus_employee_all.bonus_employee_code
+            AND (bonus_employee_all.validity_from IS NULL OR bonus_employee_all.validity_from <= date)
+            AND (bonus_employee_all.validity_to IS NULL OR bonus_employee_all.validity_to >= date)
+    LEFT JOIN bonus_employee AS bonus_employee_name
+        ON
+            CONCAT(goods_sales.expert_name, '-Товар-', TRIM(goods_sales.goods_name)) = bonus_employee_name.bonus_employee_code
+            AND (bonus_employee_name.validity_from IS NULL OR bonus_employee_name.validity_from <= date)
+            AND (bonus_employee_name.validity_to IS NULL OR bonus_employee_name.validity_to >= date)
+),
+
 bonus_report_goods_step_1 AS (
     SELECT
         *,
@@ -43,11 +71,8 @@ bonus_report_goods_step_1 AS (
             '_'
         ) AS du_id
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
-    LEFT JOIN bonus_employee
-        ON
-            CONCAT(goods_sales.expert_name, '-Товар-ВСЕ') = bonus_employee.bonus_employee_code
-            AND (bonus_employee.validity_from IS NULL OR bonus_employee.validity_from <= date)
-            AND (bonus_employee.validity_to IS NULL OR bonus_employee.validity_to >= date)
+    LEFT JOIN bonus_employee_values
+        ON goods_sales.eid = bonus_employee_values.bonus_employee_values__eid
 ),
 
 bonus_report_goods_step_2 AS (
