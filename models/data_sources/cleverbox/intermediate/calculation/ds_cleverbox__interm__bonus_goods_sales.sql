@@ -91,7 +91,9 @@ bonus_report_goods_step_3 AS (
     SELECT
         *,
         CASE
+            WHEN bonus_employee_type = 'Фіксована' THEN bonus_employee_type
             WHEN is_employee = TRUE THEN 'БезПремії'
+            WHEN bonus_discount_type IS NOT NULL THEN bonus_discount_type
             WHEN is_vip = TRUE AND cost_total < 0 THEN '%ВідВартості'
             ELSE COALESCE(bonus_employee_type, '<<НЕВІДОМО>>')
         END AS bonus_type_for_calculation,

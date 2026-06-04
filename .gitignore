@@ -189,3 +189,4 @@ scripts/sync_confluence_docs*
 .cursor/
 .archive/
 .envrc
+.vscode/
