@@ -14,7 +14,7 @@ models:
                   AND client_name IS NOT NULL
                   AND goods_name IS NOT NULL
                   AND amount IS NOT NULL
-                  AND cost IS NOT NULL
+                  AND paid IS NOT NULL
     columns:
       - name: date
         data_type: DATE
@@ -77,7 +77,7 @@ models:
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of one goods
-      - name: cost
+      - name: paid
         data_type: NUMERIC.COST
         description: Total cost of goods
         data_tests:
