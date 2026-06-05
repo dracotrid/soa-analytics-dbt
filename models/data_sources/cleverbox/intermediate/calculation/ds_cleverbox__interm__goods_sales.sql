@@ -9,9 +9,9 @@ WITH employees_position AS (
 report_goods_step_1 AS (
     SELECT
         *,
-        cost_total - paid AS discount_total,
         paid AS income_total,
-        round(paid / amount, 5) AS price,
+        cost_total - paid AS discount_total,
+        round(cost_total / amount, 5) AS price,
         round(cost_price_total / amount, 5) AS cost_price_unit
     FROM {{ tf_ref('ds_cleverbox__processed__goods_sales') }} AS goods_sales
     LEFT JOIN employees_position

@@ -96,25 +96,13 @@ bonus_report_goods_step_3 AS (
             WHEN bonus_discount_type IS NOT NULL THEN bonus_discount_type
             WHEN is_vip = TRUE AND cost_total < 0 THEN '%ВідВартості'
             ELSE COALESCE(bonus_employee_type, '<<НЕВІДОМО>>')
-        END AS bonus_type_for_calculation,
-        paid AS cleverbox_base_for_bonus
+        END AS bonus_type_for_calculation
     FROM bonus_report_goods_step_2
     LEFT JOIN bonus_discount
         ON bonus_report_goods_step_2.discount_usage_discount_name = bonus_discount.bonus_discount_name
 ),
 
 bonus_report_goods_step_4 AS (
-    SELECT
-        *,
-        CASE
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN 'Фіксована'
-            ELSE '%ВідОплати'
-        END AS cleverbox_bonus_type
-
-    FROM bonus_report_goods_step_3
-),
-
-bonus_report_goods_step_5 AS (
     SELECT
         *,
         CASE
@@ -125,17 +113,37 @@ bonus_report_goods_step_5 AS (
             WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
             ELSE bonus_employee_value
         END AS bonus_percent
-    FROM bonus_report_goods_step_4
+    FROM bonus_report_goods_step_3
 ),
 
-final AS (
+-->> CLEVERBOX bonuses
+bonus_report_goods_step_5 AS (
     SELECT
         *,
         CASE
-            WHEN cleverbox_bonus_type = 'Фіксована' THEN fixed_bonus_sum
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN 'Фіксована'
+            ELSE '%ВідОплати'
+        END AS cleverbox_bonus_type,
+        CASE
+            WHEN bonus_type_for_calculation = 'Фіксована' THEN fixed_bonus_sum
+            ELSE paid
+        END AS cleverbox_base_for_bonus
+    FROM bonus_report_goods_step_4
+),
+
+bonus_report_goods_step_6 AS (
+    SELECT
+        *,
+        CASE
+            WHEN cleverbox_bonus_type = 'Фіксована' THEN cleverbox_base_for_bonus * amount
             ELSE ROUND(cleverbox_base_for_bonus * bonus_percent, 2)
         END AS cleverbox_bonus_total
     FROM bonus_report_goods_step_5
+),
+--<< CLEVERBOX bonuses
+
+final AS (
+    SELECT * FROM bonus_report_goods_step_6
 )
 
 {{ tf_transform_model('final') }}
