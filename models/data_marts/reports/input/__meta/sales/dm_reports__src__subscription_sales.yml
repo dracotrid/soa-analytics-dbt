@@ -21,9 +21,18 @@ models:
       - name: expert_position
         data_type: STRING
         description: Position of employee
-      - name: client
+      - name: client_code
+        data_type: STRING
+        description: Client code
+        meta:
+          tf_config:
+            constant: UNDEFINED #FIXME: use upstream field name after refactoring
+      - name: client_name
         data_type: STRING
         description: Client name
+        meta:
+          tf_config:
+            field: client #FIXME: use upstream field name after refactoring
       - name: is_vip
         data_type: BOOLEAN
         description: Client is VIP

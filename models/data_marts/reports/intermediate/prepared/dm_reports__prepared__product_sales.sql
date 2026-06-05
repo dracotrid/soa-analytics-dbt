@@ -55,7 +55,7 @@ WITH source AS (
         date,
         branch,
         expert_name,
-        client AS client_name,
+        client_name,
         subscription_name AS product_name,
         direction,
         category,
