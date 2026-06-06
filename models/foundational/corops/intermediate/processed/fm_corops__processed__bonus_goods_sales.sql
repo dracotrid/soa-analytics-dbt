@@ -1,6 +1,6 @@
 WITH goods_sales AS (
     SELECT
-        eid,
+        eid AS goods_sales__eid,
         date,
         expert_name,
         amount,
@@ -11,8 +11,7 @@ WITH goods_sales AS (
 
 processed_bonus_goods_sales_step_1 AS (
     SELECT
-        bonus_goods_sales.*,
-        goods_sales.* EXCEPT (eid),
+        *,
         CASE
             WHEN bonus_type_for_calculation = '%ВідОплати' THEN paid
             WHEN bonus_type_for_calculation = '%ВідВартості' THEN cost
@@ -21,7 +20,7 @@ processed_bonus_goods_sales_step_1 AS (
         END AS base_for_bonus
     FROM {{ tf_ref('fm_corops__src__bonus_goods_sales') }} AS bonus_goods_sales
     LEFT JOIN goods_sales
-        ON bonus_goods_sales.eid = goods_sales.eid
+        ON bonus_goods_sales.eid = goods_sales.goods_sales__eid
 ),
 
 processed_bonus_goods_sales_step_2 AS (
