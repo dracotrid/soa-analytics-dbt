@@ -15,12 +15,18 @@ models:
       - name: branch
         data_type: STRING
         description: Branch
-      - name: client_id
+      - name: client_code
         data_type: STRING
-        description: Client id
-      - name: client
+        description: Client code
+        meta:
+          tf_config:
+            field: client_id
+      - name: client_name
         data_type: STRING
         description: Client
+        meta:
+          tf_config:
+            field: client
       - name: expert_name
         data_type: STRING
         description: The employee who sold the subscription
