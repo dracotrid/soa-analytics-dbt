@@ -78,7 +78,7 @@ models:
         meta:
           tf_config:
             expression: REPLACE(COALESCE(field_13, '0'), ',', '')
-      - name: cost
+      - name: paid
         data_type: NUMERIC.COST
         description: Total cost of goods
         meta:
