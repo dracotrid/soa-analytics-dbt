@@ -14,7 +14,7 @@ models:
                   AND client_name IS NOT NULL
                   AND goods_name IS NOT NULL
                   AND amount IS NOT NULL
-                  AND cost IS NOT NULL
+                  AND paid IS NOT NULL
     columns:
       - name: date
         data_type: DATE
@@ -47,6 +47,21 @@ models:
       - name: client_id
         data_type: STRING
         description: Client id
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: client_code
+        data_type: STRING
+        logic_type: STRING.CODE
+        description: Client code
+        meta:
+          tf_config:
+            field: client_id
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
       - name: client_name
         data_type: STRING
         description: Client name
@@ -77,7 +92,7 @@ models:
       - name: cost_price_unit
         data_type: NUMERIC.PRICE
         description: Cost price of one goods
-      - name: cost
+      - name: paid
         data_type: NUMERIC.COST
         description: Total cost of goods
         data_tests:

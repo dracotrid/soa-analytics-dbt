@@ -20,10 +20,10 @@ processed_step_1 AS (
         goods_name,
         brand,
         SUM(amount) AS amount,
-        SUM(price * amount) AS paid,
+        SUM(price * amount) AS cost_total,
         SUM(cost_price_unit * amount) AS cost_price_total,
         cost_price_unit,
-        SUM(cost * amount) AS cost_total
+        SUM(paid) AS paid
     FROM {{ tf_ref('ds_cleverbox__parsed__goods_sales') }}
     GROUP BY
         eid,
