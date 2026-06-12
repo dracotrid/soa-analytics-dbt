@@ -8,7 +8,7 @@ models:
       meta:
         tf_config:
           filter: eid IS NOT NULL
-                  AND client IS NOT NULL
+                  AND client_name IS NOT NULL
                   AND expert_name IS NOT NULL
                   AND date IS NOT NULL
                   AND branch IS NOT NULL
@@ -27,9 +27,6 @@ models:
       - name: client_name
         data_type: STRING
         description: Client name
-        meta:
-          tf_config:
-            field: client
         data_tests:
           - not_null:
               config:
@@ -38,9 +35,6 @@ models:
         data_type: STRING
         logic_type: STRING.CODE
         description: Client code
-        meta:
-          tf_config:
-            constant: "0000"
       - name: expert_name
         data_type: STRING
         description: The employee who sold the certificate
