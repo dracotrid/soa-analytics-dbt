@@ -110,7 +110,7 @@ bonus_report_goods_step_4 AS (
             ELSE 0
         END AS fixed_bonus_sum,
         CASE
-            WHEN bonus_type_for_calculation = 'Фіксована' THEN 0
+            WHEN bonus_type_for_calculation IN ('Фіксована', 'БезПремії', '<<НЕВІДОМО>>') THEN 0
             ELSE bonus_employee_value
         END AS bonus_percent
     FROM bonus_report_goods_step_3
