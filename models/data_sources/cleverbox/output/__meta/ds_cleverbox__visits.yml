@@ -15,12 +15,12 @@ models:
       - name: branch
         data_type: STRING
         description: Branch
-      - name: client_id
+      - name: client_code
         data_type: STRING
-        description: Client id
-      - name: client
+        description: Client code
+      - name: client_name
         data_type: STRING
-        description: Client
+        description: Client name
       - name: expert_name
         data_type: STRING
         description: The employee who sold the subscription

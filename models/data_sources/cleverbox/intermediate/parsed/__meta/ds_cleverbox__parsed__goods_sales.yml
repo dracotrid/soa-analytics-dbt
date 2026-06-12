@@ -44,20 +44,10 @@ models:
           - not_null:
               config:
                 severity: warn
-      - name: client_id
-        data_type: STRING
-        description: Client id
-        data_tests:
-          - not_null:
-              config:
-                severity: warn
       - name: client_code
         data_type: STRING
         logic_type: STRING.CODE
         description: Client code
-        meta:
-          tf_config:
-            field: client_id
         data_tests:
           - not_null:
               config:

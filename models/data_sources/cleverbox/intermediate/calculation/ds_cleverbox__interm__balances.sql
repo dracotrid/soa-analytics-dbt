@@ -28,9 +28,9 @@ final AS (
     LEFT JOIN employees_position
         ON balances.expert_name = employees_position.employees_position_expert_name
     LEFT JOIN vip_clients_table
-        ON balances.client = vip_clients_table.vip_client_name
+        ON balances.client_name = vip_clients_table.vip_client_name
     LEFT JOIN employees
-        ON balances.client = employees.name_for_service
+        ON balances.client_name = employees.name_for_service
 )
 
 {{ tf_transform_model('final') }}

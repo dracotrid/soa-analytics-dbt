@@ -29,9 +29,9 @@ report_subscriptions_step_1 AS (
     LEFT JOIN employees_position
         ON subscriptions_sales.expert_name = employees_position.employees_position_expert_name
     LEFT JOIN vip_clients_table
-        ON subscriptions_sales.client = vip_clients_table.vip_client_name
+        ON subscriptions_sales.client_name = vip_clients_table.vip_client_name
     LEFT JOIN employees
-        ON subscriptions_sales.client = employees.name_for_service
+        ON subscriptions_sales.client_name = employees.name_for_service
 ),
 
 final AS (

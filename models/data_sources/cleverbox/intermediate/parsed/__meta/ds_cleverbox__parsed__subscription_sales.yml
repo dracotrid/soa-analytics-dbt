@@ -8,7 +8,7 @@ models:
       meta:
         tf_config:
           filter: eid IS NOT NULL
-                  AND client IS NOT NULL
+                  AND client_name IS NOT NULL
                   AND expert_name IS NOT NULL
                   AND date IS NOT NULL
                   AND branch IS NOT NULL
@@ -31,9 +31,16 @@ models:
       - name: subscription_type
         data_type: STRING
         description: Subscription type
-      - name: client
+      - name: client_name
         data_type: STRING
         description: Client name
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: client_code
+        data_type: STRING
+        description: Client code
         data_tests:
           - not_null:
               config:
