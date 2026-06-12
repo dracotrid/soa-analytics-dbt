@@ -28,15 +28,22 @@ models:
         meta:
           tf_config:
             field: field_2
-      - name: client
+      - name: client_name
         data_type: STRING
         description: Client name
         meta:
           tf_config:
             field: field_4
+      - name: client_code
+        data_type: STRING
+        logic_type: STRING.CODE
+        description: Client code
+        meta:
+          tf_config:
+            constant: "0000"
       - name: branch
         data_type: STRING
-        description: Client name
+        description: Branch name
         meta:
           tf_config:
             field: field_7

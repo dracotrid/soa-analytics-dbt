@@ -45,13 +45,23 @@ models:
           - not_null:
               config:
                 severity: warn
-      - name: client
+      - name: client_name
         data_type: STRING
         description: Client name
+        meta:
+          tf_config:
+            field: client
         data_tests:
           - not_null:
               config:
                 severity: warn
+      - name: client_code
+        data_type: STRING
+        logic_type: STRING.CODE
+        description: Client code
+        meta:
+          tf_config:
+            constant: "0000"
       - name: category
         data_type: STRING
         description: Category of the product

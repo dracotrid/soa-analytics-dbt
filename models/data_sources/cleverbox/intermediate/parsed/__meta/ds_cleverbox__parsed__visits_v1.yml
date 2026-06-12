@@ -29,15 +29,16 @@ models:
           tf_config:
             field: field_4
             required: false
-      - name: client_id
+      - name: client_code
         data_type: STRING
-        description: Client id
+        logic_type: STRING.CODE
+        description: Client code
         meta:
           tf_config:
             field: field_5
-      - name: client
+      - name: client_name
         data_type: STRING
-        description: Client
+        description: Client name
         meta:
           tf_config:
             field: field_6
