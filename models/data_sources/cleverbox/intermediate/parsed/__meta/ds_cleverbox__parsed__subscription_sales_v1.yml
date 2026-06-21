@@ -40,7 +40,7 @@ models:
         description: Client code
         meta:
           tf_config:
-            constant: "0000"
+            field: field_3
       - name: branch
         data_type: STRING
         description: Branch name
