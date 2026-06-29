@@ -60,6 +60,9 @@ models:
       - name: payback
         data_type: NUMERIC.COST
         description: Payback of the service
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Paid
       - name: cost_total
         data_type: NUMERIC.COST
         description: Total cost of services
