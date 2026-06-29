@@ -27,6 +27,9 @@ models:
       - name: client_name
         data_type: STRING
         description: Client name
+      - name: goods_code
+        data_type: STRING
+        description: Goods code
       - name: goods_name
         data_type: STRING
         description: Goods name

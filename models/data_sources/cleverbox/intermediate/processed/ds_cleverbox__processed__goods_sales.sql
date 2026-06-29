@@ -17,6 +17,7 @@ processed_step_1 AS (
         expert_name,
         client_code,
         client_name,
+        goods_code,
         goods_name,
         brand,
         SUM(amount) AS amount,
@@ -33,6 +34,7 @@ processed_step_1 AS (
         expert_name,
         client_code,
         client_name,
+        goods_code,
         goods_name,
         brand,
         cost_price_unit
