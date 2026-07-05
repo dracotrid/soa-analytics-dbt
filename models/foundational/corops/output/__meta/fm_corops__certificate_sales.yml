@@ -36,6 +36,12 @@ models:
       - name: certificate_name
         data_type: STRING
         description: Certificate name
+      - name: label
+        data_type: STRING
+        description: Product family label
+        meta:
+          tf_config:
+            field: label
       - name: direction
         data_type: STRING
         description: Direction of the product

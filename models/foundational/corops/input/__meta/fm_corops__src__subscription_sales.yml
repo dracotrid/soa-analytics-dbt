@@ -36,6 +36,12 @@ models:
       - name: subscription_name
         data_type: STRING
         description: Subscription name
+      - name: label
+        data_type: STRING
+        description: Product family label
+        meta:
+          tf_config:
+            constant: 'Абонемент'
       - name: direction
         data_type: STRING
         description: Direction of the product

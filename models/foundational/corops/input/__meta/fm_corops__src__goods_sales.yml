@@ -36,6 +36,12 @@ models:
       - name: goods_name
         data_type: STRING
         description: Goods name
+      - name: label
+        data_type: STRING
+        description: Product family label
+        meta:
+          tf_config:
+            constant: 'Товар'
       - name: brand
         data_type: STRING
         description: Brand of goods
