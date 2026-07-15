@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: check__analytics_diff
+    description: "Check analytics difference"
+    config:
+      alias: check__analytics_diff
+    data_tests:
+      - dbt_expectations.expect_table_row_count_to_equal:
+          value: 0
+    columns:
+      - name: id
+        data_type: STRING
+        description: Record identifier
+      - name: prod_value
+        data_type: STRING
+        description: Snapshot value
+      - name: actual_value
+        data_type: STRING
+        description: Actual value
+      - name: difference
+        data_type: STRING
+        description: Difference between snapshot and actual values
