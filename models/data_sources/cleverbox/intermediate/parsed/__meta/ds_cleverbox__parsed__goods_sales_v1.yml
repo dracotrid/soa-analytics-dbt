@@ -48,6 +48,12 @@ models:
         meta:
           tf_config:
             field: field_5
+      - name: goods_code
+        data_type: STRING
+        description: Goods code
+        meta:
+          tf_config:
+            field: field_7
       - name: goods_name
         data_type: STRING
         description: Goods name

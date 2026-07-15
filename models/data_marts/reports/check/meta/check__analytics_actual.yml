@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: check__analytics_actual
+    description: "Check analytics actual"
+    config:
+      alias: check__analytics_actual
+    columns:
+      - name: product_type
+        description: Product type
+        data_type: STRING
+      - name: period
+        description: Period
+        data_type: STRING
+      - name: income
+        description: Period
+        data_type: NUMERIC.COST
+      - name: profit
+        description: Profit
+        data_type: NUMERIC.COST
+      - name: bonus
+        description: Profit
+        data_type: NUMERIC.COST

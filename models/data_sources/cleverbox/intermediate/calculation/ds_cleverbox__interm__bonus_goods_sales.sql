@@ -52,7 +52,7 @@ bonus_employee_values AS (
             AND (bonus_employee_all.validity_to IS NULL OR bonus_employee_all.validity_to >= date)
     LEFT JOIN bonus_employee AS bonus_employee_name
         ON
-            CONCAT(goods_sales.expert_name, '-Товар-', TRIM(goods_sales.goods_name)) = bonus_employee_name.bonus_employee_code
+            CONCAT(goods_sales.expert_name, '-Товар-', TRIM(LTRIM(goods_sales.goods_code, '0'))) = bonus_employee_name.bonus_employee_code
             AND (bonus_employee_name.validity_from IS NULL OR bonus_employee_name.validity_from <= date)
             AND (bonus_employee_name.validity_to IS NULL OR bonus_employee_name.validity_to >= date)
 ),
