@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dm_reports__prepared__incorrect_visits
+    description: "Reports Incorrect Visits"
+    config:
+      alias: prepared__incorrect_visits
+    columns:
+      - name: client_name
+        data_type: STRING
+        description: Client name
+      - name: date
+        data_type: DATE
+        description: Date when product was sold
+      - name: direction
+        data_type: STRING
+        description: Service direction
+      - name: v_count
+        data_type: NUMERIC.AMOUNT
+        description: Visits amount
+      - name: expert_name
+        data_type: STRING
+        description: The specialist who sold the product
+      - name: service_name
+        data_type: STRING
+        description: Service name
