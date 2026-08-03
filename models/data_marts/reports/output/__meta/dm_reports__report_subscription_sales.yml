@@ -78,3 +78,6 @@ models:
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
         description: Employee bonus for selling a subscriptions according Cleverbox
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Paid

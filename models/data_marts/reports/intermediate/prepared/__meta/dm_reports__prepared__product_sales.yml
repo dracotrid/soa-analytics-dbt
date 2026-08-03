@@ -69,3 +69,6 @@ models:
       - name: margin
         data_type: NUMERIC.COST
         description: Margin from product sales
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Paid

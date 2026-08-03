@@ -81,3 +81,9 @@ models:
       - name: cleverbox_bonus_total
         data_type: NUMERIC.PRICE
         description: Employee bonus for balance replenishment according Cleverbox
+      - name: paid
+        data_type: NUMERIC.COST
+        description: Paid
+        meta:
+          tf_config:
+            field: income_total
