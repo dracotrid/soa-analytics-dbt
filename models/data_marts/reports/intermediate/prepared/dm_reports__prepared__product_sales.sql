@@ -20,7 +20,8 @@ WITH source AS (
         discount_total AS discount,
         bonus_total AS bonus,
         profit_total AS profit,
-        margin
+        margin,
+        paid
     FROM {{ tf_ref('dm_reports__prepared__service_sales') }}
 
     UNION ALL
@@ -46,7 +47,8 @@ WITH source AS (
         discount_total AS discount,
         bonus_total AS bonus,
         profit_total AS profit,
-        margin
+        margin,
+        paid
     FROM {{ tf_ref('dm_reports__prepared__goods_sales') }}
 
     UNION ALL
@@ -72,7 +74,8 @@ WITH source AS (
         discount_total AS discount,
         bonus_total AS bonus,
         profit_total AS profit,
-        margin
+        margin,
+        paid
     FROM {{ tf_ref('dm_reports__prepared__subscription_sales') }}
 
     UNION ALL
@@ -98,7 +101,8 @@ WITH source AS (
         discount,
         bonus_total AS bonus,
         profit_total AS profit,
-        margin
+        margin,
+        paid
     FROM {{ tf_ref('dm_reports__prepared__certificate_sales') }}
 
     UNION ALL
@@ -124,7 +128,8 @@ WITH source AS (
         discount,
         bonus_total AS bonus,
         profit_total AS profit,
-        margin
+        margin,
+        paid
     FROM {{ tf_ref('dm_reports__prepared__balances') }}
 
 )
