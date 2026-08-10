@@ -30,6 +30,12 @@ models:
       - name: product_name
         data_type: STRING
         description: Name of the product
+      - name: label
+        data_type: STRING
+        description: Product family label
+        meta:
+          tf_config:
+            field: label
       - name: direction
         data_type: STRING
         description: Direction of the product
